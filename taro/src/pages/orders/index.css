@@ -1,0 +1,147 @@
+.orders {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+.orders-tabs {
+  display: flex;
+  background-color: var(--color-bg-card);
+  border-bottom: 1rpx solid var(--color-border-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.orders-tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 32rpx;
+  color: var(--color-text-secondary);
+  position: relative;
+}
+
+.orders-tab-active {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.orders-tab-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background-color: var(--color-primary);
+}
+
+.orders-list {
+  padding: 24rpx;
+}
+
+.order-card {
+  background-color: var(--color-bg-card);
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid var(--color-border);
+  transition: transform 0.15s ease;
+}
+
+.order-card:active {
+  transform: scale(0.97);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+}
+
+.card-status {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 24rpx;
+  font-weight: 500;
+  flex-shrink: 0;
+  color: var(--color-primary);
+  border: 1rpx solid var(--color-primary);
+}
+
+.card-subtitle {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 24rpx;
+  line-height: 1.5;
+}
+
+.card-room {
+  color: var(--color-text-secondary);
+}
+
+.card-divider {
+  margin: 0 12rpx;
+  color: var(--color-border);
+}
+
+.card-duration {
+  color: var(--color-text-muted);
+}
+
+.card-reserve {
+  color: var(--color-text-secondary);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 2rpx dashed var(--color-border);
+}
+
+.card-price {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--color-price);
+}
+
+.card-order-time {
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 160rpx 40rpx;
+}
+
+.empty-image {
+  width: 280rpx;
+  height: 280rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  color: var(--color-text-muted);
+  font-size: 28rpx;
+  line-height: 1.6;
+  text-align: center;
+}

@@ -1,0 +1,147 @@
+.transfer {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+.segment-group {
+  display: flex;
+  border-radius: 12rpx;
+  overflow: hidden;
+  width: fit-content;
+  margin: 0 auto 48rpx;
+}
+
+.segment {
+  padding: 18rpx 48rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  text-align: center;
+  background: var(--color-bg-card);
+  border: 2rpx solid var(--color-border);
+}
+
+.segment:first-child {
+  border-right: none;
+  border-radius: 12rpx 0 0 12rpx;
+}
+
+.segment:last-child {
+  border-radius: 0 12rpx 12rpx 0;
+}
+
+.segment.active {
+  background: var(--gradient-primary);
+  color: var(--color-bg);
+  font-weight: 500;
+  border-color: transparent;
+}
+
+.form {
+  padding: 32rpx;
+}
+
+.amount-section {
+  margin-bottom: 40rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 24rpx;
+}
+
+.amount-input {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 2rpx solid var(--color-border);
+  padding-bottom: 16rpx;
+}
+
+.currency {
+  font-size: 64rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-right: 8rpx;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+  font-size: 64rpx;
+  line-height: 1.4;
+}
+
+.input {
+  flex: 1;
+  font-size: 64rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  outline: none;
+  line-height: 1.4;
+  min-height: 64rpx;
+}
+
+.amount-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24rpx;
+}
+
+.balance-hint {
+  font-size: 26rpx;
+  color: var(--color-text-muted);
+}
+
+.withdraw-all {
+  font-size: 26rpx;
+  color: var(--color-accent);
+}
+
+.withdraw-all:active {
+  opacity: 0.7;
+}
+
+.preset-amounts {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 48rpx;
+}
+
+.preset-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  border: 2rpx solid var(--color-border);
+  background: var(--color-bg-card);
+}
+
+.preset-item.selected {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: rgba(217, 168, 74, 0.06);
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-primary);
+  border-radius: 12rpx;
+  padding: 28rpx 0;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
+}
+
+.submit-btn-text {
+  font-size: 32rpx;
+  color: var(--color-bg);
+  font-weight: 600;
+}

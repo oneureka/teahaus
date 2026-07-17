@@ -1,0 +1,77 @@
+.verify {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding: 48rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg-card);
+  border-radius: 16rpx;
+  padding: 0 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.verify-input {
+  flex: 1;
+  height: 108rpx;
+  font-size: 32rpx;
+  color: var(--color-text);
+  margin-right: 24rpx;
+}
+
+.input-placeholder {
+  color: var(--color-text-muted);
+}
+
+.scan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx;
+  margin: -16rpx;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.scan-btn:active {
+  background-color: var(--color-bg);
+}
+
+.scan-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.input-wrapper-focus {
+  box-shadow: 0 0 0 2rpx var(--color-primary);
+}
+
+.btn-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-primary);
+  border-radius: 12rpx;
+  padding: 28rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(125, 94, 74, 0.3);
+  transition: opacity 0.15s ease;
+}
+
+.btn-submit:active {
+  opacity: 0.9;
+}
+
+.btn-submit-disabled {
+  opacity: 0.6;
+}
+
+.btn-submit-text {
+  font-size: 32rpx;
+  color: var(--color-bg);
+  font-weight: 600;
+}

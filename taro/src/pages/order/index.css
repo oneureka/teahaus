@@ -1,0 +1,155 @@
+.order-detail {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding-bottom: 120rpx;
+}
+
+.scroll-content {
+  height: 100vh;
+}
+
+/* 订单状态 */
+.order-status {
+  background: var(--gradient-primary);
+  padding: 40rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-text {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 12rpx;
+}
+
+.status-time {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 通用区块 */
+.section {
+  background-color: var(--color-bg-card);
+  margin-top: 24rpx;
+  padding: 24rpx;
+}
+
+/* 空间信息 */
+.space-info {
+  display: flex;
+  align-items: center;
+}
+
+.space-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  margin-right: 20rpx;
+}
+
+.space-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.space-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8rpx;
+}
+
+.room-name {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.arrow {
+  font-size: 40rpx;
+  color: var(--color-text-muted);
+  margin-left: 12rpx;
+}
+
+/* 信息行 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+.value {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+
+/* 费用明细 */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.price-row:last-child {
+  border-bottom: none;
+}
+
+.price-row.total {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 2rpx solid var(--color-border-light);
+  border-bottom: none;
+}
+
+.total-price {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20rpx 24rpx;
+  background-color: var(--color-bg-card);
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  gap: 24rpx;
+}
+
+.cancel-btn {
+  padding: 20rpx 40rpx;
+  border: 2rpx solid var(--color-text-muted);
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+.pay-btn {
+  padding: 20rpx 48rpx;
+  background: var(--gradient-primary);
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 600;
+}

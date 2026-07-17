@@ -1,0 +1,218 @@
+.review {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding-bottom: 120rpx;
+}
+
+.scroll-content {
+  height: 100vh;
+}
+
+/* 通用区块 */
+.section {
+  background-color: var(--color-bg-card);
+  margin-top: 24rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 24rpx;
+}
+
+/* 空间信息 */
+.space-section {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+}
+
+.space-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  margin-right: 20rpx;
+}
+
+.space-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.space-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8rpx;
+}
+
+.room-name {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+/* 评分区域 */
+.rating-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.stars {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.star-icon {
+  font-size: 60rpx;
+  color: var(--color-border);
+  transition: color 0.2s ease;
+}
+
+.star-icon.active {
+  color: var(--color-star);
+}
+
+.rating-text {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+/* 标签网格 */
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.tag-item {
+  padding: 16rpx 28rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: 32rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.tag-item.active {
+  border-color: var(--color-primary);
+  background-color: rgba(186, 38, 54, 0.1);
+  color: var(--color-primary);
+}
+
+/* 评价输入框 */
+.review-input {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background-color: var(--color-bg);
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+  margin-top: 12rpx;
+}
+
+/* 上传图片 */
+.image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.upload-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+.delete-btn {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 48rpx;
+  height: 48rpx;
+  background-color: var(--color-error);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(252, 149, 129, 0.4);
+}
+
+.delete-btn text {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.upload-btn {
+  width: 180rpx;
+  height: 180rpx;
+  border: 2rpx dashed #d0d0d0;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.upload-icon {
+  font-size: 60rpx;
+  color: #d0d0d0;
+}
+
+/* 匿名评价 */
+.anonymous-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 底部提交按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 24rpx;
+  background-color: var(--color-bg-card);
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 24rpx;
+  background: var(--gradient-primary);
+  border-radius: 48rpx;
+  font-size: 30rpx;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}

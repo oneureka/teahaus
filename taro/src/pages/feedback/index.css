@@ -1,0 +1,104 @@
+.feedback {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+.feedback-form {
+  padding: 40rpx 32rpx;
+}
+
+.form-item {
+  margin-bottom: 48rpx;
+}
+
+.form-label-wrapper {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.form-label-required {
+  font-size: 28rpx;
+  color: var(--color-error);
+  margin-right: 8rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.form-picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
+  transition: border-color 0.2s ease;
+}
+
+.picker-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.picker-value text {
+  font-size: 30rpx;
+  color: var(--color-text);
+}
+
+.picker-arrow {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 240rpx;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  color: var(--color-text);
+  border-bottom: 2rpx solid var(--color-border-light);
+  line-height: 1.6;
+  transition: border-color 0.2s ease;
+}
+
+.form-textarea-focus {
+  border-bottom-color: var(--color-primary);
+}
+
+.form-count {
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+  margin-top: 12rpx;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-primary);
+  border-radius: 12rpx;
+  padding: 28rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(125, 94, 74, 0.3);
+  transition: opacity 0.15s ease;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
+}
+
+.submit-btn-disabled {
+  opacity: 0.6;
+}
+
+.submit-btn-text {
+  font-size: 32rpx;
+  color: var(--color-bg);
+  font-weight: 600;
+}

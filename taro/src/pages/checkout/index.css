@@ -1,0 +1,374 @@
+.checkout {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  padding-bottom: 140rpx;
+}
+
+.scroll-content {
+  height: 100vh;
+}
+
+/* ===== 通用卡片 ===== */
+.card {
+  background-color: var(--color-bg-card);
+  padding: 28rpx;
+  margin: 0 24rpx 20rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid var(--color-border);
+}
+
+/* ===== Section 标题 ===== */
+.section-header {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ===== 茶室信息 ===== */
+.space-info {
+  display: flex;
+  align-items: center;
+}
+
+.space-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+  display: block;
+}
+
+.space-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.space-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.room-name {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.room-price-info {
+  font-size: 26rpx;
+  color: var(--color-price);
+  font-weight: 600;
+}
+
+/* ===== 表单项 ===== */
+.form-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.form-item.no-border {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--color-text);
+  text-align: right;
+}
+
+.picker {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: var(--color-text-muted);
+  margin-left: 12rpx;
+}
+
+/* ===== 日期快捷选择 ===== */
+.date-quick-list {
+  display: flex;
+  gap: 12rpx;
+  padding: 16rpx 0 24rpx;
+  overflow-x: auto;
+}
+
+.date-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rpx;
+  padding: 14rpx 24rpx;
+  border-radius: 12rpx;
+  background-color: var(--color-bg);
+  border: 2rpx solid var(--color-border-light);
+  min-width: 80rpx;
+  transition: all 0.15s ease;
+}
+
+.date-chip:active {
+  transform: scale(0.95);
+}
+
+.date-chip.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.date-chip.active .date-chip-week,
+.date-chip.active .date-chip-day {
+  color: #fff;
+}
+
+.date-chip-week {
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+}
+
+.date-chip-day {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ===== 时间段选择 ===== */
+.time-slot-group {
+  padding-top: 16rpx;
+}
+
+.slot-period {
+  margin-bottom: 20rpx;
+}
+
+.slot-period:last-child {
+  margin-bottom: 0;
+}
+
+.period-label {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.slot-row {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.slot-chip {
+  padding: 14rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 2rpx solid var(--color-border-light);
+  transition: all 0.15s ease;
+}
+
+.slot-chip:active {
+  transform: scale(0.95);
+}
+
+.slot-chip.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.slot-chip.disabled {
+  opacity: 0.35;
+}
+
+/* ===== 时长选择 ===== */
+.duration-list {
+  display: flex;
+  gap: 12rpx;
+}
+
+.duration-chip {
+  padding: 12rpx 28rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 2rpx solid var(--color-border-light);
+  transition: all 0.15s ease;
+}
+
+.duration-chip:active {
+  transform: scale(0.95);
+}
+
+.duration-chip.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ===== 人数选择器 ===== */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.stepper-btn {
+  width: 52rpx;
+  height: 52rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid var(--color-primary);
+  border-radius: 50%;
+  font-size: 28rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.stepper-value {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  min-width: 48rpx;
+  text-align: center;
+}
+
+/* ===== 费用明细 ===== */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.price-label {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.price-value {
+  font-size: 26rpx;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.price-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  margin-top: 8rpx;
+  border-top: 2rpx dashed var(--color-border);
+}
+
+.total-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.total-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--color-price);
+}
+
+/* ===== 优惠券 ===== */
+.coupon-card {
+  padding: 0;
+}
+
+.coupon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx;
+}
+
+.coupon-label {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex: 1;
+}
+
+.coupon-name {
+  font-size: 26rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.coupon-placeholder {
+  font-size: 26rpx;
+  color: var(--color-text-muted);
+}
+
+/* ===== 底部结算栏 ===== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background-color: var(--color-bg-card);
+  border-top: 2rpx solid var(--color-border);
+  z-index: 100;
+}
+
+.bottom-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+}
+
+.bottom-label {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.bottom-total {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--color-price);
+}
+
+.submit-btn {
+  padding: 22rpx 56rpx;
+  background: var(--gradient-primary);
+  border-radius: 48rpx;
+  font-size: 30rpx;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(125, 94, 74, 0.3);
+}

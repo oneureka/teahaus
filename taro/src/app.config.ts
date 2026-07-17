@@ -1,0 +1,50 @@
+export default defineAppConfig({
+  pages: [
+    "pages/home/index",
+    "pages/orders/index",
+    "pages/space/index",
+    "pages/order/index",
+    "pages/checkout/index",
+    "pages/review/index",
+    "pages/profile/index",
+    "pages/coupons/index",
+    "pages/wallet/index",
+    "pages/transfer/index",
+    "pages/points/index",
+    "pages/faq/index",
+    "pages/feedback/index",
+    "pages/verify/index",
+  ],
+  window: {
+    backgroundTextStyle: "light",
+    navigationBarBackgroundColor: "#fff",
+    navigationBarTitleText: "茶室预定",
+    navigationBarTextStyle: "black",
+  },
+  tabBar: {
+    color: "#999999",
+    selectedColor: "#7D5E4A",
+    backgroundColor: "#F5EDE0",
+    borderStyle: "black",
+    list: [
+      {
+        pagePath: "pages/home/index",
+        text: "首页",
+        iconPath: "assets/icons/home.png",
+        selectedIconPath: "assets/icons/home-active.png",
+      },
+      {
+        pagePath: "pages/orders/index",
+        text: "订单",
+        iconPath: "assets/icons/order.png",
+        selectedIconPath: "assets/icons/order-active.png",
+      },
+      {
+        pagePath: "pages/profile/index",
+        text: "我的",
+        iconPath: "assets/icons/mine.png",
+        selectedIconPath: "assets/icons/mine-active.png",
+      },
+    ],
+  },
+});

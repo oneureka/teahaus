@@ -1,0 +1,217 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../dist/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  nickname      String?  @db.VarChar(20)
+  avatar        String?  @db.VarChar(200)
+  phone         String?  @db.VarChar(20)
+  wechatOpenId  String?  @unique @db.VarChar(100)
+  wechatUnionId String?  @db.VarChar(100)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  favorites UserFavorite[]
+  orders    Order[]
+
+  pointAccount PointAccount?
+  wallet       Wallet?
+}
+
+model UserFavorite {
+  id        String   @id @default(cuid())
+  userId    String
+  spaceId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, spaceId])
+}
+
+model Space {
+  id            String   @id @default(cuid())
+  name          String   @db.VarChar(100)
+  category      String?  @db.VarChar(30)
+  description   String?  @db.Text
+  businessHours String?  @db.VarChar(50)
+  address       String?  @db.VarChar(200)
+  district      String?  @db.VarChar(20)
+  lat           Decimal? @db.Decimal(10, 7)
+  lng           Decimal? @db.Decimal(10, 7)
+  phone         String?  @db.VarChar(20)
+  minPrice      Decimal? @db.Decimal(10, 2)
+  isFeatured    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  images    SpaceImage[]
+  tags      SpaceTag[]
+  rooms     Room[]
+  orders    Order[]
+  favorites UserFavorite[]
+}
+
+model SpaceImage {
+  id        String @id @default(cuid())
+  spaceId   String
+  url       String @db.VarChar(500)
+  sortOrder Int    @default(0)
+
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id   String @id @default(cuid())
+  name String @unique @db.VarChar(30)
+
+  spaces SpaceTag[]
+}
+
+model SpaceTag {
+  id      String @id @default(cuid())
+  spaceId String
+  tagId   String
+
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  tag   Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([spaceId, tagId])
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  spaceId     String
+  name        String   @db.VarChar(50)
+  price       Decimal  @db.Decimal(10, 2)
+  description String?  @db.Text
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  space     Space          @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  schedules RoomSchedule[]
+  orders    Order[]
+}
+
+model RoomSchedule {
+  id        String   @id @default(cuid())
+  roomId    String
+  orderId   String?
+  isBooked  Boolean  @default(false)
+  startTime DateTime @db.Time(0)
+  endTime   DateTime @db.Time(0)
+  date      DateTime @db.Date
+
+  room  Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  order Order? @relation(fields: [orderId], references: [id])
+
+  @@unique([roomId, date, startTime, endTime])
+}
+
+enum OrderStatus {
+  UNPAID
+  PAID
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderNo      String      @unique @db.VarChar(20)
+  spaceId      String
+  roomId       String
+  userId       String
+  status       OrderStatus @default(UNPAID)
+  startTime    DateTime    @db.Time(0)
+  endTime      DateTime    @db.Time(0)
+  contactName  String?     @db.VarChar(20)
+  contactPhone String?     @db.VarChar(20)
+  roomPrice    Decimal     @db.Decimal(10, 2)
+  totalPrice   Decimal     @db.Decimal(10, 2)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id])
+  space Space @relation(fields: [spaceId], references: [id])
+  room  Room  @relation(fields: [roomId], references: [id])
+
+  schedules         RoomSchedule[]
+  transactions      Transaction[]
+  pointTransactions PointTransaction[]
+}
+
+model Wallet {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  balance       Decimal  @default(0) @db.Decimal(10, 2)
+  totalRecharge Decimal  @default(0) @db.Decimal(10, 2)
+  totalWithdraw Decimal  @default(0) @db.Decimal(10, 2)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+}
+
+enum TransactionType {
+  RECHARGE
+  WITHDRAW
+  PAYMENT
+  REFUND
+  REWARD
+}
+
+model Transaction {
+  id            String          @id @default(cuid())
+  walletId      String
+  balanceBefore Decimal         @db.Decimal(10, 2)
+  balanceAfter  Decimal         @db.Decimal(10, 2)
+  amount        Decimal         @db.Decimal(10, 2)
+  type          TransactionType
+
+  orderId   String?
+  createdAt DateTime @default(now())
+
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  order  Order? @relation(fields: [orderId], references: [id])
+}
+
+enum PointActionType {
+  EARN
+  BURN
+}
+
+model PointAccount {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  balance     Int      @default(0)
+  totalEarned Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions PointTransaction[]
+}
+
+model PointTransaction {
+  id           String @id @default(cuid())
+  accountId    String
+  balanceAfter Int
+
+  type      PointActionType
+  points    Int
+  orderId   String?
+  createdAt DateTime        @default(now())
+
+  account PointAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  order   Order?       @relation(fields: [orderId], references: [id])
+}

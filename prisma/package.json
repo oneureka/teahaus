@@ -1,0 +1,13 @@
+{
+  "name": "@teahaus/db",
+  "version": "0.1.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "prisma studio"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "dotenv": "17.4.2",
+    "prisma": "7.8.0"
+  }
+}

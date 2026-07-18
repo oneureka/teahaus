@@ -8,7 +8,8 @@ const app = new Hono()
 app.get('/', async (c) => {
   const data = await db.query.spaces.findMany({
     with: {
-      tags: true
+      tags: true,
+      images: true
     }
   })
 
@@ -18,7 +19,12 @@ app.get('/', async (c) => {
 app.get('/:id', async (c) => {
   const spaceId = c.req.param('id')
   const data = await db.query.spaces.findFirst({
-    where: eq(spaces.id, spaceId)
+    where: eq(spaces.id, spaceId),
+    with: {
+      tags: true,
+      rooms: true,
+      images: true
+    }
   })
 
   return c.json(data)

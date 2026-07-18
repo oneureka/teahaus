@@ -13,21 +13,21 @@ import {
 } from 'drizzle-orm/mysql-core'
 import { relations } from 'drizzle-orm'
 
-export const orderStatus = mysqlEnum('OrderStatus', [
+export const orderStatus = mysqlEnum('status', [
   'UNPAID',
   'PAID',
   'IN_PROGRESS',
   'COMPLETED',
   'CANCELLED'
 ])
-export const transactionType = mysqlEnum('TransactionType', [
+export const transactionType = mysqlEnum('type', [
   'RECHARGE',
   'WITHDRAW',
   'PAYMENT',
   'REFUND',
   'REWARD'
 ])
-export const pointActionType = mysqlEnum('PointActionType', ['EARN', 'BURN'])
+export const pointActionType = mysqlEnum('type', ['EARN', 'BURN'])
 
 export const users = mysqlTable('User', {
   id: varchar('id', { length: 25 }).primaryKey().notNull(),

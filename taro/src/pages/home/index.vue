@@ -75,6 +75,13 @@
             <text>{{ item.category }}</text>
           </view>
 
+          <view class="card-meta">
+            <text class="meta-rating">★ {{ item.rating }}</text>
+            <text class="meta-reviews">{{ item.reviewCount }}条评价</text>
+            <text class="meta-divider">|</text>
+            <text class="meta-distance">{{ item.distance }}</text>
+          </view>
+
           <view class="card-address">{{ item.address }}</view>
 
           <view class="card-footer">
@@ -98,27 +105,47 @@ import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { spaceList as mockSpaceList, type Space } from "@/datasets";
 import "./index.css";
 
+interface SpaceDisplay extends Space {
+  rating: number;
+  reviewCount: number;
+  distance: string;
+  distanceValue: number;
+}
+
 interface SortOption {
   key: string;
   label: string;
 }
 
-const categoryOptions = [...new Set(mockSpaceList.map((s) => s.category))];
-
 const categoryList = [
   { key: "all", label: "全部" },
-  ...categoryOptions.map((c) => ({ key: c, label: c })),
+  { key: "海景茶舍", label: "海景" },
+  { key: "禅意茶苑", label: "禅意" },
+  { key: "文艺茶舍", label: "文艺" },
+  { key: "山景茶居", label: "山景" },
+  { key: "工夫茶馆", label: "工夫茶" },
+  { key: "古城茶馆", label: "古城" },
 ];
 
 const sortOptions: SortOption[] = [
+  { key: "distance", label: "距离最近" },
   { key: "price", label: "价格最低" },
+  { key: "rating", label: "评分最高" },
 ];
 
 const searchKeyword = ref("");
 const activeCategory = ref("all");
-const activeSort = ref("price");
+const activeSort = ref("distance");
 const imagesLoaded = ref<Record<string, boolean>>({});
-const spaceList = ref<Space[]>([...mockSpaceList]);
+const spaceList = ref<SpaceDisplay[]>(
+  mockSpaceList.map((s, i) => ({
+    ...s,
+    rating: +(4.5 + (i % 5) * 0.1).toFixed(1),
+    reviewCount: 200 + i * 80,
+    distance: `${(1 + i * 0.5).toFixed(1)}km`,
+    distanceValue: 1 + i * 0.5,
+  }))
+);
 
 const filteredList = computed(() => {
   let list = spaceList.value;
@@ -135,8 +162,12 @@ const filteredList = computed(() => {
   }
 
   const sorted = [...list];
-  if (activeSort.value === "price") {
+  if (activeSort.value === "distance") {
+    sorted.sort((a, b) => a.distanceValue - b.distanceValue);
+  } else if (activeSort.value === "price") {
     sorted.sort((a, b) => a.minPrice - b.minPrice);
+  } else if (activeSort.value === "rating") {
+    sorted.sort((a, b) => b.rating - a.rating);
   }
 
   return sorted;
@@ -150,7 +181,7 @@ const onSortChange = (key: string) => {
   activeSort.value = key;
 };
 
-const onCardClick = (item: Space) => {
+const onCardClick = (item: SpaceDisplay) => {
   Taro.navigateTo({
     url: `/pages/space/index?id=${item.id}`,
   });

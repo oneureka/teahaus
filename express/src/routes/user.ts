@@ -13,11 +13,19 @@ app.get('/', async (c) => {
     }
   })
 
+  if (!user) {
+    return c.notFound()
+  }
+
   return c.json(user)
 })
 
 app.get('/orders', async (c) => {
   const user = await db.query.users.findFirst()
+
+  if (!user) {
+    return c.notFound()
+  }
 
   const data = await db.query.orders.findMany({
     where: eq(orders.userId, user.id as string)
@@ -33,6 +41,10 @@ app.get('/transactions', async (c) => {
       pointAccount: true
     }
   })
+
+  if (!user || !user.wallet || !user.pointAccount) {
+    return c.notFound()
+  }
 
   if (c.req.query('type') === 'wallet') {
     const data = await db.query.transactions.findMany({

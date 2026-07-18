@@ -83,6 +83,7 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
               "color-primary-hover": "rgba(91, 79, 75, 0.04)",
               "color-error-bg": "rgba(193, 0, 7, 0.1)",
               "color-error-badge": "rgba(193, 0, 7, 0.08)",
+              "color-accent-soft": "#d4a76a",
             },
           },
         },

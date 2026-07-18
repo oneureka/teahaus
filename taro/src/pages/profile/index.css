@@ -20,7 +20,7 @@
 
 .navbar-title {
   font-size: 36rpx;
-  color: #fff;
+  color: var(--color-primary-content);
 }
 
 .user-section {
@@ -164,7 +164,7 @@
 
 .stat-label {
   font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-primary-content);
   letter-spacing: 0.12em;
 }
 

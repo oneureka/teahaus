@@ -27,7 +27,7 @@
   top: 24rpx;
   left: 24rpx;
   font-size: 22rpx;
-  color: #fff;
+  color: var(--color-primary-content);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8rpx);
   padding: 6rpx 16rpx;
@@ -60,7 +60,7 @@
 .card-featured {
   font-size: 20rpx;
   color: var(--color-primary);
-  background-color: rgba(125, 94, 74, 0.1);
+  background-color: var(--color-primary-bg);
   padding: 4rpx 12rpx;
   border-radius: 6rpx;
   margin-left: 12rpx;
@@ -178,7 +178,7 @@
 
 .room-item.active {
   border-color: var(--color-primary);
-  background-color: rgba(125, 94, 74, 0.04);
+  background-color: var(--color-primary-hover);
 }
 
 .room-left {
@@ -222,7 +222,7 @@
 
 .room-checked-icon {
   font-size: 22rpx;
-  color: #fff;
+  color: var(--color-primary-content);
   font-weight: 600;
 }
 
@@ -364,5 +364,5 @@
 .book-text {
   font-size: 30rpx;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-primary-content);
 }

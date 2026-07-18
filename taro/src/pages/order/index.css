@@ -20,13 +20,13 @@
 .status-text {
   font-size: 40rpx;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-primary-content);
   margin-bottom: 12rpx;
 }
 
 .status-time {
   font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-primary-content);
 }
 
 /* 通用区块 */
@@ -150,6 +150,6 @@
   background: var(--gradient-primary);
   border-radius: 40rpx;
   font-size: 28rpx;
-  color: #fff;
+  color: var(--color-primary-content);
   font-weight: 600;
 }

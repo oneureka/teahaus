@@ -25,8 +25,13 @@
   --color-text-muted: #A6A09B;
   --color-border: #D6D3D1;
   --color-border-light: #E7E5E4;
-  --gradient-primary: linear-gradient(135deg, #5B4F4B 0%, #473C39 30%, #2B2422 60%, #1D1816 100%);
+  --gradient-primary: linear-gradient(135deg, #5B4F4B 0%, #473C39 30%, #2B2422 100%);
   --color-shadow-primary: rgba(91, 79, 75, 0.3);
   --color-shadow-card: rgba(0, 0, 0, 0.05);
   --color-skeleton: #E0E0E0;
+  --color-primary-bg: rgba(91, 79, 75, 0.1);
+  --color-primary-badge: rgba(91, 79, 75, 0.08);
+  --color-primary-hover: rgba(91, 79, 75, 0.04);
+  --color-error-bg: rgba(193, 0, 7, 0.1);
+  --color-error-badge: rgba(193, 0, 7, 0.08);
 }

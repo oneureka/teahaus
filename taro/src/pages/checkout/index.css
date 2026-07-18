@@ -139,7 +139,7 @@
 
 .date-chip.active .date-chip-week,
 .date-chip.active .date-chip-day {
-  color: #fff;
+  color: var(--color-primary-content);
 }
 
 .date-chip-week {
@@ -196,7 +196,7 @@
 .slot-chip.active {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-primary-content);
   font-weight: 600;
 }
 
@@ -227,7 +227,7 @@
 .duration-chip.active {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-primary-content);
   font-weight: 600;
 }
 
@@ -368,7 +368,7 @@
   background: var(--gradient-primary);
   border-radius: 48rpx;
   font-size: 30rpx;
-  color: #fff;
+  color: var(--color-primary-content);
   font-weight: 600;
   box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
 }

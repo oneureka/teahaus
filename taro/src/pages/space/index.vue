@@ -69,7 +69,7 @@
           >
             <view class="room-left">
               <text class="room-name">{{ room.name }}</text>
-              <text class="room-capacity">可容纳 {{ room.capacity }} 人</text>
+              <text class="room-capacity">{{ room.description }}</text>
             </view>
             <view class="room-right">
               <text class="room-price">¥{{ room.price }}/时</text>

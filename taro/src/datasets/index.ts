@@ -1,4 +1,6 @@
 export * from "./spaces";
+export * from "./rooms";
+export * from "./tags";
 export * from "./reviews";
 export * from "./orders";
 export * from "./coupons";

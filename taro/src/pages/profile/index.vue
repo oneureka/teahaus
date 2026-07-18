@@ -25,7 +25,7 @@
             @confirm="onNicknameDone"
             focus
           />
-          <text class="user-title">{{ userInfo.userTitle }}</text>
+          <text class="user-title">{{ userInfo.userTitle ?? '品茗会员' }}</text>
         </view>
       </view>
       <view class="stats-divider">
@@ -90,7 +90,7 @@ import iconCoupon from "@/assets/icons/icon-coupon@2x.png";
 import iconFaq from "@/assets/icons/icon-faq@2x.png";
 import iconContact from "@/assets/icons/icon-contact@2x.png";
 import iconFeedback from "@/assets/icons/icon-feedback@2x.png";
-import { userInfo as mockUserInfo, userStats as mockUserStats } from "@/datasets";
+import { user as mockUser, userStats as mockUserStats } from "@/datasets";
 import "./index.css";
 
 const statusBarHeight = ref(0);
@@ -110,7 +110,7 @@ onMounted(() => {
 });
 
 // 用户信息
-const userInfo = ref({ ...mockUserInfo });
+const userInfo = ref({ ...mockUser });
 
 // 用户统计数据
 const userStats = ref({ ...mockUserStats });

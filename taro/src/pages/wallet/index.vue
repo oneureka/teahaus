@@ -24,8 +24,8 @@
           class="transaction-item"
         >
           <view class="transaction-info">
-            <text class="transaction-type">{{ transaction.type }}</text>
-            <text class="transaction-time">{{ transaction.time }}</text>
+            <text class="transaction-type">{{ { RECHARGE: '充值', PAYMENT: '消费', REWARD: '奖励' }[transaction.type] || transaction.type }}</text>
+            <text class="transaction-time">{{ transaction.createdAt.split('T')[0] }}</text>
           </view>
           <view
             class="transaction-amount"
@@ -48,10 +48,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import Taro from "@tarojs/taro";
-import { walletBalance, transactionList, type Transaction } from "@/datasets";
+import { user, transactionList, type Transaction } from "@/datasets";
 import "./index.css";
 
-const balance = ref(walletBalance);
+const balance = ref(user.wallet.balance);
 const transactions = ref<Transaction[]>([...transactionList]);
 
 const goToRecharge = () => {

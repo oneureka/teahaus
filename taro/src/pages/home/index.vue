@@ -56,7 +56,7 @@
           <view v-if="!imagesLoaded[item.id]" class="image-skeleton"></view>
           <image
             class="card-image"
-            :src="item.image"
+            :src="item.images[0] || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'"
             mode="aspectFill"
             lazy-load
             @load="onImageLoad(item.id)"
@@ -72,16 +72,7 @@
           </view>
 
           <view class="card-tags">
-            <text v-for="(tag, ti) in item.tags" :key="tag">
-              {{ tag }}<text v-if="ti < item.tags.length - 1" class="tag-divider"> · </text>
-            </text>
-          </view>
-
-          <view class="card-meta">
-            <text class="meta-rating">★ {{ item.rating }}</text>
-            <text class="meta-reviews">{{ item.reviewCount }}条评价</text>
-            <text class="meta-divider">|</text>
-            <text class="meta-distance">{{ item.distance }}</text>
+            <text>{{ item.category }}</text>
           </view>
 
           <view class="card-address">{{ item.address }}</view>
@@ -107,35 +98,26 @@ import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { spaceList as mockSpaceList, type Space } from "@/datasets";
 import "./index.css";
 
-interface Category {
-  key: string;
-  label: string;
-}
-
 interface SortOption {
   key: string;
   label: string;
 }
 
-const categoryList: Category[] = [
+const categoryOptions = [...new Set(mockSpaceList.map((s) => s.category))];
+
+const categoryList = [
   { key: "all", label: "全部" },
-  { key: "elegant", label: "雅致" },
-  { key: "business", label: "商务" },
-  { key: "metro", label: "近地铁" },
-  { key: "artistic", label: "文艺" },
-  { key: "heritage", label: "老洋房" },
+  ...categoryOptions.map((c) => ({ key: c, label: c })),
 ];
 
 const sortOptions: SortOption[] = [
-  { key: "distance", label: "距离最近" },
   { key: "price", label: "价格最低" },
-  { key: "rating", label: "评分最高" },
 ];
 
 const searchKeyword = ref("");
 const activeCategory = ref("all");
-const activeSort = ref("distance");
-const imagesLoaded = ref<Record<number, boolean>>({});
+const activeSort = ref("price");
+const imagesLoaded = ref<Record<string, boolean>>({});
 const spaceList = ref<Space[]>([...mockSpaceList]);
 
 const filteredList = computed(() => {
@@ -153,12 +135,8 @@ const filteredList = computed(() => {
   }
 
   const sorted = [...list];
-  if (activeSort.value === "distance") {
-    sorted.sort((a, b) => a.distanceValue - b.distanceValue);
-  } else if (activeSort.value === "price") {
+  if (activeSort.value === "price") {
     sorted.sort((a, b) => a.minPrice - b.minPrice);
-  } else if (activeSort.value === "rating") {
-    sorted.sort((a, b) => b.rating - a.rating);
   }
 
   return sorted;
@@ -190,11 +168,11 @@ const clearSearch = () => {
   searchKeyword.value = "";
 };
 
-const onImageLoad = (id: number) => {
+const onImageLoad = (id: string) => {
   imagesLoaded.value[id] = true;
 };
 
-const onImageError = (id: number) => {
+const onImageError = (id: string) => {
   imagesLoaded.value[id] = true;
 };
 

@@ -38,8 +38,8 @@
           class="point-transaction-item"
         >
           <view class="transaction-info">
-            <text class="transaction-type">{{ transaction.type }}</text>
-            <text class="transaction-time">{{ transaction.time }}</text>
+            <text class="transaction-type">{{ transaction.type === 'EARN' ? '获得' : '消耗' }}</text>
+            <text class="transaction-time">{{ transaction.createdAt.split('T')[0] }}</text>
           </view>
           <view
             class="transaction-points"
@@ -59,10 +59,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { pointsBalance, pointTransactionList, type PointTransaction } from "@/datasets";
+import { user, pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets";
 import "./index.css";
 
-const points = ref(pointsBalance);
+const points = ref(user.pointAccount.balance);
 const showModal = ref(false);
 const pointTransactions = ref<PointTransaction[]>([...pointTransactionList]);
 

@@ -18,7 +18,7 @@
           :src="emptyOrdersImage"
           mode="aspectFit"
         />
-        <text v-if="activeTab === OrderStatus.ALL" class="empty-text">还没有订单呢</text>
+        <text v-if="activeTab === 'ALL'" class="empty-text">还没有订单呢</text>
         <text v-else class="empty-text">暂无{{ activeTabName }}订单</text>
       </view>
       <view
@@ -29,19 +29,19 @@
         @tap="onOrderClick(order)"
       >
         <view class="card-header">
-          <text class="card-title">{{ order.roomName }}</text>
-          <text class="card-status">{{ order.statusText }}</text>
+          <text class="card-title">{{ getRoomName(order.roomId) }}</text>
+          <text class="card-status">{{ statusLabel(order.status) }}</text>
         </view>
         <view class="card-subtitle">
-          <text class="card-room">{{ order.room }}</text>
+          <text class="card-room">{{ getRoomName(order.roomId) }}</text>
           <text class="card-divider">·</text>
-          <text class="card-duration">{{ calcDuration(order.reserveTime) }}</text>
+          <text class="card-duration">{{ calcDuration(order.startTime, order.endTime) }}</text>
           <text class="card-divider">·</text>
-          <text class="card-reserve">{{ order.reserveTime }}</text>
+          <text class="card-reserve">{{ order.startTime }}-{{ order.endTime }}</text>
         </view>
         <view class="card-footer">
-          <text class="card-price">¥{{ formatPrice(order.price) }}</text>
-          <text class="card-order-time">{{ formatRelativeTime(order.time) }}</text>
+          <text class="card-price">¥{{ order.totalPrice }}</text>
+          <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
         </view>
       </view>
     </view>
@@ -52,25 +52,43 @@
 import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { ref, computed } from "vue";
 import emptyOrdersImage from "@/assets/images/no-orders.png";
-import { orderList, OrderStatus, type Order } from "@/datasets";
+import { orderList, roomList, type Order, type OrderStatus } from "@/datasets";
 import "./index.css";
+
+type FilterStatus = OrderStatus | "ALL";
 
 interface TabItem {
   title: string;
   key: string;
-  type: OrderStatus;
+  type: FilterStatus;
 }
 
 const tabs: TabItem[] = [
-  { title: "全部", key: "all", type: OrderStatus.ALL },
-  { title: "未支付", key: "unpaid", type: OrderStatus.UNPAID },
-  { title: "进行中", key: "in-progress", type: OrderStatus.IN_PROGRESS },
-  { title: "已完成", key: "completed", type: OrderStatus.COMPLETED },
+  { title: "全部", key: "all", type: "ALL" },
+  { title: "未支付", key: "unpaid", type: "UNPAID" },
+  { title: "进行中", key: "in-progress", type: "IN_PROGRESS" },
+  { title: "已完成", key: "completed", type: "COMPLETED" },
 ];
 
-const activeTab = ref<OrderStatus>(OrderStatus.ALL);
+const activeTab = ref<FilterStatus>("ALL");
 
 const orders = ref<Order[]>([...orderList]);
+
+const statusLabel = (status: OrderStatus): string => {
+  const map: Record<OrderStatus, string> = {
+    UNPAID: "未支付",
+    PAID: "已支付",
+    IN_PROGRESS: "进行中",
+    COMPLETED: "已完成",
+    CANCELLED: "已取消",
+  };
+  return map[status];
+};
+
+const getRoomName = (roomId: string): string => {
+  const room = roomList.find((r) => r.id === roomId);
+  return room?.name ?? "未知房间";
+};
 
 usePullDownRefresh(() => {
   setTimeout(() => {
@@ -78,7 +96,7 @@ usePullDownRefresh(() => {
   }, 2000);
 });
 
-const onTabChange = (type: OrderStatus) => {
+const onTabChange = (type: FilterStatus) => {
   activeTab.value = type;
 };
 
@@ -89,17 +107,17 @@ const activeTabName = computed(() => {
 
 const filteredOrders = computed(() => {
   const currentStatus = activeTab.value;
-  if (currentStatus === OrderStatus.ALL) {
+  if (currentStatus === "ALL") {
     return orders.value;
   }
   return orders.value.filter((order) => order.status === currentStatus);
 });
 
-const calcDuration = (reserveTime: string): string => {
-  const match = reserveTime.match(/(\d+):(\d+)-(\d+):(\d+)/);
-  if (!match) return "";
-  const start = parseInt(match[1]) * 60 + parseInt(match[2]);
-  const end = parseInt(match[3]) * 60 + parseInt(match[4]);
+const calcDuration = (startTime: string, endTime: string): string => {
+  const [sh, sm] = startTime.split(":").map(Number);
+  const [eh, em] = endTime.split(":").map(Number);
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
   const hours = (end - start) / 60;
   return `共${hours}小时`;
 };
@@ -112,11 +130,7 @@ const formatRelativeTime = (dateStr: string): string => {
   if (days === 0) return "今天";
   if (days === 1) return "昨天";
   if (days < 30) return `${days}天前`;
-  return dateStr.split(" ")[0];
-};
-
-const formatPrice = (price: string): string => {
-  return price.replace(/\.00$/, "");
+  return dateStr.split("T")[0];
 };
 
 const onOrderClick = (order: Order) => {

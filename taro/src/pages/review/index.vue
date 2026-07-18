@@ -93,7 +93,7 @@
           <switch
             :checked="reviewInfo.isAnonymous"
             @change="onAnonymousChange"
-            color="#7D5E4A"
+            color="#5B4F4B"
           />
         </view>
       </view>

@@ -66,7 +66,7 @@ defineExpose({
 
 .tabs-header {
   display: flex;
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   border-bottom: 1rpx solid var(--color-border-light);
 }
 

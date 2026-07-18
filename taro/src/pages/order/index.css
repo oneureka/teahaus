@@ -1,6 +1,6 @@
 .order-detail {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   padding-bottom: 120rpx;
 }
 
@@ -31,7 +31,7 @@
 
 /* 通用区块 */
 .section {
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   margin-top: 24rpx;
   padding: 24rpx;
 }
@@ -58,7 +58,7 @@
 .space-name {
   font-size: 32rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 8rpx;
 }
 
@@ -93,7 +93,7 @@
 
 .value {
   font-size: 28rpx;
-  color: var(--color-text);
+  color: var(--color-base-content);
 }
 
 /* 费用明细 */
@@ -132,7 +132,7 @@
   align-items: center;
   justify-content: flex-end;
   padding: 20rpx 24rpx;
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
   gap: 24rpx;
 }

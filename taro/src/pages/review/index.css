@@ -1,6 +1,6 @@
 .review {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   padding-bottom: 120rpx;
 }
 
@@ -10,7 +10,7 @@
 
 /* 通用区块 */
 .section {
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   margin-top: 24rpx;
   padding: 24rpx;
 }
@@ -18,7 +18,7 @@
 .section-title {
   font-size: 30rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 24rpx;
 }
 
@@ -45,7 +45,7 @@
 .space-name {
   font-size: 32rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 8rpx;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .star-icon.active {
-  color: var(--color-star);
+  color: var(--color-accent);
 }
 
 .rating-text {
@@ -110,10 +110,10 @@
   width: 100%;
   min-height: 200rpx;
   padding: 20rpx;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   border-radius: 16rpx;
   font-size: 28rpx;
-  color: var(--color-text);
+  color: var(--color-base-content);
   line-height: 1.6;
 }
 
@@ -202,7 +202,7 @@
   align-items: center;
   justify-content: center;
   padding: 20rpx 24rpx;
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 

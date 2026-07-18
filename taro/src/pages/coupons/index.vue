@@ -13,7 +13,7 @@
     </view>
     <scroll-view
       :style="{ height: scrollHeight + 'px' }"
-      refresher-background="var(--color-bg)"
+      refresher-background="var(--color-base-200)"
       :refresher-enabled="true"
       :refresher-triggered="refreshing"
       @refresherrefresh="onRefresh"

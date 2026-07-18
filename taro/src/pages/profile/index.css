@@ -1,6 +1,6 @@
 .profile {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
 }
 
 .custom-navbar {
@@ -85,7 +85,7 @@
   display: block;
   font-size: 36rpx;
   font-weight: 600;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   margin-bottom: 12rpx;
   text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
@@ -102,7 +102,7 @@
   display: block;
   font-size: 36rpx;
   font-weight: 600;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
   background: transparent;
   border: none;
@@ -159,7 +159,7 @@
 .stat-value {
   font-size: 36rpx;
   font-weight: 700;
-  color: var(--color-bg);
+  color: var(--color-base-200);
 }
 
 .stat-label {
@@ -180,7 +180,7 @@
 }
 
 .menu-list {
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   border-radius: 24rpx;
   border: 2rpx solid var(--color-border);
   overflow: hidden;
@@ -201,7 +201,7 @@
 }
 
 .menu-list-item:active {
-  background-color: var(--color-bg-warm);
+  background-color: var(--color-base-300);
 }
 
 .menu-list-item:not(:last-child)::after {
@@ -227,7 +227,7 @@
 
 .menu-list-title {
   font-size: 30rpx;
-  color: var(--color-text);
+  color: var(--color-base-content);
   font-weight: 500;
   letter-spacing: 0.05em;
 }
@@ -258,7 +258,7 @@
 }
 
 .deco-icon {
-  color: var(--color-star);
+  color: var(--color-accent);
   font-size: 20rpx;
 }
 

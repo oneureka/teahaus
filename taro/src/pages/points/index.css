@@ -1,6 +1,6 @@
 .points {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
 }
 
 .points-header {
@@ -32,7 +32,7 @@
 .points-amount {
   font-size: 80rpx;
   font-weight: 600;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   line-height: 1;
 }
 
@@ -61,7 +61,7 @@
   display: block;
   font-size: 30rpx;
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 16rpx;
 }
 
@@ -117,7 +117,7 @@
 
 .transaction-type {
   font-size: 28rpx;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 8rpx;
 }
 
@@ -156,7 +156,7 @@
 
 .modal-content {
   width: 600rpx;
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   border-radius: 24rpx;
   overflow: hidden;
   animation: modalSlideIn 0.3s ease-out;
@@ -184,7 +184,7 @@
 .modal-title {
   font-size: 32rpx;
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-base-content);
 }
 
 .modal-close {

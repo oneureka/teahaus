@@ -1,12 +1,12 @@
 .orders {
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   min-height: 100vh;
   padding-bottom: 40rpx;
 }
 
 .orders-tabs {
   display: flex;
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   border-bottom: 1rpx solid var(--color-border-light);
   position: sticky;
   top: 0;
@@ -43,7 +43,7 @@
 }
 
 .order-card {
-  background-color: var(--color-bg-card);
+  background-color: var(--color-base-100);
   border-radius: 16rpx;
   padding: 28rpx;
   margin-bottom: 20rpx;
@@ -65,7 +65,7 @@
 .card-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   letter-spacing: 0.05em;
 }
 
@@ -116,7 +116,7 @@
 .card-price {
   font-size: 36rpx;
   font-weight: 700;
-  color: var(--color-price);
+  color: var(--color-secondary);
 }
 
 .card-order-time {

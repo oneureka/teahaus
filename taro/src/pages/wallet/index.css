@@ -1,6 +1,6 @@
 .wallet {
   min-height: calc(100vh - 44px);
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
   padding: 24rpx;
 }
 
@@ -37,7 +37,7 @@
 .balance-amount {
   font-size: 64rpx;
   font-weight: 600;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   line-height: 1;
   vertical-align: bottom;
 }
@@ -58,7 +58,7 @@
 
 .btn-withdraw {
   background: transparent;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   border: 1rpx solid rgba(255, 255, 255, 0.5);
 }
 
@@ -108,7 +108,7 @@
 
 .transaction-type {
   font-size: 28rpx;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-bottom: 8rpx;
 }
 

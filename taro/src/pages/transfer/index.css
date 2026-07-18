@@ -1,6 +1,6 @@
 .transfer {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-base-200);
 }
 
 .segment-group {
@@ -16,7 +16,7 @@
   font-size: 28rpx;
   color: var(--color-text-secondary);
   text-align: center;
-  background: var(--color-bg-card);
+  background: var(--color-base-100);
   border: 2rpx solid var(--color-border);
 }
 
@@ -31,7 +31,7 @@
 
 .segment.active {
   background: var(--gradient-primary);
-  color: var(--color-bg);
+  color: var(--color-base-200);
   font-weight: 500;
   border-color: transparent;
 }
@@ -61,7 +61,7 @@
 .currency {
   font-size: 64rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   margin-right: 8rpx;
 }
 
@@ -75,7 +75,7 @@
   flex: 1;
   font-size: 64rpx;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-base-content);
   background: transparent;
   border: none;
   outline: none;
@@ -118,7 +118,7 @@
   font-size: 28rpx;
   color: var(--color-text-secondary);
   border: 2rpx solid var(--color-border);
-  background: var(--color-bg-card);
+  background: var(--color-base-100);
 }
 
 .preset-item.selected {
@@ -142,6 +142,6 @@
 
 .submit-btn-text {
   font-size: 32rpx;
-  color: var(--color-bg);
+  color: var(--color-base-200);
   font-weight: 600;
 }

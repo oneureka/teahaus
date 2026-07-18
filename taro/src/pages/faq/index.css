@@ -6,7 +6,7 @@
 .faq-list {
   background-color: var(--color-base-100);
   overflow: hidden;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2rpx 12rpx var(--color-shadow-card);
 }
 
 .faq-item {

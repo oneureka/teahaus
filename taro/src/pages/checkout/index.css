@@ -370,5 +370,5 @@
   font-size: 30rpx;
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 8rpx 24rpx rgba(125, 94, 74, 0.3);
+  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
 }

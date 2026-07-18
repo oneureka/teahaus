@@ -42,7 +42,7 @@
   border-radius: 12rpx;
   padding: 24rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx var(--color-shadow-card);
   transition: transform 0.15s ease;
 }
 
@@ -158,7 +158,7 @@
   background: var(--gradient-primary);
   padding: 24rpx 64rpx;
   border-radius: 48rpx;
-  box-shadow: 0 8rpx 24rpx rgba(125, 94, 74, 0.3);
+  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
 }
 
 .btn-get-coupons text {

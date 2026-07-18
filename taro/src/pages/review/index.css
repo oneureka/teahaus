@@ -167,17 +167,17 @@
 .upload-btn {
   width: 180rpx;
   height: 180rpx;
-  border: 2rpx dashed #d0d0d0;
+  border: 2rpx dashed var(--color-text-muted);
   border-radius: 16rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fafafa;
+  background-color: var(--color-base-100);
 }
 
 .upload-icon {
   font-size: 60rpx;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
 }
 
 /* 匿名评价 */
@@ -203,7 +203,7 @@
   justify-content: center;
   padding: 20rpx 24rpx;
   background-color: var(--color-base-100);
-  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4rpx 20rpx var(--color-shadow-card);
 }
 
 .submit-btn {

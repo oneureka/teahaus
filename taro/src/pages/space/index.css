@@ -358,7 +358,7 @@
   background: var(--gradient-primary);
   padding: 24rpx 64rpx;
   border-radius: 48rpx;
-  box-shadow: 0 8rpx 24rpx rgba(125, 94, 74, 0.3);
+  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
 }
 
 .book-text {

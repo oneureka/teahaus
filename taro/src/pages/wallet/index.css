@@ -9,7 +9,7 @@
   padding: 40rpx 32rpx;
   border-radius: 16rpx;
   margin-bottom: 32rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4rpx 20rpx var(--color-shadow-card);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,7 +52,7 @@
 }
 
 .btn-recharge {
-  background: linear-gradient(135deg, var(--color-accent), #C4943E);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
   color: #fff;
 }
 

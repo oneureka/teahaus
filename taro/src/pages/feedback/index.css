@@ -85,7 +85,7 @@
   background: var(--gradient-primary);
   border-radius: 12rpx;
   padding: 28rpx 0;
-  box-shadow: 0 4rpx 16rpx rgba(125, 94, 74, 0.3);
+  box-shadow: 0 4rpx 16rpx var(--color-shadow-primary);
   transition: opacity 0.15s ease;
 }
 

@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server'
-import spaces from './routes/spaces'
-import tags from './routes/tags'
-import user from './routes/user'
+import spaces from './routes/spaces.js'
+import tags from './routes/tags.js'
+import user from './routes/user.js'
 
 import { Hono } from 'hono'
 

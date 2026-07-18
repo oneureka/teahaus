@@ -1,5 +1,5 @@
 import { drizzle } from 'drizzle-orm/mysql2'
-import * as schema from './schema'
+import * as schema from './schema.js'
 import mysql from 'mysql2/promise'
 
 if (process.env.NODE_ENV !== 'production') {

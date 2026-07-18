@@ -1,0 +1,19 @@
+{
+  "name": "@teahaus/api",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch dev.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.0.10",
+    "drizzle-orm": "0.45.2",
+    "hono": "^4.12.30",
+    "mysql2": "3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "dotenv": "17.4.2",
+    "tsx": "4.23.1",
+    "typescript": "6.0.3"
+  }
+}

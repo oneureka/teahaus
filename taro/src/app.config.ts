@@ -5,7 +5,6 @@ export default defineAppConfig({
     "pages/space/index",
     "pages/order/index",
     "pages/checkout/index",
-    "pages/review/index",
     "pages/profile/index",
     "pages/coupons/index",
     "pages/wallet/index",

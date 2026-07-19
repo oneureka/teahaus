@@ -9,7 +9,6 @@ export const ROUTES = {
   wallet: "/pages/wallet/index",
   transfer: "/pages/transfer/index",
   points: "/pages/points/index",
-  review: "/pages/review/index",
   faq: "/pages/faq/index",
   feedback: "/pages/feedback/index",
   verify: "/pages/verify/index",

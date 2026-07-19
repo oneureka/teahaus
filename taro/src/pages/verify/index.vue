@@ -2,6 +2,7 @@
   <view class="verify">
     <view class="input-wrapper" :class="{ 'input-wrapper-focus': isFocus }">
       <input
+        :key="inputKey"
         v-model="verificationCode"
         class="verify-input"
         type="text"
@@ -37,6 +38,7 @@ import "./index.css";
 
 const verificationCode = ref("");
 const isFocus = ref(false);
+const inputKey = ref(0);
 
 const { submitting, submit } = useMockSubmit({
   loadingText: "核销中...",
@@ -49,10 +51,7 @@ const handleScan = () => {
     success: (res) => {
       if (res.result) {
         verificationCode.value = res.result;
-        Taro.showToast({
-          title: "扫码成功",
-          icon: "success",
-        });
+        handleSubmit();
       }
     },
     fail: (err) => {
@@ -78,6 +77,7 @@ const handleSubmit = () => {
 
   submit(() => {
     verificationCode.value = "";
+    inputKey.value++;
   });
 };
 </script>

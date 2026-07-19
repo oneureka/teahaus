@@ -1,7 +1,8 @@
 .verify {
   min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
-  padding: 48rpx 32rpx;
+  padding: 24rpx 24rpx 48rpx;
   display: flex;
   flex-direction: column;
   gap: 32rpx;

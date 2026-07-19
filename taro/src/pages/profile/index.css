@@ -194,7 +194,6 @@
   align-items: center;
   padding: 34rpx 28rpx;
   position: relative;
-  transition: transform 0.2s ease;
 }
 
 .menu-list-item:active {

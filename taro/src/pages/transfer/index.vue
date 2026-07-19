@@ -67,6 +67,7 @@ const router = useRouter();
 const activeTab = ref<"recharge" | "withdraw">("recharge");
 const amount = ref<number>(0);
 const balance = ref(userStore.balance);
+
 const presets = [50, 100, 200, 500];
 
 const tabLabels: Record<string, string> = {

@@ -1,10 +1,11 @@
 .feedback {
   min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
 }
 
 .feedback-form {
-  padding: 40rpx 32rpx;
+  padding: 24rpx 24rpx 48rpx;
 }
 
 .form-item {
@@ -34,7 +35,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20rpx 0;
-  border-bottom: 2rpx solid var(--color-taupe-200);
+  border-bottom: 1rpx solid var(--color-taupe-200);
   transition: border-color 0.2s ease;
 }
 
@@ -61,7 +62,7 @@
   padding: 20rpx 0;
   font-size: 30rpx;
   color: var(--color-base-content);
-  border-bottom: 2rpx solid var(--color-taupe-200);
+  border-bottom: 1rpx solid var(--color-taupe-200);
   line-height: 1.6;
   transition: border-color 0.2s ease;
 }
@@ -70,10 +71,20 @@
   border-bottom-color: var(--color-primary);
 }
 
+.form-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
 .form-count {
-  display: block;
-  text-align: right;
+  margin-left: auto;
   font-size: 24rpx;
   color: var(--color-taupe-400);
-  margin-top: 12rpx;
+}
+
+.form-error {
+  flex: 1;
+  font-size: 24rpx;
+  color: var(--color-error);
 }

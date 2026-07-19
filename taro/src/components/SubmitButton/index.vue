@@ -1,7 +1,7 @@
 <template>
   <view
     class="submit-btn"
-    :class="[variant, { block, disabled }]"
+    :class="[variant, { disabled }]"
     @tap="onClick"
   >
     <text class="submit-btn-text">{{ text }}</text>
@@ -12,13 +12,11 @@
 interface Props {
   text: string;
   variant?: "pill" | "square";
-  block?: boolean;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: "square",
-  block: false,
   disabled: false,
 });
 
@@ -33,11 +31,12 @@ const onClick = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .submit-btn {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   background: var(--gradient-button);
   box-shadow: 0 4rpx 16rpx var(--color-shadow-button);
   transition: opacity 0.15s ease;
@@ -58,10 +57,6 @@ const onClick = () => {
   padding: 28rpx 0;
 }
 
-.submit-btn.block {
-  width: 100%;
-}
-
 .submit-btn.disabled {
   opacity: 0.6;
 }
@@ -72,11 +67,11 @@ const onClick = () => {
 
 .submit-btn.pill .submit-btn-text {
   font-size: 30rpx;
-  color: var(--color-primary-content);
+  color: var(--color-taupe-200);
 }
 
 .submit-btn.square .submit-btn-text {
   font-size: 32rpx;
-  color: var(--color-base-200);
+  color: var(--color-taupe-200);
 }
 </style>

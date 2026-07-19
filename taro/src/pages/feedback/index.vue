@@ -36,8 +36,12 @@
           maxlength="500"
           @focus="onTextareaFocus"
           @blur="onTextareaBlur"
+          @input="onContentInput"
         />
-        <text class="form-count">{{ feedbackContent.length }}/500</text>
+        <view class="form-footer">
+          <text v-if="showContentError" class="form-error">请填写反馈内容</text>
+          <text class="form-count">{{ feedbackContent.length }}/500</text>
+        </view>
       </view>
       <SubmitButton
         :text="submitting ? '提交中...' : '提交反馈'"
@@ -50,7 +54,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Taro from "@tarojs/taro";
 import { useMockSubmit } from "@/composables/useMockSubmit";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import "./index.css";
@@ -75,6 +78,7 @@ const feedbackTypes: FeedbackType[] = [
 const selectedType = ref(0);
 const feedbackContent = ref("");
 const isTextareaFocus = ref(false);
+const showContentError = ref(false);
 
 const { submitting, submit } = useMockSubmit({
   loadingText: "提交中...",
@@ -89,6 +93,9 @@ const onTextareaFocus = () => {
 const onTextareaBlur = () => {
   isTextareaFocus.value = false;
 };
+const onContentInput = () => {
+  showContentError.value = false;
+};
 
 const onTypeChange = (e: PickerEvent) => {
   selectedType.value = e.detail.value;
@@ -96,10 +103,7 @@ const onTypeChange = (e: PickerEvent) => {
 
 const onSubmit = () => {
   if (!feedbackContent.value.trim()) {
-    Taro.showToast({
-      title: "请填写反馈内容",
-      icon: "none",
-    });
+    showContentError.value = true;
     return;
   }
 

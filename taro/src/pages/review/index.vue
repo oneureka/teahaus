@@ -69,7 +69,7 @@
 
     <!-- 底部提交按钮 -->
     <BottomBar justify="center" shadow>
-      <SubmitButton text="提交评价" variant="pill" block @tap="onSubmit" />
+      <SubmitButton text="提交评价" variant="pill" @tap="onSubmit" />
     </BottomBar>
   </view>
 </template>

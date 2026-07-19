@@ -90,6 +90,10 @@
   color: var(--color-base-content);
 }
 
+.time-separator {
+  color: var(--color-taupe-400);
+}
+
 /* 费用明细 */
 .price-row {
   display: flex;

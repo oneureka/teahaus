@@ -6,7 +6,7 @@
       <text class="room-name">{{ roomName }}</text>
       <text v-if="price" class="room-price-info">{{ price }}</text>
     </view>
-    <text v-if="showArrow" class="arrow">›</text>
+    <image v-if="showArrow" class="arrow" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
   </view>
 </template>
 
@@ -59,7 +59,7 @@ const onClick = () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6rpx;
+  gap: 12rpx;
   min-width: 0;
 }
 
@@ -81,8 +81,9 @@ const onClick = () => {
 }
 
 .arrow {
-  font-size: 32rpx;
-  color: var(--color-taupe-400);
+  width: 32rpx;
+  height: 32rpx;
+  display: block;
   margin-left: 12rpx;
 }
 </style>

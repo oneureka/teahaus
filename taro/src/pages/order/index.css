@@ -2,12 +2,14 @@
   min-height: 100vh;
   box-sizing: border-box;
   background-color: var(--color-base-200);
-  padding-bottom: 120rpx;
 }
 
 .scroll-content {
   height: 100vh;
-  padding-bottom: 120rpx;
+}
+
+.scroll-content.has-bottom-bar {
+  padding-bottom: 80rpx;
 }
 
 /* 订单状态 */

@@ -1,6 +1,6 @@
 <template>
   <view class="order-detail">
-    <scroll-view v-if="order" class="scroll-content" scroll-y>
+    <scroll-view v-if="order" class="scroll-content" :class="{ 'has-bottom-bar': order.status === 'UNPAID' }" scroll-y>
       <!-- 订单状态 -->
       <view class="order-status">
         <text class="status-text">{{ statusLabel(order.status) }}</text>

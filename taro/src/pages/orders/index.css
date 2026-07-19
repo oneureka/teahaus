@@ -54,7 +54,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12rpx;
 }
 
 .card-title {
@@ -62,6 +61,7 @@
   font-weight: 600;
   color: var(--color-base-content);
   letter-spacing: 0.05em;
+  margin: 12rpx 0;
 }
 
 .card-status {
@@ -113,26 +113,15 @@
   border-top: 2rpx dashed var(--color-taupe-300);
 }
 
+.card-order-no {
+  font-size: 22rpx;
+  color: var(--color-taupe-400);
+}
+
 .card-price {
   font-size: 36rpx;
   font-weight: 700;
   color: var(--color-gold);
-}
-
-.card-footer-left {
-  display: flex;
-  align-items: center;
-  gap: 12rpx;
-}
-
-.footer-divider {
-  color: var(--color-taupe-300);
-  font-size: 22rpx;
-}
-
-.card-order-no {
-  font-size: 22rpx;
-  color: var(--color-taupe-400);
 }
 
 .card-order-time {

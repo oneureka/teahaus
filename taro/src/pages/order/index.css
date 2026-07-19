@@ -1,11 +1,13 @@
 .order-detail {
   min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
   padding-bottom: 120rpx;
 }
 
 .scroll-content {
   height: 100vh;
+  padding-bottom: 120rpx;
 }
 
 /* 订单状态 */
@@ -42,7 +44,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .info-row:last-child {

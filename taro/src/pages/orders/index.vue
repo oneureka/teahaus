@@ -25,9 +25,10 @@
         @tap="onOrderClick(order)"
       >
         <view class="card-header">
-          <text class="card-title">{{ getSpaceName(order.spaceId) }}</text>
+          <text class="card-order-no">{{ order.orderNo }}</text>
           <text class="card-status" :class="statusClass(order.status)">{{ statusLabel(order.status) }}</text>
         </view>
+        <text class="card-title">{{ getSpaceName(order.spaceId) }}</text>
         <view class="card-subtitle">
           <text class="card-room">{{ getRoomName(order.roomId) }}</text>
           <text class="card-divider">·</text>
@@ -36,11 +37,7 @@
           <text class="card-reserve">{{ order.startTime }}-{{ order.endTime }}</text>
         </view>
         <view class="card-footer">
-          <view class="card-footer-left">
-            <text class="card-order-no">{{ order.orderNo }}</text>
-            <text class="footer-divider">|</text>
-            <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
-          </view>
+          <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
           <text class="card-price">¥{{ order.totalPrice }}</text>
         </view>
       </view>

@@ -18,7 +18,7 @@ withDefaults(defineProps<Props>(), {
 });
 </script>
 
-<style scoped>
+<style>
 .bottom-bar {
   position: fixed;
   bottom: 0;

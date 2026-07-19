@@ -37,7 +37,7 @@ const onClick = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .space-info-card {
   display: flex;
   align-items: center;

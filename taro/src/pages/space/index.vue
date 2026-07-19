@@ -39,7 +39,7 @@
             <text class="info-label">📍 地址</text>
             <text class="info-value address">{{ space.address }}</text>
           </view>
-          <text class="arrow">›</text>
+            <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
       </view>
 
@@ -50,7 +50,7 @@
             <text class="info-label">📞 联系商家</text>
             <text class="info-value">{{ space.phone }}</text>
           </view>
-          <text class="arrow">›</text>
+            <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
       </view>
 
@@ -69,7 +69,7 @@
           >
             <view class="room-left">
               <text class="room-name">{{ room.name }}</text>
-              <text class="room-capacity">{{ room.description }}</text>
+              <text class="room-desc">{{ room.description }}</text>
             </view>
             <view class="room-right">
               <text class="room-price">¥{{ room.price }}/时</text>
@@ -135,7 +135,7 @@
     </scroll-view>
 
     <!-- 底部操作栏 -->
-    <BottomBar tall>
+    <BottomBar justify="between">
       <view class="bar-actions">
         <view class="bar-action" @tap="onFavorite">
           <text class="bar-action-icon">{{ favorited ? '❤️' : '🤍' }}</text>
@@ -155,11 +155,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Taro, { useRouter } from "@tarojs/taro";
+import Taro, { useRouter, usePullDownRefresh } from "@tarojs/taro";
 import { getSpaceDetail, type SpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms, type Room } from "@/datasets/rooms";
 import { spaceReviews, type Review } from "@/datasets/reviews";
 import { ROUTES, buildRoute } from "@/constants/routes";
+import { usePullRefresh } from "@/composables/useMockSubmit";
 import BottomBar from "@/components/BottomBar/index.vue";
 import "./index.css";
 
@@ -173,6 +174,8 @@ const roomList = ref<Room[]>([]);
 const selectedRoom = ref<Room | null>(null);
 
 const reviews = ref<Review[]>([...spaceReviews]);
+
+usePullDownRefresh(usePullRefresh());
 
 const getFacilityIcon = (facility: string) => {
   const iconMap: Record<string, string> = {

@@ -26,7 +26,7 @@
       >
         <view class="card-header">
           <text class="card-title">{{ getRoomName(order.roomId) }}</text>
-          <text class="card-status">{{ statusLabel(order.status) }}</text>
+          <text class="card-status" :class="statusClass(order.status)">{{ statusLabel(order.status) }}</text>
         </view>
         <view class="card-subtitle">
           <text class="card-room">{{ getRoomName(order.roomId) }}</text>
@@ -83,6 +83,10 @@ const statusLabel = (status: OrderStatus): string => {
     CANCELLED: "已取消",
   };
   return map[status];
+};
+
+const statusClass = (status: OrderStatus): string => {
+  return status === "CANCELLED" ? "card-status-cancelled" : "";
 };
 
 const getRoomName = (roomId: string): string => {

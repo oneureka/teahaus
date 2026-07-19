@@ -1,7 +1,7 @@
 .orders {
   background-color: var(--color-base-200);
   min-height: 100vh;
-  padding-bottom: 40rpx;
+  box-sizing: border-box;
 }
 
 .orders-tabs {
@@ -24,7 +24,7 @@
 
 .orders-tab-active {
   color: var(--color-primary);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .orders-tab-active::after {
@@ -39,7 +39,7 @@
 }
 
 .orders-list {
-  padding: 24rpx;
+  padding: 24rpx 24rpx 48rpx;
 }
 
 .order-card {
@@ -48,11 +48,6 @@
   padding: 28rpx;
   margin-bottom: 20rpx;
   border: 2rpx solid var(--color-taupe-300);
-  transition: transform 0.15s ease;
-}
-
-.order-card:active {
-  transform: scale(0.97);
 }
 
 .card-header {
@@ -77,6 +72,11 @@
   flex-shrink: 0;
   color: var(--color-primary);
   border: 1rpx solid var(--color-primary);
+}
+
+.card-status-cancelled {
+  color: var(--color-taupe-400);
+  border-color: var(--color-taupe-300);
 }
 
 .card-subtitle {
@@ -116,7 +116,7 @@
 .card-price {
   font-size: 36rpx;
   font-weight: 700;
-  color: var(--color-secondary);
+  color: var(--color-gold);
 }
 
 .card-order-time {

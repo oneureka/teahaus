@@ -39,7 +39,7 @@ const onMaskTap = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .modal-mask {
   position: fixed;
   inset: 0;

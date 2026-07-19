@@ -1,5 +1,6 @@
 .points {
   min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
 }
 
@@ -20,7 +21,7 @@
 
 .points-title {
   font-size: 32rpx;
-  color: var(--color-primary-content);
+  color: var(--color-taupe-200);
   margin-bottom: 24rpx;
 }
 
@@ -40,12 +41,12 @@
   font-size: 28rpx;
   margin-left: 8rpx;
   margin-bottom: 2rpx;
-  color: var(--color-primary-content);
+  color: var(--color-taupe-200);
 }
 
 .points-rules {
   font-size: 28rpx;
-  color: var(--color-primary-content);
+  color: var(--color-taupe-200);
   padding-bottom: 8rpx;
 }
 

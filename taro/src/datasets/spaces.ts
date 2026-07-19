@@ -292,7 +292,7 @@ export const spaceList: Space[] = [
 ];
 
 const DEFAULT_SPACE_IMAGE =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop";
+  "https://images.unsplash.com/photo-1610375233775-6e0166927193";
 
 const DEFAULT_FACILITIES = ["高速WiFi", "茶水", "充电宝", "停车位"];
 

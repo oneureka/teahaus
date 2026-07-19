@@ -129,7 +129,7 @@ const getRoomName = (roomId: string): string => {
 
 const getSpaceImage = (spaceId: string): string => {
   const space = spaceList.find((s) => s.id === spaceId);
-  const DEFAULT = "https://images.unsplash.com/photo-1558618666-fcd25c850cd64?w=800&h=600&fit=crop";
+  const DEFAULT = "https://images.unsplash.com/photo-1610375233775-6e0166927193";
   return space?.images?.[0] ?? DEFAULT;
 };
 

@@ -56,7 +56,7 @@
           <view v-if="!imagesLoaded[item.id]" class="image-skeleton"></view>
           <image
             class="card-image"
-            :src="item.images[0] || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'"
+            :src="item.images[0] || 'https://images.unsplash.com/photo-1531970227416-f0cddeb1f748'"
             mode="aspectFill"
             lazy-load
             @load="onImageLoad(item.id)"

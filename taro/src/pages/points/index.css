@@ -4,7 +4,7 @@
 }
 
 .points-header {
-  background: var(--gradient-primary);
+  background: var(--gradient-hero);
   padding: 56rpx 32rpx;
   position: relative;
   overflow: hidden;
@@ -68,7 +68,7 @@
 .usage-detail {
   display: block;
   font-size: 26rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .points-records {
@@ -79,120 +79,13 @@
   display: block;
   font-size: 28rpx;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   line-height: 40rpx;
   margin-bottom: 16rpx;
   padding-left: 16rpx;
   border-left: 6rpx solid var(--color-primary);
 }
 
-.empty-records {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120rpx 40rpx;
-}
-
-.empty-text {
-  font-size: 30rpx;
-  color: var(--color-text-muted);
-}
-
-.point-transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28rpx 0;
-  border-bottom: 1rpx solid var(--color-border-light);
-}
-
-.point-transaction-item:last-child {
-  border-bottom: none;
-}
-
-.transaction-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.transaction-type {
-  font-size: 28rpx;
-  color: var(--color-base-content);
-  margin-bottom: 8rpx;
-}
-
-.transaction-time {
-  font-size: 22rpx;
-  color: var(--color-text-muted);
-}
-
-.transaction-points {
-  font-size: 30rpx;
-  font-weight: 500;
-  display: flex;
-  align-items: baseline;
-}
-
-.points-in {
-  color: var(--color-success);
-}
-
-.points-out {
-  color: var(--color-error);
-}
-
-.modal-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  width: 600rpx;
-  background-color: var(--color-base-100);
-  border-radius: 24rpx;
-  overflow: hidden;
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50rpx);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32rpx 40rpx;
-  border-bottom: 1rpx solid var(--color-border-light);
-}
-
-.modal-title {
-  font-size: 32rpx;
-  font-weight: 500;
-  color: var(--color-base-content);
-}
-
-.modal-close {
-  font-size: 40rpx;
-  color: var(--color-text-muted);
-  line-height: 1;
-}
-
-.modal-body {
-  padding: 32rpx 40rpx;
+.records-list {
+  height: calc(100vh - 320rpx);
 }

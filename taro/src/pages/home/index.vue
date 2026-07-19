@@ -100,9 +100,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import Taro, { usePullDownRefresh } from "@tarojs/taro";
-import { spaceList as mockSpaceList, type Space } from "@/datasets";
+import { spaceList as mockSpaceList, type Space } from "@/datasets/spaces";
+import { ROUTES, buildRoute } from "@/constants/routes";
+import { usePullRefresh } from "@/composables/useMockSubmit";
 import "./index.css";
 
 interface SpaceDisplay extends Space {
@@ -144,7 +146,7 @@ const spaceList = ref<SpaceDisplay[]>(
     reviewCount: 200 + i * 80,
     distance: `${(1 + i * 0.5).toFixed(1)}km`,
     distanceValue: 1 + i * 0.5,
-  }))
+  })),
 );
 
 const filteredList = computed(() => {
@@ -183,20 +185,12 @@ const onSortChange = (key: string) => {
 
 const onCardClick = (item: SpaceDisplay) => {
   Taro.navigateTo({
-    url: `/pages/space/index?id=${item.id}`,
+    url: buildRoute(ROUTES.space, { id: item.id }),
   });
 };
 
 const onFeaturedClick = () => {
   Taro.showToast({ title: "夏日龙井活动", icon: "none" });
-};
-
-const onSearch = () => {
-  // handled by computed
-};
-
-const clearSearch = () => {
-  searchKeyword.value = "";
 };
 
 const onImageLoad = (id: string) => {
@@ -207,13 +201,5 @@ const onImageError = (id: string) => {
   imagesLoaded.value[id] = true;
 };
 
-onMounted(() => {
-  // 页面初始化
-});
-
-usePullDownRefresh(() => {
-  setTimeout(() => {
-    Taro.stopPullDownRefresh();
-  }, 1500);
-});
+usePullDownRefresh(usePullRefresh());
 </script>

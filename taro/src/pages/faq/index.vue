@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { faqList as mockFaqList, type FaqItem } from "@/datasets";
+import { faqList as mockFaqList, type FaqItem } from "@/datasets/faq";
 import "./index.css";
 
 const faqList = ref<FaqItem[]>(

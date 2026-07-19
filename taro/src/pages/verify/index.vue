@@ -20,20 +20,29 @@
       </view>
     </view>
 
-    <view class="btn-submit" :class="{ 'btn-submit-disabled': submitting }" @tap="handleSubmit">
-      <text class="btn-submit-text">{{ submitting ? '核销中...' : '立即核销' }}</text>
-    </view>
+    <SubmitButton
+      :text="submitting ? '核销中...' : '立即核销'"
+      :disabled="submitting"
+      @tap="handleSubmit"
+    />
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import Taro from "@tarojs/taro";
+import { useMockSubmit } from "@/composables/useMockSubmit";
+import SubmitButton from "@/components/SubmitButton/index.vue";
 import "./index.css";
 
 const verificationCode = ref("");
 const isFocus = ref(false);
-const submitting = ref(false);
+
+const { submitting, submit } = useMockSubmit({
+  loadingText: "核销中...",
+  successText: "核销成功",
+  delay: 1500,
+});
 
 const handleScan = () => {
   Taro.scanCode({
@@ -59,8 +68,6 @@ const handleScan = () => {
 };
 
 const handleSubmit = () => {
-  if (submitting.value) return;
-
   if (!verificationCode.value.trim()) {
     Taro.showToast({
       title: "请输入核销码",
@@ -69,19 +76,8 @@ const handleSubmit = () => {
     return;
   }
 
-  submitting.value = true;
-  Taro.showLoading({
-    title: "核销中...",
-  });
-
-  setTimeout(() => {
-    Taro.hideLoading();
-    Taro.showToast({
-      title: "核销成功",
-      icon: "success",
-    });
+  submit(() => {
     verificationCode.value = "";
-    submitting.value = false;
-  }, 1500);
+  });
 };
 </script>

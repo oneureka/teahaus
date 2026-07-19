@@ -4,73 +4,52 @@
       <view class="points-left">
         <text class="points-title">我的积分</text>
         <view class="points-amount-wrapper">
-          <text class="points-amount">{{ points }}</text>
+          <text class="points-amount">{{ userStore.points }}</text>
           <text class="points-unit">积分</text>
         </view>
       </view>
       <text class="points-rules" @tap="showUsageModal">积分规则</text>
     </view>
-    <view v-if="showModal" class="modal-mask" @tap="closeModal">
-      <view class="modal-content" @tap.stop>
-        <view class="modal-header">
-          <text class="modal-title">积分规则</text>
-          <text class="modal-close" @tap="closeModal">✕</text>
-        </view>
-        <view class="modal-body">
-          <view class="usage-item">
-            <text class="usage-text">100 积分 = 1 元</text>
-            <text class="usage-detail">可在下单时抵扣现金</text>
-          </view>
-        </view>
+    <Modal v-model="showModal" title="积分规则">
+      <view class="usage-item">
+        <text class="usage-text">100 积分 = 1 元</text>
+        <text class="usage-detail">可在下单时抵扣现金</text>
       </view>
-    </view>
+    </Modal>
 
     <view class="points-records">
       <text class="records-title">积分明细</text>
-      <scroll-view class="records-list">
-        <view v-if="pointTransactions.length === 0" class="empty-records">
-          <text class="empty-text">暂无积分明细</text>
-        </view>
-        <view
-          v-else
-          v-for="transaction in pointTransactions"
-          :key="transaction.id"
-          class="point-transaction-item"
-        >
-          <view class="transaction-info">
-            <text class="transaction-type">{{ transaction.type === 'EARN' ? '获得' : '消耗' }}</text>
-            <text class="transaction-time">{{ transaction.createdAt.split('T')[0] }}</text>
-          </view>
-          <view
-            class="transaction-points"
-            :class="{
-              'points-in': transaction.points > 0,
-              'points-out': transaction.points < 0,
-            }"
-          >
-            <text v-if="transaction.points > 0">+{{ transaction.points }}</text>
-            <text v-else>-{{ Math.abs(transaction.points) }}</text>
-          </view>
-        </view>
-      </scroll-view>
+      <TransactionList
+        class="records-list"
+        :items="pointTransactions"
+        :type-labels="pointsTypeLabels"
+        amount-key="points"
+        unit=""
+        empty-text="暂无积分明细"
+      />
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { user, pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets";
+import { useUserStore } from "@/stores/user";
+import { pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets/points";
+import TransactionList from "@/components/TransactionList/index.vue";
+import Modal from "@/components/Modal/index.vue";
 import "./index.css";
 
-const points = ref(user.pointAccount.balance);
+const userStore = useUserStore();
+
 const showModal = ref(false);
 const pointTransactions = ref<PointTransaction[]>([...pointTransactionList]);
 
-const showUsageModal = () => {
-  showModal.value = true;
+const pointsTypeLabels: Record<string, string> = {
+  EARN: "获得",
+  BURN: "消耗",
 };
 
-const closeModal = () => {
-  showModal.value = false;
+const showUsageModal = () => {
+  showModal.value = true;
 };
 </script>

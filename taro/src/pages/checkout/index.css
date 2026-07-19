@@ -14,7 +14,7 @@
   padding: 28rpx;
   margin: 0 24rpx 20rpx;
   border-radius: 16rpx;
-  border: 2rpx solid var(--color-border);
+  border: 2rpx solid var(--color-taupe-300);
 }
 
 /* ===== Section 标题 ===== */
@@ -28,51 +28,13 @@
   color: var(--color-base-content);
 }
 
-/* ===== 茶室信息 ===== */
-.space-info {
-  display: flex;
-  align-items: center;
-}
-
-.space-image {
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 12rpx;
-  margin-right: 20rpx;
-  display: block;
-}
-
-.space-detail {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6rpx;
-}
-
-.space-name {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: var(--color-base-content);
-}
-
-.room-name {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
-}
-
-.room-price-info {
-  font-size: 26rpx;
-  color: var(--color-secondary);
-  font-weight: 600;
-}
-
 /* ===== 表单项 ===== */
 .form-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24rpx 0;
-  border-bottom: 1rpx solid var(--color-border-light);
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .form-item.no-border {
@@ -81,7 +43,7 @@
 
 .label {
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   flex-shrink: 0;
 }
 
@@ -103,7 +65,7 @@
 
 .arrow {
   font-size: 32rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   margin-left: 12rpx;
 }
 
@@ -123,7 +85,7 @@
   padding: 14rpx 24rpx;
   border-radius: 12rpx;
   background-color: var(--color-base-200);
-  border: 2rpx solid var(--color-border-light);
+  border: 2rpx solid var(--color-taupe-200);
   min-width: 80rpx;
   transition: all 0.15s ease;
 }
@@ -144,7 +106,7 @@
 
 .date-chip-week {
   font-size: 22rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .date-chip-day {
@@ -168,7 +130,7 @@
 
 .period-label {
   font-size: 24rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   margin-bottom: 12rpx;
   display: block;
 }
@@ -179,56 +141,10 @@
   flex-wrap: wrap;
 }
 
-.slot-chip {
-  padding: 14rpx 24rpx;
-  border-radius: 12rpx;
-  font-size: 26rpx;
-  color: var(--color-base-content);
-  background-color: var(--color-base-200);
-  border: 2rpx solid var(--color-border-light);
-  transition: all 0.15s ease;
-}
-
-.slot-chip:active {
-  transform: scale(0.95);
-}
-
-.slot-chip.active {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-primary-content);
-  font-weight: 600;
-}
-
-.slot-chip.disabled {
-  opacity: 0.35;
-}
-
 /* ===== 时长选择 ===== */
 .duration-list {
   display: flex;
   gap: 12rpx;
-}
-
-.duration-chip {
-  padding: 12rpx 28rpx;
-  border-radius: 12rpx;
-  font-size: 26rpx;
-  color: var(--color-base-content);
-  background-color: var(--color-base-200);
-  border: 2rpx solid var(--color-border-light);
-  transition: all 0.15s ease;
-}
-
-.duration-chip:active {
-  transform: scale(0.95);
-}
-
-.duration-chip.active {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-primary-content);
-  font-weight: 600;
 }
 
 /* ===== 人数选择器 ===== */
@@ -265,12 +181,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 16rpx 0;
-  border-bottom: 1rpx solid var(--color-border-light);
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .price-label {
   font-size: 26rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .price-value {
@@ -285,7 +201,7 @@
   align-items: center;
   padding-top: 20rpx;
   margin-top: 8rpx;
-  border-top: 2rpx dashed var(--color-border);
+  border-top: 2rpx dashed var(--color-taupe-300);
 }
 
 .total-label {
@@ -327,25 +243,10 @@
 
 .coupon-placeholder {
   font-size: 26rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 /* ===== 底部结算栏 ===== */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20rpx 24rpx;
-  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
-  background-color: var(--color-base-100);
-  border-top: 2rpx solid var(--color-border);
-  z-index: 100;
-}
-
 .bottom-price {
   display: flex;
   align-items: baseline;
@@ -354,21 +255,11 @@
 
 .bottom-label {
   font-size: 26rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .bottom-total {
   font-size: 38rpx;
   font-weight: 700;
   color: var(--color-secondary);
-}
-
-.submit-btn {
-  padding: 22rpx 56rpx;
-  background: var(--gradient-primary);
-  border-radius: 48rpx;
-  font-size: 30rpx;
-  color: var(--color-primary-content);
-  font-weight: 600;
-  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
 }

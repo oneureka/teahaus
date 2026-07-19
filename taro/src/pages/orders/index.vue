@@ -12,15 +12,11 @@
       </view>
     </view>
     <view class="orders-list">
-      <view v-if="filteredOrders.length === 0" class="empty">
-        <image
-          class="empty-image"
-          :src="emptyOrdersImage"
-          mode="aspectFit"
-        />
-        <text v-if="activeTab === 'ALL'" class="empty-text">还没有订单呢</text>
-        <text v-else class="empty-text">暂无{{ activeTabName }}订单</text>
-      </view>
+      <EmptyState
+        v-if="filteredOrders.length === 0"
+        :image="emptyOrdersImage"
+        :text="activeTab === 'ALL' ? '还没有订单呢' : `暂无${activeTabName}订单`"
+      />
       <view
         v-else
         class="order-card"
@@ -52,7 +48,11 @@
 import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { ref, computed } from "vue";
 import emptyOrdersImage from "@/assets/images/no-orders.png";
-import { orderList, roomList, type Order, type OrderStatus } from "@/datasets";
+import { orderList, type Order, type OrderStatus } from "@/datasets/orders";
+import { roomList } from "@/datasets/rooms";
+import { ROUTES, buildRoute } from "@/constants/routes";
+import { usePullRefresh } from "@/composables/useMockSubmit";
+import EmptyState from "@/components/EmptyState/index.vue";
 import "./index.css";
 
 type FilterStatus = OrderStatus | "ALL";
@@ -90,11 +90,7 @@ const getRoomName = (roomId: string): string => {
   return room?.name ?? "未知房间";
 };
 
-usePullDownRefresh(() => {
-  setTimeout(() => {
-    Taro.stopPullDownRefresh();
-  }, 2000);
-});
+usePullDownRefresh(usePullRefresh(undefined, { delay: 2000 }));
 
 const onTabChange = (type: FilterStatus) => {
   activeTab.value = type;
@@ -135,7 +131,7 @@ const formatRelativeTime = (dateStr: string): string => {
 
 const onOrderClick = (order: Order) => {
   Taro.navigateTo({
-    url: `/pages/order/index?id=${order.id}`,
+    url: buildRoute(ROUTES.order, { id: order.id }),
   });
 };
 </script>

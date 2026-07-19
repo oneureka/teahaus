@@ -3,32 +3,18 @@
     <scroll-view class="scroll-content" scroll-y>
       <!-- 空间信息 -->
       <view class="section space-section">
-        <image
-          class="space-image"
-          :src="reviewInfo.spaceImage"
-          mode="aspectFill"
+        <SpaceInfoCard
+          :image="reviewInfo.spaceImage"
+          :space-name="reviewInfo.spaceName"
+          :room-name="reviewInfo.roomName"
         />
-        <view class="space-info">
-          <text class="space-name">{{ reviewInfo.spaceName }}</text>
-          <text class="room-name">{{ reviewInfo.roomName }}</text>
-        </view>
       </view>
 
       <!-- 评分 -->
       <view class="section">
         <view class="section-title">整体评分</view>
         <view class="rating-section">
-          <view class="stars">
-            <text
-              v-for="star in 5"
-              :key="star"
-              class="star-icon"
-              :class="{ active: star <= reviewInfo.rating }"
-              @tap="onRatingClick(star)"
-            >
-              ★
-            </text>
-          </view>
+          <StarRating v-model="reviewInfo.rating" />
           <text class="rating-text">{{ ratingText }}</text>
         </view>
       </view>
@@ -37,15 +23,15 @@
       <view class="section">
         <view class="section-title">选择标签</view>
         <view class="tags-grid">
-          <view
+          <Chip
             v-for="tag in tags"
             :key="tag.id"
-            class="tag-item"
-            :class="{ active: tag.selected }"
+            :active="tag.selected"
+            pill
             @tap="onTagClick(tag)"
           >
             {{ tag.name }}
-          </view>
+          </Chip>
         </view>
       </view>
 
@@ -65,25 +51,7 @@
       <!-- 上传图片 -->
       <view class="section">
         <view class="section-title">上传图片（可选）</view>
-        <view class="image-upload">
-          <view
-            v-for="(img, index) in reviewInfo.images"
-            :key="index"
-            class="image-item"
-          >
-            <image class="upload-image" :src="img" mode="aspectFill" />
-            <view class="delete-btn" @tap="onDeleteImage(index)">
-              <text>✕</text>
-            </view>
-          </view>
-          <view
-            v-if="reviewInfo.images.length < 9"
-            class="upload-btn"
-            @tap="onUploadImage"
-          >
-            <text class="upload-icon">+</text>
-          </view>
-        </view>
+        <ImageUpload v-model="reviewInfo.images" />
       </view>
 
       <!-- 匿名评价 -->
@@ -93,22 +61,30 @@
           <switch
             :checked="reviewInfo.isAnonymous"
             @change="onAnonymousChange"
-            color="#5B4F4B"
+            color="#57534E"
           />
         </view>
       </view>
     </scroll-view>
 
     <!-- 底部提交按钮 -->
-    <view class="bottom-bar">
-      <view class="submit-btn" @tap="onSubmit">提交评价</view>
-    </view>
+    <BottomBar justify="center" shadow>
+      <SubmitButton text="提交评价" variant="pill" block @tap="onSubmit" />
+    </BottomBar>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import Taro, { useRouter } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
+import { useMockSubmit } from "@/composables/useMockSubmit";
+import { useQueryParams } from "@/composables/useQueryParams";
+import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
+import SubmitButton from "@/components/SubmitButton/index.vue";
+import StarRating from "@/components/StarRating/index.vue";
+import BottomBar from "@/components/BottomBar/index.vue";
+import Chip from "@/components/Chip/index.vue";
+import ImageUpload from "@/components/ImageUpload/index.vue";
 import "./index.css";
 
 interface Tag {
@@ -131,7 +107,25 @@ interface ReviewInfo {
   isAnonymous: boolean;
 }
 
-const router = useRouter();
+const { submitting, submit } = useMockSubmit({
+  loadingText: "提交中...",
+  successText: "评价成功",
+  delay: 1000,
+});
+
+const query = useQueryParams<{
+  orderId: number;
+  spaceId: number;
+  roomId: number;
+  spaceName: string;
+  roomName: string;
+}>({
+  orderId: (v) => (v ? Number(v) : 0),
+  spaceId: (v) => (v ? Number(v) : 0),
+  roomId: (v) => (v ? Number(v) : 0),
+  spaceName: (v) => v ?? "",
+  roomName: (v) => v ?? "",
+});
 
 const tags = ref<Tag[]>([
   { id: 1, name: "环境优雅", selected: false },
@@ -163,10 +157,6 @@ const ratingText = computed(() => {
   return texts[reviewInfo.value.rating] || "";
 });
 
-const onRatingClick = (star: number) => {
-  reviewInfo.value.rating = star;
-};
-
 const onTagClick = (tag: Tag) => {
   tag.selected = !tag.selected;
   if (tag.selected) {
@@ -176,25 +166,7 @@ const onTagClick = (tag: Tag) => {
   }
 };
 
-const onUploadImage = () => {
-  Taro.chooseImage({
-    count: 9 - reviewInfo.value.images.length,
-    sizeType: ["compressed"],
-    sourceType: ["album", "camera"],
-    success: (res) => {
-      reviewInfo.value.images = [
-        ...reviewInfo.value.images,
-        ...res.tempFilePaths,
-      ];
-    },
-  });
-};
-
-const onDeleteImage = (index: number) => {
-  reviewInfo.value.images.splice(index, 1);
-};
-
-const onAnonymousChange = (e: any) => {
+const onAnonymousChange = (e: { detail: { value: boolean } }) => {
   reviewInfo.value.isAnonymous = e.detail.value;
 };
 
@@ -214,37 +186,18 @@ const onSubmit = () => {
     return;
   }
 
-  console.log("提交评价:", reviewInfo.value);
-  Taro.showLoading({ title: "提交中..." });
-
-  setTimeout(() => {
-    Taro.hideLoading();
-    Taro.showToast({
-      title: "评价成功",
-      icon: "success",
-    });
+  submit(() => {
     setTimeout(() => {
       Taro.navigateBack();
     }, 1500);
-  }, 1000);
+  });
 };
 
 onMounted(() => {
-  const params = router.params;
-  if (params.orderId) {
-    reviewInfo.value.orderId = Number(params.orderId);
-  }
-  if (params.spaceId) {
-    reviewInfo.value.spaceId = Number(params.spaceId);
-  }
-  if (params.roomId) {
-    reviewInfo.value.roomId = Number(params.roomId);
-  }
-  if (params.spaceName) {
-    reviewInfo.value.spaceName = params.spaceName;
-  }
-  if (params.roomName) {
-    reviewInfo.value.roomName = params.roomName;
-  }
+  reviewInfo.value.orderId = query.orderId;
+  reviewInfo.value.spaceId = query.spaceId;
+  reviewInfo.value.roomId = query.roomId;
+  reviewInfo.value.spaceName = query.spaceName;
+  reviewInfo.value.roomName = query.roomName;
 });
 </script>

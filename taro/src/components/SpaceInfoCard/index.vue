@@ -1,0 +1,88 @@
+<template>
+  <view class="space-info-card" :class="{ clickable }" @tap="onClick">
+    <image class="space-image" :src="image" mode="aspectFill" />
+    <view class="space-detail">
+      <text class="space-name">{{ spaceName }}</text>
+      <text class="room-name">{{ roomName }}</text>
+      <text v-if="price" class="room-price-info">{{ price }}</text>
+    </view>
+    <text v-if="showArrow" class="arrow">›</text>
+  </view>
+</template>
+
+<script setup lang="ts">
+interface Props {
+  image: string;
+  spaceName: string;
+  roomName: string;
+  price?: string;
+  showArrow?: boolean;
+  clickable?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  price: "",
+  showArrow: false,
+  clickable: false,
+});
+
+const emit = defineEmits<{
+  tap: [];
+}>();
+
+const onClick = () => {
+  if (props.clickable) {
+    emit("tap");
+  }
+};
+</script>
+
+<style scoped>
+.space-info-card {
+  display: flex;
+  align-items: center;
+}
+
+.space-info-card.clickable {
+  cursor: pointer;
+}
+
+.space-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+  display: block;
+}
+
+.space-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  min-width: 0;
+}
+
+.space-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-base-content);
+}
+
+.room-name {
+  font-size: 26rpx;
+  color: var(--color-taupe-500);
+}
+
+.room-price-info {
+  font-size: 26rpx;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: var(--color-taupe-400);
+  margin-left: 12rpx;
+}
+</style>

@@ -10,7 +10,7 @@
 
 /* 订单状态 */
 .order-status {
-  background: var(--gradient-primary);
+  background: var(--gradient-hero);
   padding: 40rpx 24rpx;
   display: flex;
   flex-direction: column;
@@ -36,43 +36,6 @@
   padding: 24rpx;
 }
 
-/* 空间信息 */
-.space-info {
-  display: flex;
-  align-items: center;
-}
-
-.space-image {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 16rpx;
-  margin-right: 20rpx;
-}
-
-.space-detail {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.space-name {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: var(--color-base-content);
-  margin-bottom: 8rpx;
-}
-
-.room-name {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
-}
-
-.arrow {
-  font-size: 40rpx;
-  color: var(--color-text-muted);
-  margin-left: 12rpx;
-}
-
 /* 信息行 */
 .info-row {
   display: flex;
@@ -88,7 +51,7 @@
 
 .label {
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .value {
@@ -102,7 +65,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16rpx 0;
-  border-bottom: 1rpx solid var(--color-border-light);
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .price-row:last-child {
@@ -112,7 +75,7 @@
 .price-row.total {
   margin-top: 16rpx;
   padding-top: 16rpx;
-  border-top: 2rpx solid var(--color-border-light);
+  border-top: 2rpx solid var(--color-taupe-200);
   border-bottom: none;
 }
 
@@ -123,31 +86,17 @@
 }
 
 /* 底部操作栏 */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 20rpx 24rpx;
-  background-color: var(--color-base-100);
-  box-shadow: 0 -4rpx 20rpx var(--color-shadow-card);
-  gap: 24rpx;
-}
-
 .cancel-btn {
   padding: 20rpx 40rpx;
-  border: 2rpx solid var(--color-text-muted);
+  border: 2rpx solid var(--color-taupe-400);
   border-radius: 40rpx;
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .pay-btn {
   padding: 20rpx 48rpx;
-  background: var(--gradient-primary);
+  background: var(--gradient-button);
   border-radius: 40rpx;
   font-size: 28rpx;
   color: var(--color-primary-content);

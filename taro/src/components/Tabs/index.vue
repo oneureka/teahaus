@@ -67,7 +67,7 @@ defineExpose({
 .tabs-header {
   display: flex;
   background-color: var(--color-base-100);
-  border-bottom: 1rpx solid var(--color-border-light);
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .tab-item {
@@ -75,7 +75,7 @@ defineExpose({
   text-align: center;
   padding: 24rpx 0;
   font-size: 32rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   position: relative;
 }
 

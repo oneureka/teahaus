@@ -1,5 +1,5 @@
 <template>
-  <view class="detail">
+  <view class="detail" v-if="space">
     <scroll-view class="scroll-content" scroll-y>
       <!-- 顶部图片 -->
       <view class="header-image-wrapper">
@@ -135,7 +135,7 @@
     </scroll-view>
 
     <!-- 底部操作栏 -->
-    <view class="bottom-bar">
+    <BottomBar tall>
       <view class="bar-actions">
         <view class="bar-action" @tap="onFavorite">
           <text class="bar-action-icon">{{ favorited ? '❤️' : '🤍' }}</text>
@@ -149,30 +149,26 @@
       <view class="book-btn" @tap="onBook">
         <text class="book-text">立即预定</text>
       </view>
-    </view>
+    </BottomBar>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import Taro, { useRouter } from "@tarojs/taro";
-import {
-  spaceDetail,
-  roomList as mockRoomList,
-  spaceReviews,
-  type SpaceDetail,
-  type Room,
-  type Review,
-} from "@/datasets";
+import { getSpaceDetail, type SpaceDetail } from "@/datasets/spaces";
+import { roomList as allRooms, type Room } from "@/datasets/rooms";
+import { spaceReviews, type Review } from "@/datasets/reviews";
+import { ROUTES, buildRoute } from "@/constants/routes";
+import BottomBar from "@/components/BottomBar/index.vue";
 import "./index.css";
 
 const router = useRouter();
-const spaceId = ref<number>(0);
 const favorited = ref(false);
 
-const space = ref<SpaceDetail>({ ...spaceDetail });
+const space = ref<SpaceDetail | null>(null);
 
-const roomList = ref<Room[]>([...mockRoomList]);
+const roomList = ref<Room[]>([]);
 
 const selectedRoom = ref<Room | null>(null);
 
@@ -190,9 +186,10 @@ const getFacilityIcon = (facility: string) => {
 };
 
 const onLocationClick = () => {
+  if (!space.value) return;
   Taro.openLocation({
-    latitude: 31.2244,
-    longitude: 121.4586,
+    latitude: space.value.lat,
+    longitude: space.value.lng,
     name: space.value.name,
     address: space.value.address,
   });
@@ -211,13 +208,14 @@ const onFavorite = () => {
 };
 
 const onContact = () => {
+  if (!space.value) return;
   Taro.makePhoneCall({
     phoneNumber: space.value.phone,
   });
 };
 
 const onBook = () => {
-  if (!selectedRoom.value) {
+  if (!space.value || !selectedRoom.value) {
     Taro.showToast({
       title: "请先选择房间",
       icon: "none",
@@ -225,7 +223,13 @@ const onBook = () => {
     return;
   }
   Taro.navigateTo({
-    url: `/pages/checkout/index?roomId=${selectedRoom.value.id}&spaceId=${space.value.id}&roomName=${selectedRoom.value.name}&spaceName=${space.value.name}&roomPrice=${selectedRoom.value.price}`,
+    url: buildRoute(ROUTES.checkout, {
+      roomId: selectedRoom.value.id,
+      spaceId: space.value.id,
+      roomName: selectedRoom.value.name,
+      spaceName: space.value.name,
+      roomPrice: selectedRoom.value.price,
+    }),
   });
 };
 
@@ -234,9 +238,12 @@ const onViewAllReviews = () => {
 };
 
 onMounted(() => {
-  const params = router.params;
-  if (params.id) {
-    spaceId.value = Number(params.id);
+  const detail = getSpaceDetail(router.params.id || "");
+  if (!detail) {
+    Taro.showToast({ title: "门店不存在", icon: "none" });
+    return;
   }
+  space.value = detail;
+  roomList.value = allRooms.filter((room) => room.spaceId === detail.id);
 });
 </script>

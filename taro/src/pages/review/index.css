@@ -29,31 +29,6 @@
   padding: 24rpx;
 }
 
-.space-image {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 16rpx;
-  margin-right: 20rpx;
-}
-
-.space-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.space-name {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: var(--color-base-content);
-  margin-bottom: 8rpx;
-}
-
-.room-name {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
-}
-
 /* 评分区域 */
 .rating-section {
   display: flex;
@@ -62,25 +37,9 @@
   padding: 20rpx 0;
 }
 
-.stars {
-  display: flex;
-  gap: 16rpx;
-  margin-bottom: 16rpx;
-}
-
-.star-icon {
-  font-size: 60rpx;
-  color: var(--color-border);
-  transition: color 0.2s ease;
-}
-
-.star-icon.active {
-  color: var(--color-accent);
-}
-
 .rating-text {
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 /* 标签网格 */
@@ -88,21 +47,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16rpx;
-}
-
-.tag-item {
-  padding: 16rpx 28rpx;
-  border: 2rpx solid var(--color-border);
-  border-radius: 32rpx;
-  font-size: 28rpx;
-  color: var(--color-text-secondary);
-  transition: all 0.2s ease;
-}
-
-.tag-item.active {
-  border-color: var(--color-primary);
-  background-color: var(--color-error-bg);
-  color: var(--color-primary);
 }
 
 /* 评价输入框 */
@@ -121,63 +65,8 @@
   display: block;
   text-align: right;
   font-size: 24rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   margin-top: 12rpx;
-}
-
-/* 上传图片 */
-.image-upload {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16rpx;
-}
-
-.image-item {
-  position: relative;
-  width: 180rpx;
-  height: 180rpx;
-}
-
-.upload-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 16rpx;
-}
-
-.delete-btn {
-  position: absolute;
-  top: -12rpx;
-  right: -12rpx;
-  width: 48rpx;
-  height: 48rpx;
-  background-color: var(--color-error);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4rpx 12rpx rgba(252, 149, 129, 0.4);
-}
-
-.delete-btn text {
-  font-size: 24rpx;
-  color: var(--color-error-content);
-  font-weight: bold;
-}
-
-.upload-btn {
-  width: 180rpx;
-  height: 180rpx;
-  border: 2rpx dashed var(--color-text-muted);
-  border-radius: 16rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-base-100);
-}
-
-.upload-icon {
-  font-size: 60rpx;
-  color: var(--color-text-muted);
 }
 
 /* 匿名评价 */
@@ -193,26 +82,3 @@
 }
 
 /* 底部提交按钮 */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20rpx 24rpx;
-  background-color: var(--color-base-100);
-  box-shadow: 0 -4rpx 20rpx var(--color-shadow-card);
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 24rpx;
-  background: var(--gradient-primary);
-  border-radius: 48rpx;
-  font-size: 30rpx;
-  color: var(--color-primary-content);
-  font-weight: 600;
-  text-align: center;
-}

@@ -14,10 +14,10 @@
 .segment {
   padding: 18rpx 48rpx;
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   text-align: center;
   background: var(--color-base-100);
-  border: 2rpx solid var(--color-border);
+  border: 2rpx solid var(--color-taupe-300);
 }
 
 .segment:first-child {
@@ -30,7 +30,7 @@
 }
 
 .segment.active {
-  background: var(--gradient-primary);
+  background: var(--gradient-button);
   color: var(--color-base-200);
   font-weight: 500;
   border-color: transparent;
@@ -47,14 +47,14 @@
 .label {
   display: block;
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   margin-bottom: 24rpx;
 }
 
 .amount-input {
   display: flex;
   align-items: baseline;
-  border-bottom: 2rpx solid var(--color-border);
+  border-bottom: 2rpx solid var(--color-taupe-300);
   padding-bottom: 16rpx;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .input::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   font-size: 64rpx;
   line-height: 1.4;
 }
@@ -92,7 +92,7 @@
 
 .balance-hint {
   font-size: 26rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .withdraw-all {
@@ -116,8 +116,8 @@
   padding: 20rpx 0;
   border-radius: 16rpx;
   font-size: 28rpx;
-  color: var(--color-text-secondary);
-  border: 2rpx solid var(--color-border);
+  color: var(--color-taupe-500);
+  border: 2rpx solid var(--color-taupe-300);
   background: var(--color-base-100);
 }
 
@@ -125,23 +125,4 @@
   color: var(--color-accent);
   border-color: var(--color-accent);
   background: rgba(217, 168, 74, 0.06);
-}
-
-.submit-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--gradient-primary);
-  border-radius: 12rpx;
-  padding: 28rpx 0;
-}
-
-.submit-btn:active {
-  opacity: 0.9;
-}
-
-.submit-btn-text {
-  font-size: 32rpx;
-  color: var(--color-base-200);
-  font-weight: 600;
 }

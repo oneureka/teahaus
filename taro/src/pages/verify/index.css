@@ -25,7 +25,7 @@
 }
 
 .input-placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .scan-btn {
@@ -49,29 +49,4 @@
 
 .input-wrapper-focus {
   box-shadow: 0 0 0 2rpx var(--color-primary);
-}
-
-.btn-submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--gradient-primary);
-  border-radius: 12rpx;
-  padding: 28rpx 0;
-  box-shadow: 0 4rpx 16rpx var(--color-shadow-primary);
-  transition: opacity 0.15s ease;
-}
-
-.btn-submit:active {
-  opacity: 0.9;
-}
-
-.btn-submit-disabled {
-  opacity: 0.6;
-}
-
-.btn-submit-text {
-  font-size: 32rpx;
-  color: var(--color-base-200);
-  font-weight: 600;
 }

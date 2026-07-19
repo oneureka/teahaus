@@ -9,18 +9,14 @@
 
       <!-- 空间信息 -->
       <view class="section">
-        <view class="space-info" @tap="onSpaceClick">
-          <image
-            class="space-image"
-            :src="order.spaceImage"
-            mode="aspectFill"
-          />
-          <view class="space-detail">
-            <text class="space-name">{{ order.spaceName }}</text>
-            <text class="room-name">{{ order.roomName }}</text>
-          </view>
-          <text class="arrow">›</text>
-        </view>
+        <SpaceInfoCard
+          :image="order.spaceImage"
+          :space-name="order.spaceName"
+          :room-name="order.roomName"
+          show-arrow
+          clickable
+          @tap="onSpaceClick"
+        />
       </view>
 
       <!-- 预定信息 -->
@@ -71,25 +67,21 @@
     </scroll-view>
 
     <!-- 底部操作栏 -->
-    <view class="bottom-bar" v-if="order.status === OrderStatus.UNPAID">
+    <BottomBar v-if="order.status === 'UNPAID'" justify="end" shadow>
       <view class="cancel-btn" @tap="onCancel">取消订单</view>
       <view class="pay-btn" @tap="onPay">立即支付</view>
-    </view>
+    </BottomBar>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import Taro, { useRouter } from "@tarojs/taro";
+import { ROUTES, buildRoute } from "@/constants/routes";
+import { type OrderStatus } from "@/datasets/orders";
+import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
+import BottomBar from "@/components/BottomBar/index.vue";
 import "./index.css";
-
-enum OrderStatus {
-  UNPAID = 0,
-  PAID = 1,
-  IN_PROGRESS = 2,
-  COMPLETED = 3,
-  CANCELLED = 4,
-}
 
 interface Order {
   id: number;
@@ -112,12 +104,11 @@ interface Order {
 }
 
 const router = useRouter();
-const orderId = ref<number>(0);
 
 const order = ref<Order>({
   id: 0,
   orderNo: "",
-  status: OrderStatus.UNPAID,
+  status: "UNPAID",
   statusText: "待支付",
   createTime: "",
   spaceId: 0,
@@ -136,7 +127,7 @@ const order = ref<Order>({
 
 const onSpaceClick = () => {
   Taro.navigateTo({
-    url: `/pages/space/index?id=${order.value.spaceId}`,
+    url: buildRoute(ROUTES.space, { id: order.value.spaceId }),
   });
 };
 
@@ -171,8 +162,7 @@ const onPay = () => {
 onMounted(() => {
   const params = router.params;
   if (params.id) {
-    orderId.value = Number(params.id);
-    console.log("Order ID:", orderId.value);
+    order.value.id = Number(params.id);
   }
 });
 </script>

@@ -58,14 +58,3 @@ export const user: User = {
   },
 };
 
-export interface UserStats {
-  coupons: number;
-  balance: number;
-  points: number;
-}
-
-export const userStats: UserStats = {
-  coupons: 2,
-  balance: 128.5,
-  points: 2560,
-};

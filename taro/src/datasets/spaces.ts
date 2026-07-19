@@ -28,6 +28,8 @@ export interface SpaceDetail {
   tags: string[];
   facilities: string[];
   isFeatured: boolean;
+  lat: number;
+  lng: number;
 }
 
 export const spaceList: Space[] = [
@@ -289,19 +291,37 @@ export const spaceList: Space[] = [
   },
 ];
 
-export const spaceDetail: SpaceDetail = {
-  id: 1,
-  name: "栖闲茶室·南京西路写字楼店",
-  image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-  businessHours: "24 小时营业",
-  address: "上海市静安区南京西路1266号恒隆广场2座18楼",
-  district: "静安区",
-  phone: "400-820-6688",
-  rating: 4.9,
-  reviewCount: 1032,
-  tags: ["24h自助", "商务洽谈", "近地铁"],
-  facilities: ["高速WiFi", "独立空调", "投影仪", "自助茶饮", "电子门锁", "充电插座"],
-  isFeatured: true,
-};
+const DEFAULT_SPACE_IMAGE =
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop";
+
+const DEFAULT_FACILITIES = ["高速WiFi", "茶水", "充电宝", "停车位"];
+
+export function getSpaceById(id: string | number): Space | undefined {
+  const key = String(id);
+  return spaceList.find((space) => String(space.id) === key);
+}
+
+export function getSpaceDetail(id: string | number): SpaceDetail | null {
+  const space = getSpaceById(id);
+  if (!space) return null;
+
+  return {
+    id: Number(space.id),
+    name: space.name,
+    image: space.images[0] || DEFAULT_SPACE_IMAGE,
+    businessHours: space.businessHours,
+    address: space.address,
+    district: space.district,
+    phone: space.phone,
+    rating: 4.8,
+    reviewCount: 128,
+    tags: space.tags.length ? space.tags : [space.category],
+    facilities: DEFAULT_FACILITIES,
+    isFeatured: space.isFeatured,
+    lat: Number(space.lat) || 0,
+    lng: Number(space.lng) || 0,
+  };
+}
+
 
 

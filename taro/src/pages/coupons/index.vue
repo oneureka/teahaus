@@ -19,46 +19,19 @@
       @refresherrefresh="onRefresh"
     >
       <view class="coupons-list">
-        <view v-if="filteredCoupons.length === 0" class="empty">
-          <image
-            class="empty-image"
-            :src="emptyCouponsImage"
-            mode="aspectFit"
-          />
-          <text v-if="activeTab === CouponStatus.ALL" class="empty-text">还没有卡券呢</text>
-          <text v-else class="empty-text">暂无相关卡券</text>
-          <view
-            v-if="activeTab === CouponStatus.ALL"
-            class="btn-get-coupons"
-            @tap="getMoreCoupons"
-          >
-            <text>去领取</text>
-          </view>
-        </view>
+        <EmptyState
+          v-if="filteredCoupons.length === 0"
+          :image="emptyCouponsImage"
+          :text="activeTab === CouponStatus.ALL ? '还没有卡券呢' : '暂无相关卡券'"
+          :action-text="activeTab === CouponStatus.ALL ? '去领取' : ''"
+          @action="getMoreCoupons"
+        />
         <view
           v-else
           v-for="coupon in filteredCoupons"
           :key="coupon.id"
-          class="coupon-card"
-          :class="{ 'coupon-used': coupon.status === CouponStatus.USED }"
-          @tap="handleCouponTap(coupon)"
         >
-          <view class="coupon-info">
-            <view class="coupon-header">
-              <text class="coupon-name">{{ coupon.name }}</text>
-              <text :class="couponStatusClass(coupon)">{{ couponStatusLabel(coupon) }}</text>
-            </view>
-            <view class="coupon-details">
-              <text class="coupon-value">¥{{ coupon.value }}</text>
-              <text class="coupon-desc">{{ coupon.description }}</text>
-            </view>
-            <view class="coupon-footer">
-              <text class="coupon-conditions">{{ coupon.conditions }}</text>
-              <text class="coupon-valid-date">
-                有效期至 {{ coupon.expireDate }}
-              </text>
-            </view>
-          </view>
+          <CouponCard :coupon="coupon" @tap="handleCouponTap" />
         </view>
       </view>
     </scroll-view>
@@ -69,8 +42,11 @@
 import { ref, computed } from "vue";
 import Taro from "@tarojs/taro";
 import { useSystemStore } from "@/stores/system";
+import { useMockSubmit } from "@/composables/useMockSubmit";
 import emptyCouponsImage from "@/assets/images/no-coupons.png";
-import { couponList, CouponStatus, type Coupon } from "@/datasets";
+import { couponList, CouponStatus, type Coupon } from "@/datasets/coupons";
+import EmptyState from "@/components/EmptyState/index.vue";
+import CouponCard from "@/components/CouponCard/index.vue";
 import "./index.css";
 
 interface StatusFilter {
@@ -92,22 +68,20 @@ const refreshing = ref(false);
 const systemStore = useSystemStore();
 systemStore.init();
 
+const { submit: runRefresh } = useMockSubmit({ delay: 2000 });
+
 const scrollHeight = computed(() => {
   return systemStore.systemViewHeight.windowHeight - 100;
 });
 
 const onRefresh = () => {
   refreshing.value = true;
-  setTimeout(() => {
+  runRefresh(() => {
     refreshing.value = false;
-  }, 2000);
+  });
 };
 
 const coupons = ref<Coupon[]>([...couponList]);
-
-const onTabChange = (_index: number, filter: StatusFilter) => {
-  activeTab.value = filter.type;
-};
 
 const isExpiringSoon = (coupon: Coupon): boolean => {
   const expireDate = new Date(coupon.expireDate);
@@ -122,18 +96,8 @@ const isExpired = (coupon: Coupon): boolean => {
   return new Date(coupon.expireDate) < new Date();
 };
 
-const couponStatusLabel = (coupon: Coupon): string => {
-  if (coupon.status === CouponStatus.USED) return "已使用";
-  if (isExpired(coupon)) return "已过期";
-  if (isExpiringSoon(coupon)) return "即将过期";
-  return "可用";
-};
-
-const couponStatusClass = (coupon: Coupon): string => {
-  if (coupon.status === CouponStatus.USED) return "coupon-status-used";
-  if (isExpired(coupon)) return "coupon-status-expired";
-  if (isExpiringSoon(coupon)) return "coupon-status-expiring";
-  return "coupon-status-new";
+const onTabChange = (_index: number, filter: StatusFilter) => {
+  activeTab.value = filter.type;
 };
 
 const filteredCoupons = computed(() => {

@@ -40,7 +40,7 @@
   padding: 28rpx;
   margin: 0 24rpx 20rpx;
   border-radius: 16rpx;
-  border: 2rpx solid var(--color-border);
+  border: 2rpx solid var(--color-taupe-300);
 }
 
 /* ===== 基本信息 ===== */
@@ -60,7 +60,7 @@
 .card-featured {
   font-size: 20rpx;
   color: var(--color-primary);
-  background-color: var(--color-primary-bg);
+  background-color: var(--color-taupe-200);
   padding: 4rpx 12rpx;
   border-radius: 6rpx;
   margin-left: 12rpx;
@@ -69,13 +69,13 @@
 
 .card-tags {
   font-size: 24rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   margin-bottom: 16rpx;
   line-height: 1.5;
 }
 
 .tag-divider {
-  color: var(--color-border);
+  color: var(--color-taupe-300);
 }
 
 .card-meta {
@@ -91,7 +91,7 @@
 }
 
 .meta-reviews {
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 /* ===== 信息行 ===== */
@@ -120,7 +120,7 @@
 
 .info-value {
   font-size: 26rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   line-height: 1.5;
 }
 
@@ -130,7 +130,7 @@
 
 .arrow {
   font-size: 36rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
   flex-shrink: 0;
   margin-top: 4rpx;
 }
@@ -151,7 +151,7 @@
 
 .view-all {
   font-size: 24rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 /* ===== 房间列表 ===== */
@@ -168,7 +168,7 @@
   padding: 24rpx;
   border-radius: 12rpx;
   background-color: var(--color-base-200);
-  border: 2rpx solid var(--color-border-light);
+  border: 2rpx solid var(--color-taupe-200);
   transition: all 0.15s ease;
 }
 
@@ -178,7 +178,7 @@
 
 .room-item.active {
   border-color: var(--color-primary);
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-taupe-50);
 }
 
 .room-left {
@@ -195,7 +195,7 @@
 
 .room-capacity {
   font-size: 24rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .room-right {
@@ -213,7 +213,7 @@
 .room-checked {
   width: 40rpx;
   height: 40rpx;
-  background: var(--gradient-primary);
+  background: var(--gradient-button);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -247,7 +247,7 @@
 
 .facility-name {
   font-size: 22rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 /* ===== 评价列表 ===== */
@@ -259,7 +259,7 @@
 
 .review-item {
   padding-bottom: 24rpx;
-  border-bottom: 1rpx solid var(--color-border-light);
+  border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
 .review-item:last-child {
@@ -295,12 +295,12 @@
 
 .review-time {
   font-size: 22rpx;
-  color: var(--color-text-muted);
+  color: var(--color-taupe-400);
 }
 
 .review-content {
   font-size: 26rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   line-height: 1.6;
   margin-bottom: 12rpx;
 }
@@ -318,21 +318,6 @@
 }
 
 /* ===== 底部操作栏 ===== */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120rpx;
-  background-color: var(--color-base-100);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24rpx;
-  border-top: 2rpx solid var(--color-border);
-  z-index: 100;
-}
-
 .bar-actions {
   display: flex;
   gap: 32rpx;
@@ -351,14 +336,14 @@
 
 .bar-action-text {
   font-size: 20rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .book-btn {
-  background: var(--gradient-primary);
+  background: var(--gradient-button);
   padding: 24rpx 64rpx;
   border-radius: 48rpx;
-  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
+  box-shadow: 0 8rpx 24rpx var(--color-shadow-button);
 }
 
 .book-text {

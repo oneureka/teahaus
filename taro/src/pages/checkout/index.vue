@@ -3,18 +3,12 @@
     <scroll-view class="scroll-content" scroll-y>
       <!-- 茶室信息 -->
       <view class="card">
-        <view class="space-info">
-          <image
-            class="space-image"
-            :src="checkoutInfo.spaceImage"
-            mode="aspectFill"
-          />
-          <view class="space-detail">
-            <text class="space-name">{{ checkoutInfo.spaceName }}</text>
-            <text class="room-name">{{ checkoutInfo.roomName }}</text>
-            <text class="room-price-info">¥{{ checkoutInfo.roomPrice }}/时</text>
-          </view>
-        </view>
+        <SpaceInfoCard
+          :image="checkoutInfo.spaceImage"
+          :space-name="checkoutInfo.spaceName"
+          :room-name="checkoutInfo.roomName"
+          :price="`¥${checkoutInfo.roomPrice}/时`"
+        />
       </view>
 
       <!-- 预订信息 -->
@@ -56,43 +50,43 @@
           <view class="slot-period">
             <text class="period-label">上午</text>
             <view class="slot-row">
-              <view
+              <Chip
                 v-for="slot in morningSlots"
                 :key="slot"
-                class="slot-chip"
-                :class="{ active: selectedTimeSlot === slot, disabled: !isSlotAvailable(slot) }"
+                :active="selectedTimeSlot === slot"
+                :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
               >
-                <text>{{ slot }}</text>
-              </view>
+                {{ slot }}
+              </Chip>
             </view>
           </view>
           <view class="slot-period">
             <text class="period-label">下午</text>
             <view class="slot-row">
-              <view
+              <Chip
                 v-for="slot in afternoonSlots"
                 :key="slot"
-                class="slot-chip"
-                :class="{ active: selectedTimeSlot === slot, disabled: !isSlotAvailable(slot) }"
+                :active="selectedTimeSlot === slot"
+                :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
               >
-                <text>{{ slot }}</text>
-              </view>
+                {{ slot }}
+              </Chip>
             </view>
           </view>
           <view class="slot-period">
             <text class="period-label">晚间</text>
             <view class="slot-row">
-              <view
+              <Chip
                 v-for="slot in eveningSlots"
                 :key="slot"
-                class="slot-chip"
-                :class="{ active: selectedTimeSlot === slot, disabled: !isSlotAvailable(slot) }"
+                :active="selectedTimeSlot === slot"
+                :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
               >
-                <text>{{ slot }}</text>
-              </view>
+                {{ slot }}
+              </Chip>
             </view>
           </view>
         </view>
@@ -101,15 +95,14 @@
         <view class="form-item no-border">
           <text class="label">时长</text>
           <view class="duration-list">
-            <view
+            <Chip
               v-for="d in durationOptions"
               :key="d"
-              class="duration-chip"
-              :class="{ active: selectedDuration === d }"
+              :active="selectedDuration === d"
               @tap="selectedDuration = d"
             >
-              <text>{{ d }}小时</text>
-            </view>
+              {{ d }}小时
+            </Chip>
           </view>
         </view>
 
@@ -185,19 +178,24 @@
     </scroll-view>
 
     <!-- 底部结算栏 -->
-    <view class="bottom-bar">
+    <BottomBar>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
         <text class="bottom-total">¥{{ computedTotal }}</text>
       </view>
-      <view class="submit-btn" @tap="onSubmit">提交订单</view>
-    </view>
+      <SubmitButton text="提交订单" variant="pill" @tap="onSubmit" />
+    </BottomBar>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import Taro, { useRouter } from "@tarojs/taro";
+import { ROUTES, buildRoute } from "@/constants/routes";
+import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
+import SubmitButton from "@/components/SubmitButton/index.vue";
+import BottomBar from "@/components/BottomBar/index.vue";
+import Chip from "@/components/Chip/index.vue";
 import "./index.css";
 
 interface CheckoutInfo {
@@ -310,13 +308,13 @@ const increasePartySize = () => {
   checkoutInfo.value.partySize++;
 };
 
-const onDateChange = (e: any) => {
+const onDateChange = (e: { detail: { value: string } }) => {
   checkoutInfo.value.date = e.detail.value;
 };
 
 const onSelectCoupon = () => {
   Taro.navigateTo({
-    url: "/pages/coupons/index?selectMode=true",
+    url: buildRoute(ROUTES.coupons, { selectMode: true }),
   });
 };
 

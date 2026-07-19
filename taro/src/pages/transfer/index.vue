@@ -45,9 +45,10 @@
         >¥{{ amt }}</view>
       </view>
 
-      <view class="submit-btn" @tap="onSubmit">
-        <text class="submit-btn-text">{{ activeTab === 'recharge' ? '立即充值' : '提现' }}</text>
-      </view>
+      <SubmitButton
+        :text="activeTab === 'recharge' ? '立即充值' : '提现'"
+        @tap="onSubmit"
+      />
     </view>
   </view>
 </template>
@@ -56,12 +57,16 @@
 import { ref, onMounted, watch } from "vue";
 import { useRouter } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
+import { useUserStore } from "@/stores/user";
+import SubmitButton from "@/components/SubmitButton/index.vue";
 import "./index.css";
+
+const userStore = useUserStore();
 
 const router = useRouter();
 const activeTab = ref<"recharge" | "withdraw">("recharge");
 const amount = ref<number>(0);
-const balance = ref(128.5);
+const balance = ref(userStore.balance);
 const presets = [50, 100, 200, 500];
 
 const tabLabels: Record<string, string> = {

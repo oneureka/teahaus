@@ -17,9 +17,9 @@
   padding: 12rpx 24rpx;
   border-radius: 8rpx;
   background-color: var(--color-base-100);
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   font-size: 28rpx;
-  border: 1rpx solid var(--color-border);
+  border: 1rpx solid var(--color-taupe-300);
   transition: transform 0.15s ease;
 }
 
@@ -82,27 +82,27 @@
 }
 
 .coupon-status-used {
-  background-color: var(--color-border-light);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-taupe-200);
+  color: var(--color-taupe-400);
+  border: 1px solid var(--color-taupe-300);
 }
 
 .coupon-status-new {
-  background-color: var(--color-primary-badge);
+  background-color: var(--color-taupe-100);
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
 }
 
 .coupon-status-expiring {
-  background-color: var(--color-error-badge);
-  color: var(--color-error);
-  border: 1px solid var(--color-error);
+  background: var(--gradient-badge);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
 }
 
 .coupon-status-expired {
-  background-color: var(--color-border-light);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-taupe-200);
+  color: var(--color-taupe-400);
+  border: 1px solid var(--color-taupe-300);
 }
 
 .coupon-details {
@@ -120,7 +120,7 @@
 
 .coupon-desc {
   font-size: 28rpx;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
 }
 
 .coupon-footer {
@@ -128,41 +128,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 16rpx;
-  border-top: 1rpx dashed var(--color-border);
+  border-top: 1rpx dashed var(--color-taupe-300);
   font-size: 24rpx;
-  color: var(--color-text-muted);
-}
-
-.empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120rpx 0;
-}
-
-.empty-image {
-  width: 280rpx;
-  height: 280rpx;
-  margin-bottom: 32rpx;
-  opacity: 0.85;
-}
-
-.empty-text {
-  color: var(--color-text-muted);
-  font-size: 28rpx;
-  margin-bottom: 32rpx;
-}
-
-.btn-get-coupons {
-  background: var(--gradient-primary);
-  padding: 24rpx 64rpx;
-  border-radius: 48rpx;
-  box-shadow: 0 8rpx 24rpx var(--color-shadow-primary);
-}
-
-.btn-get-coupons text {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: var(--color-base-200);
+  color: var(--color-taupe-400);
 }

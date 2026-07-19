@@ -39,9 +39,11 @@
         />
         <text class="form-count">{{ feedbackContent.length }}/500</text>
       </view>
-      <view class="submit-btn" :class="{ 'submit-btn-disabled': submitting }" @tap="onSubmit">
-        <text class="submit-btn-text">{{ submitting ? '提交中...' : '提交反馈' }}</text>
-      </view>
+      <SubmitButton
+        :text="submitting ? '提交中...' : '提交反馈'"
+        :disabled="submitting"
+        @tap="onSubmit"
+      />
     </view>
   </view>
 </template>
@@ -49,6 +51,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Taro from "@tarojs/taro";
+import { useMockSubmit } from "@/composables/useMockSubmit";
+import SubmitButton from "@/components/SubmitButton/index.vue";
 import "./index.css";
 
 interface FeedbackType {
@@ -71,7 +75,12 @@ const feedbackTypes: FeedbackType[] = [
 const selectedType = ref(0);
 const feedbackContent = ref("");
 const isTextareaFocus = ref(false);
-const submitting = ref(false);
+
+const { submitting, submit } = useMockSubmit({
+  loadingText: "提交中...",
+  successText: "提交成功",
+  delay: 1000,
+});
 
 const onTextareaFocus = () => {
   isTextareaFocus.value = true;
@@ -86,8 +95,6 @@ const onTypeChange = (e: PickerEvent) => {
 };
 
 const onSubmit = () => {
-  if (submitting.value) return;
-
   if (!feedbackContent.value.trim()) {
     Taro.showToast({
       title: "请填写反馈内容",
@@ -96,18 +103,9 @@ const onSubmit = () => {
     return;
   }
 
-  submitting.value = true;
-  Taro.showLoading({ title: "提交中..." });
-
-  setTimeout(() => {
-    Taro.hideLoading();
-    Taro.showToast({
-      title: "提交成功",
-      icon: "success",
-    });
+  submit(() => {
     feedbackContent.value = "";
     selectedType.value = 0;
-    submitting.value = false;
-  }, 1000);
+  });
 };
 </script>

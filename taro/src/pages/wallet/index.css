@@ -5,7 +5,7 @@
 }
 
 .wallet-balance {
-  background: var(--gradient-primary);
+  background: var(--gradient-hero);
   padding: 40rpx 32rpx;
   border-radius: 16rpx;
   margin-bottom: 32rpx;
@@ -70,62 +70,13 @@
   display: block;
   font-size: 28rpx;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-taupe-500);
   line-height: 40rpx;
   margin-bottom: 16rpx;
   padding-left: 16rpx;
   border-left: 6rpx solid var(--color-primary);
 }
 
-.empty-records {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120rpx 40rpx;
-}
-
-.empty-text {
-  font-size: 30rpx;
-  color: var(--color-text-muted);
-}
-
-.transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28rpx 0;
-  border-bottom: 1rpx solid var(--color-border-light);
-}
-
-.transaction-item:last-child {
-  border-bottom: none;
-}
-
-.transaction-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.transaction-type {
-  font-size: 28rpx;
-  color: var(--color-base-content);
-  margin-bottom: 8rpx;
-}
-
-.transaction-time {
-  font-size: 22rpx;
-  color: var(--color-text-muted);
-}
-
-.transaction-amount {
-  font-size: 30rpx;
-  font-weight: 500;
-}
-
-.amount-in {
-  color: var(--color-success);
-}
-
-.amount-out {
-  color: var(--color-error);
+.records-list {
+  height: calc(100vh - 320rpx);
 }

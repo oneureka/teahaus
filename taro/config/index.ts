@@ -86,6 +86,7 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
               // Auxiliary morphological colors (Tailwind v4 naming & values)
               "color-orange": "#FF8904",
               "color-green": "#00A63E",
+              "color-gold": "#d4a76a",
               "color-gray": "#D1D5DC",
               // Custom extensions (deprecated — gradually replaced by taupe / DaisyUI tokens)
               "gradient-hero": "linear-gradient(135deg, #404040 0%, #262626 30%, #171717 100%)",

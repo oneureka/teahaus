@@ -1,5 +1,5 @@
 <template>
-  <view class="bottom-bar" :class="[justify, { tall, shadow }]">
+  <view class="bottom-bar" :class="[`justify-${justify}`, { tall, shadow }]">
     <slot />
   </view>
 </template>

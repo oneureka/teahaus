@@ -4,7 +4,10 @@
       <!-- 订单状态 -->
       <view class="order-status">
         <text class="status-text">{{ statusLabel(order.status) }}</text>
-        <text class="status-time">{{ formatRelativeTime(order.createdAt) }}</text>
+        <view class="status-time-row">
+          <image class="clock-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
+          <text class="status-time">{{ formatRelativeTime(order.createdAt) }}</text>
+        </view>
       </view>
 
       <!-- 空间信息 -->
@@ -21,6 +24,7 @@
 
       <!-- 预定信息 -->
       <view class="section">
+        <view class="section-title">预订信息</view>
         <view class="info-row">
           <text class="label">预定时间</text>
           <text class="value">{{ order.startTime }} - {{ order.endTime }}</text>
@@ -37,6 +41,7 @@
 
       <!-- 费用明细 -->
       <view class="section">
+        <view class="section-title">费用明细</view>
         <view class="price-row">
           <text class="label">房间费用</text>
           <text class="value">¥{{ order.roomPrice }}</text>
@@ -53,6 +58,7 @@
 
       <!-- 联系信息 -->
       <view class="section">
+        <view class="section-title">联系信息</view>
         <view class="info-row">
           <text class="label">联系人</text>
           <text class="value">{{ order.contactName }}</text>

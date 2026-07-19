@@ -1,12 +1,13 @@
 .wallet {
   min-height: calc(100vh - 44px);
+  box-sizing: border-box;
   background-color: var(--color-base-200);
-  padding: 24rpx;
+  padding: 24rpx 24rpx 48rpx;
 }
 
 .wallet-balance {
   background: var(--gradient-hero);
-  padding: 40rpx 32rpx;
+  padding: 56rpx 32rpx;
   border-radius: 16rpx;
   margin-bottom: 32rpx;
   box-shadow: 0 4rpx 20rpx var(--color-shadow-card);

@@ -25,7 +25,7 @@
         @tap="onOrderClick(order)"
       >
         <view class="card-header">
-          <text class="card-title">{{ getRoomName(order.roomId) }}</text>
+          <text class="card-title">{{ getSpaceName(order.spaceId) }}</text>
           <text class="card-status" :class="statusClass(order.status)">{{ statusLabel(order.status) }}</text>
         </view>
         <view class="card-subtitle">
@@ -36,8 +36,8 @@
           <text class="card-reserve">{{ order.startTime }}-{{ order.endTime }}</text>
         </view>
         <view class="card-footer">
-          <text class="card-price">¥{{ order.totalPrice }}</text>
           <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
+          <text class="card-price">¥{{ order.totalPrice }}</text>
         </view>
       </view>
     </view>
@@ -50,6 +50,7 @@ import { ref, computed } from "vue";
 import emptyOrdersImage from "@/assets/images/no-orders.png";
 import { orderList, type Order, type OrderStatus } from "@/datasets/orders";
 import { roomList } from "@/datasets/rooms";
+import { spaceList } from "@/datasets/spaces";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
 import EmptyState from "@/components/EmptyState/index.vue";
@@ -87,6 +88,11 @@ const statusLabel = (status: OrderStatus): string => {
 
 const statusClass = (status: OrderStatus): string => {
   return status === "CANCELLED" ? "card-status-cancelled" : "";
+};
+
+const getSpaceName = (spaceId: string): string => {
+  const space = spaceList.find((s) => s.id === spaceId);
+  return space?.name ?? "未知空间";
 };
 
 const getRoomName = (roomId: string): string => {

@@ -56,7 +56,7 @@
           v-for="(item, index) in menuList"
           :key="index"
           class="menu-list-item"
-          hover-class="menu-item-press"
+
           @tap="onMenuClick(item)"
         >
           <view class="menu-list-left">
@@ -212,7 +212,7 @@ const onMenuClick = (item: MenuItem) => {
       corpId: "",
       fail: () =>
         Taro.showToast({
-          title: "打开客服失败",
+          title: "当前未接入微信客服系统，如有问题请通过「留言反馈」联系我们",
           icon: "none",
         }),
     });

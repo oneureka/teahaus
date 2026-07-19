@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Taro, { usePullDownRefresh } from "@tarojs/taro";
+import { usePullDownRefresh } from "@tarojs/taro";
 import { useUserStore } from "@/stores/user";
 import { pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets/points";
 import { usePullRefresh } from "@/composables/useMockSubmit";

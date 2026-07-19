@@ -1,5 +1,6 @@
 .profile {
   min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
 }
 
@@ -158,7 +159,7 @@
 
 .stat-value {
   font-size: 36rpx;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-base-200);
 }
 
@@ -184,7 +185,7 @@
   border-radius: 24rpx;
   border: 2rpx solid var(--color-taupe-300);
   overflow: hidden;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4rpx 16rpx var(--color-shadow-card);
 }
 
 .menu-list-item {
@@ -194,10 +195,6 @@
   padding: 34rpx 28rpx;
   position: relative;
   transition: transform 0.2s ease;
-}
-
-.menu-item-press {
-  transform: scale(0.99);
 }
 
 .menu-list-item:active {
@@ -258,7 +255,7 @@
 }
 
 .deco-icon {
-  color: var(--color-accent);
+  color: var(--color-taupe-300);
   font-size: 20rpx;
 }
 

@@ -10,7 +10,7 @@
       </view>
       <view class="points-rules" @tap="showUsageModal">
         <text>积分规则</text>
-        <text class="rules-arrow">›</text>
+        <text class="rules-arrow">▸</text>
       </view>
     </view>
     <Modal v-model="showModal" title="积分规则">
@@ -40,8 +40,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { useUserStore } from "@/stores/user";
 import { pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets/points";
+import { usePullRefresh } from "@/composables/useMockSubmit";
 import TransactionList from "@/components/TransactionList/index.vue";
 import Modal from "@/components/Modal/index.vue";
 import "./index.css";
@@ -59,4 +61,6 @@ const pointsTypeLabels: Record<string, string> = {
 const showUsageModal = () => {
   showModal.value = true;
 };
+
+usePullDownRefresh(usePullRefresh());
 </script>

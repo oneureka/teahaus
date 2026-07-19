@@ -27,10 +27,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Taro from "@tarojs/taro";
+import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { useUserStore } from "@/stores/user";
 import { transactionList, type Transaction } from "@/datasets/wallet";
 import { ROUTES, buildRoute } from "@/constants/routes";
+import { usePullRefresh } from "@/composables/useMockSubmit";
 import TransactionList from "@/components/TransactionList/index.vue";
 import "./index.css";
 
@@ -55,4 +56,6 @@ const goToWithdraw = () => {
     url: buildRoute(ROUTES.transfer, { tab: "withdraw" }),
   });
 };
+
+usePullDownRefresh(usePullRefresh());
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="transaction-list" scroll-y>
+  <view class="transaction-list">
     <view v-if="items.length === 0" class="empty-records">
       <text class="empty-text">{{ emptyText }}</text>
     </view>
@@ -24,7 +24,7 @@
         <text v-else>-{{ unit }}{{ Math.abs(getAmount(item)) }}</text>
       </view>
     </view>
-  </scroll-view>
+    </view>
 </template>
 
 <script setup lang="ts">

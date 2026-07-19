@@ -1,10 +1,13 @@
 .points {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   box-sizing: border-box;
   background-color: var(--color-base-200);
 }
 
 .points-header {
+  flex-shrink: 0;
   background: var(--gradient-hero);
   padding: 56rpx 32rpx;
   position: relative;
@@ -81,6 +84,7 @@
 }
 
 .points-records {
+  flex: 1;
   padding: 32rpx 24rpx;
 }
 
@@ -95,6 +99,4 @@
   border-left: 6rpx solid var(--color-primary);
 }
 
-.records-list {
-  height: calc(100vh - 320rpx);
-}
+

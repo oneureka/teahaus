@@ -1,10 +1,14 @@
 .faq {
   min-height: 100vh;
+  padding: 24rpx 24rpx 48rpx;
+  box-sizing: border-box;
   background-color: var(--color-base-200);
 }
 
 .faq-list {
   background-color: var(--color-base-100);
+  border: 2rpx solid var(--color-taupe-300);
+  border-radius: 16rpx;
   overflow: hidden;
 }
 
@@ -47,7 +51,7 @@
 .faq-answer {
   margin-top: 20rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid var(--color-taupe-200);
+  border-top: 1rpx dashed var(--color-taupe-200);
   animation: faqFadeIn 0.25s ease;
 }
 

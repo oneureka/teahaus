@@ -3,7 +3,7 @@
     <view class="faq-list">
       <view
         v-for="(item, index) in faqList"
-        :key="item.question"
+        :key="index"
         class="faq-item"
         @tap="onFaqClick(index)"
       >

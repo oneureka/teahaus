@@ -45,9 +45,17 @@
 }
 
 .points-rules {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
   font-size: 28rpx;
-  color: var(--color-taupe-200);
+  color: var(--color-taupe-300);
   padding-bottom: 8rpx;
+}
+
+.rules-arrow {
+  font-size: 28rpx;
+  line-height: 1;
 }
 
 .usage-item {

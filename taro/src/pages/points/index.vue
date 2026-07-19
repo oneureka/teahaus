@@ -8,12 +8,19 @@
           <text class="points-unit">积分</text>
         </view>
       </view>
-      <text class="points-rules" @tap="showUsageModal">积分规则</text>
+      <view class="points-rules" @tap="showUsageModal">
+        <text>积分规则</text>
+        <text class="rules-arrow">›</text>
+      </view>
     </view>
     <Modal v-model="showModal" title="积分规则">
       <view class="usage-item">
         <text class="usage-text">100 积分 = 1 元</text>
         <text class="usage-detail">可在下单时抵扣现金</text>
+      </view>
+      <view class="usage-item">
+        <text class="usage-text">有效期</text>
+        <text class="usage-detail">积分自获取之日起 12 个月内有效，逾期自动清零</text>
       </view>
     </Modal>
 

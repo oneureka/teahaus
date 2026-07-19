@@ -84,7 +84,7 @@ const formatDate = (item: TransactionItem): string => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28rpx 32rpx;
+  padding: 28rpx 0;
   border-bottom: 1rpx solid var(--color-taupe-200);
 }
 
@@ -106,7 +106,7 @@ const formatDate = (item: TransactionItem): string => {
 
 .transaction-amount {
   font-size: 32rpx;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .amount-in {

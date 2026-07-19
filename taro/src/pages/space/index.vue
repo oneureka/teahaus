@@ -27,7 +27,10 @@
       <!-- 营业时间 -->
       <view class="card">
         <view class="info-row">
-          <text class="info-label">🕐 营业时间</text>
+          <view class="info-label">
+            <image class="info-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
+            <text>营业时间</text>
+          </view>
           <text class="info-value">{{ space.businessHours }}</text>
         </view>
       </view>
@@ -36,7 +39,10 @@
       <view class="card" @tap="onLocationClick">
         <view class="info-row arrow-row">
           <view class="info-left">
-            <text class="info-label">📍 地址</text>
+            <view class="info-label">
+              <image class="info-icon" src="@/assets/icons/icon-location@2x.png" mode="aspectFill" />
+              <text>地址</text>
+            </view>
             <text class="info-value address">{{ space.address }}</text>
           </view>
             <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
@@ -47,7 +53,9 @@
       <view class="card" @tap="onContact">
         <view class="info-row arrow-row">
           <view class="info-left">
-            <text class="info-label">📞 联系商家</text>
+            <view class="info-label">
+              <text>📞 联系商家</text>
+            </view>
             <text class="info-value">{{ space.phone }}</text>
           </view>
             <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
@@ -138,7 +146,7 @@
     <BottomBar justify="between">
       <view class="bar-actions">
         <view class="bar-action" @tap="onFavorite">
-          <text class="bar-action-icon">{{ favorited ? '❤️' : '🤍' }}</text>
+          <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
           <text class="bar-action-text">收藏</text>
         </view>
         <view class="bar-action" @tap="onContact">
@@ -162,6 +170,8 @@ import { spaceReviews, type Review } from "@/datasets/reviews";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
 import BottomBar from "@/components/BottomBar/index.vue";
+import iconFavorite from "@/assets/icons/icon-favorite@2x.png";
+import iconFavorited from "@/assets/icons/icon-favorited@2x.png";
 import "./index.css";
 
 const router = useRouter();

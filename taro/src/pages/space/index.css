@@ -114,9 +114,19 @@
 }
 
 .info-label {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
   font-size: 28rpx;
   font-weight: 600;
   color: var(--color-base-content);
+}
+
+.info-icon {
+  width: 28rpx;
+  height: 28rpx;
+  display: block;
+  flex-shrink: 0;
 }
 
 .info-value {
@@ -332,6 +342,13 @@
 
 .bar-action-icon {
   font-size: 36rpx;
+  margin-bottom: 4rpx;
+}
+
+.bar-action-icon-img {
+  width: 36rpx;
+  height: 36rpx;
+  display: block;
   margin-bottom: 4rpx;
 }
 

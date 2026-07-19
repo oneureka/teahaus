@@ -36,7 +36,11 @@
           <text class="card-reserve">{{ order.startTime }}-{{ order.endTime }}</text>
         </view>
         <view class="card-footer">
-          <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
+          <view class="card-footer-left">
+            <text class="card-order-no">{{ order.orderNo }}</text>
+            <text class="footer-divider">|</text>
+            <text class="card-order-time">{{ formatRelativeTime(order.createdAt) }}</text>
+          </view>
           <text class="card-price">¥{{ order.totalPrice }}</text>
         </view>
       </view>

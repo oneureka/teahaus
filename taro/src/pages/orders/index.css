@@ -119,6 +119,22 @@
   color: var(--color-gold);
 }
 
+.card-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.footer-divider {
+  color: var(--color-taupe-300);
+  font-size: 22rpx;
+}
+
+.card-order-no {
+  font-size: 22rpx;
+  color: var(--color-taupe-400);
+}
+
 .card-order-time {
   font-size: 22rpx;
   color: var(--color-taupe-400);

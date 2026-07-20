@@ -12,7 +12,7 @@
       <view class="header-image-wrapper">
         <swiper class="header-swiper" :current="currentImageIndex" :indicator-dots="true" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#ffffff" autoplay circular @change="onSwiperChange">
           <swiper-item v-for="(img, i) in spaceImages" :key="i">
-            <view class="swiper-slide">
+              <view class="swiper-slide" @tap="previewImage">
               <view v-if="!imagesLoaded[i]" class="image-skeleton"></view>
               <image
                 class="header-image"
@@ -203,6 +203,13 @@ const getFacilityIcon = (facility: string) => {
     停车位: iconParking,
   };
   return imageMap[facility] || "";
+};
+
+const previewImage = () => {
+  Taro.previewImage({
+    current: spaceImages.value[currentImageIndex.value],
+    urls: spaceImages.value,
+  });
 };
 
 const onLocationClick = () => {

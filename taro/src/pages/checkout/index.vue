@@ -183,7 +183,7 @@
         <text class="bottom-label">实付款</text>
         <text class="bottom-total">¥{{ computedTotal }}</text>
       </view>
-      <SubmitButton text="提交订单" variant="pill" @tap="onSubmit" />
+      <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit" @tap="onSubmit" />
     </BottomBar>
   </view>
 </template>
@@ -199,8 +199,8 @@ import Chip from "@/components/Chip/index.vue";
 import "./index.css";
 
 interface CheckoutInfo {
-  spaceId: number;
-  roomId: number;
+  spaceId: string;
+  roomId: string;
   spaceName: string;
   spaceImage: string;
   roomName: string;
@@ -251,11 +251,10 @@ const durationOptions = [1, 2, 3, 4];
 
 const selectedTimeSlot = ref("");
 const selectedDuration = ref(2);
-const timeSlotIndex = ref(0);
 
 const checkoutInfo = ref<CheckoutInfo>({
-  spaceId: 0,
-  roomId: 0,
+  spaceId: "",
+  roomId: "",
   spaceName: "",
   spaceImage: "",
   roomName: "",
@@ -272,6 +271,12 @@ const computedTotal = computed(() => {
   const roomTotal = checkoutInfo.value.roomPrice * selectedDuration.value;
   return roomTotal + checkoutInfo.value.serviceFee;
 });
+
+const canSubmit = computed(() =>
+  !!selectedTimeSlot.value
+  && !!checkoutInfo.value.contactName.trim()
+  && !!checkoutInfo.value.contactPhone.trim()
+);
 
 const isSlotAvailable = (slot: string) => {
   const now = new Date();
@@ -336,8 +341,8 @@ const onSubmit = () => {
 
 onMounted(() => {
   const params = router.params;
-  if (params.roomId) checkoutInfo.value.roomId = Number(params.roomId);
-  if (params.spaceId) checkoutInfo.value.spaceId = Number(params.spaceId);
+  if (params.roomId) checkoutInfo.value.roomId = params.roomId;
+  if (params.spaceId) checkoutInfo.value.spaceId = params.spaceId;
   if (params.roomName) checkoutInfo.value.roomName = params.roomName;
   if (params.spaceName) checkoutInfo.value.spaceName = params.spaceName;
   if (params.roomPrice) {

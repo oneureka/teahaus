@@ -23,9 +23,11 @@
 }
 
 .section-title {
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 600;
   color: var(--color-base-content);
+  border-left: 6rpx solid var(--color-primary);
+  padding-left: 16rpx;
 }
 
 /* ===== 表单项 ===== */
@@ -88,10 +90,6 @@
   border: 2rpx solid var(--color-taupe-200);
   min-width: 80rpx;
   transition: all 0.15s ease;
-}
-
-.date-chip:active {
-  transform: scale(0.95);
 }
 
 .date-chip.active {

@@ -8,7 +8,6 @@
     <view class="skeleton-card"></view>
   </view>
   <view class="detail" v-else-if="space">
-    <scroll-view class="scroll-content" scroll-y>
       <!-- 顶部图片 -->
       <view class="header-image-wrapper">
         <swiper class="header-swiper" :current="currentImageIndex" :indicator-dots="true" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#ffffff" autoplay circular @change="onSwiperChange">
@@ -43,18 +42,15 @@
             {{ tag }}<text v-if="ti < space.tags.length - 1" class="tag-divider"> · </text>
           </text>
         </view>
-        <view class="info-row hours-row">
-          <view class="info-label">
-            <image class="info-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
-            <text>营业时间</text>
-          </view>
-          <text class="info-value">{{ space.businessHours }}</text>
+        <view class="hours-row">
+          <image class="info-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
+          <text class="info-value">营业时间 {{ space.businessHours }}</text>
         </view>
       </view>
 
       <!-- 设施服务 -->
       <view class="card">
-        <view class="section-title">设施服务</view>
+        <view class="section-title">空间设施</view>
         <view class="facilities-grid">
           <view
             v-for="facility in space.facilities"
@@ -98,7 +94,7 @@
 
       <!-- 门店地址 -->
       <view class="card" @tap="onLocationClick">
-        <view class="section-title">门店地址</view>
+        <view class="section-title">所在位置</view>
         <view class="info-row arrow-row">
           <view class="info-left">
             <view class="info-value-row">
@@ -112,7 +108,7 @@
 
       <!-- 联系我们 -->
       <view class="card card-last" @tap="onContact">
-        <view class="section-title">联系我们</view>
+        <view class="section-title">联系茶室</view>
         <view class="info-row arrow-row">
           <view class="info-left">
             <view class="info-value-row">
@@ -123,11 +119,8 @@
             <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
       </view>
-
-    </scroll-view>
-
-    <!-- 底部操作栏 -->
-    <BottomBar justify="between" shadow>
+    </view>
+    <BottomBar v-if="space" justify="between" shadow>
       <view class="bar-actions">
         <view class="bar-action" @tap="onFavorite">
           <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
@@ -138,7 +131,6 @@
         <text class="book-text">立即预订</text>
       </view>
     </BottomBar>
-  </view>
 </template>
 
 <script setup lang="ts">
@@ -167,7 +159,7 @@ const selectedRoom = ref<Room | null>(null);
 
 const loading = ref(true);
 const currentImageIndex = ref(0);
-const imagesLoaded = ref<Record<number, boolean>>({});
+const imagesLoaded = ref<boolean[]>([]);
 
 const onImageLoad = (index: number) => {
   imagesLoaded.value[index] = true;
@@ -249,7 +241,7 @@ const onBook = () => {
       spaceId: space.value.id,
       roomName: selectedRoom.value.name,
       spaceName: space.value.name,
-      roomPrice: selectedRoom.value.price,
+      roomPrice: String(selectedRoom.value.price),
     }),
   });
 };
@@ -262,7 +254,10 @@ onMounted(() => {
     return;
   }
   space.value = detail;
-  roomList.value = allRooms.filter((room) => room.spaceId === detail.id);
+  roomList.value = allRooms
+    .filter((room) => room.spaceId === detail.id)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+  imagesLoaded.value = new Array(spaceImages.value.length).fill(false);
   Taro.setNavigationBarTitle({ title: detail.name });
   loading.value = false;
 });

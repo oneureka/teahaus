@@ -278,7 +278,7 @@
 .room-price {
   font-size: 30rpx;
   font-weight: 600;
-  color: var(--color-secondary);
+  color: var(--color-gold);
 }
 
 .room-checked {
@@ -374,4 +374,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.share-btn::after {
+  border: none;
 }

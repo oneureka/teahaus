@@ -9,12 +9,50 @@
   height: 100vh;
 }
 
+/* ===== 骨架屏 ===== */
+.skeleton {
+  background-color: var(--color-base-200);
+  min-height: 100vh;
+  padding: 0 24rpx;
+}
+
+.skeleton-header {
+  width: 100%;
+  height: 500rpx;
+  background-color: var(--color-skeleton);
+  margin-bottom: 24rpx;
+}
+
+.skeleton-card {
+  height: 200rpx;
+  background-color: var(--color-skeleton);
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+
 /* ===== 顶部图片 ===== */
 .header-image-wrapper {
   position: relative;
   width: 100%;
   height: 500rpx;
   overflow: hidden;
+}
+
+.header-swiper {
+  width: 100%;
+  height: 500rpx;
+}
+
+.swiper-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-skeleton {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-skeleton);
 }
 
 .header-image {
@@ -27,11 +65,35 @@
   position: absolute;
   top: 24rpx;
   left: 24rpx;
+  z-index: 1;
   font-size: 22rpx;
   color: var(--color-primary-content);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8rpx);
   padding: 6rpx 16rpx;
+  border-radius: 6rpx;
+}
+
+.swiper-dots {
+  position: absolute;
+  bottom: 16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8rpx;
+  z-index: 1;
+}
+
+.swiper-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.swiper-dot.active {
+  background: #fff;
+  width: 24rpx;
   border-radius: 6rpx;
 }
 
@@ -44,18 +106,28 @@
   border: 2rpx solid var(--color-taupe-300);
 }
 
+.card-section {
+  padding: 24rpx;
+  margin: 24rpx 24rpx 0;
+}
+
+.card-last {
+  margin-bottom: 24rpx;
+}
+
 /* ===== 基本信息 ===== */
 .card-header {
   display: flex;
   align-items: center;
   margin-bottom: 12rpx;
+  flex-wrap: wrap;
 }
 
 .card-title {
   font-size: 34rpx;
   font-weight: 600;
   color: var(--color-base-content);
-  flex: 1;
+  flex-shrink: 0;
 }
 
 .card-featured {
@@ -64,7 +136,7 @@
   background-color: var(--color-taupe-200);
   padding: 4rpx 12rpx;
   border-radius: 6rpx;
-  margin-left: 12rpx;
+  margin-left: 8rpx;
   flex-shrink: 0;
 }
 
@@ -84,6 +156,8 @@
   align-items: center;
   gap: 12rpx;
   font-size: 26rpx;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .meta-rating {
@@ -102,6 +176,11 @@
   align-items: center;
 }
 
+.hours-row {
+  justify-content: flex-start;
+  gap: 12rpx;
+}
+
 .arrow-row {
   align-items: flex-start;
 }
@@ -118,7 +197,7 @@
   align-items: center;
   gap: 8rpx;
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-base-content);
 }
 
@@ -133,6 +212,12 @@
   font-size: 26rpx;
   color: var(--color-taupe-500);
   line-height: 1.5;
+}
+
+.info-value-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
 }
 
 .address {
@@ -156,9 +241,11 @@
 }
 
 .section-title {
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 600;
   color: var(--color-base-content);
+  border-left: 6rpx solid var(--color-primary);
+  padding-left: 16rpx;
 }
 
 /* ===== 房间列表 ===== */
@@ -178,13 +265,34 @@
   border: 2rpx solid var(--color-taupe-200);
 }
 
-.room-item:active {
-  transform: scale(0.98);
-}
+
 
 .room-item.active {
   border-color: var(--color-primary);
   background-color: var(--color-taupe-50);
+}
+
+.room-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.room-item-tag {
+  font-size: 20rpx;
+  color: var(--color-error);
+  margin-top: 4rpx;
+}
+
+.room-empty {
+  padding: 48rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-empty-text {
+  font-size: 26rpx;
+  color: var(--color-taupe-400);
 }
 
 .room-left {
@@ -219,7 +327,7 @@
 .room-checked {
   width: 40rpx;
   height: 40rpx;
-  background: var(--gradient-button);
+  background: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -287,6 +395,10 @@
   padding: 24rpx 64rpx;
   border-radius: 48rpx;
   box-shadow: 0 8rpx 24rpx var(--color-shadow-button);
+}
+
+.book-btn.disabled {
+  opacity: 0.5;
 }
 
 .book-text {

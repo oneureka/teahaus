@@ -192,6 +192,8 @@
 import { ref, computed, onMounted } from "vue";
 import Taro, { useRouter } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
+import { getSpaceDetail } from "@/datasets/spaces";
+import { roomList as allRooms } from "@/datasets/rooms";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -210,7 +212,6 @@ interface CheckoutInfo {
   contactPhone: string;
   roomPrice: number;
   serviceFee: number;
-  totalPrice: number;
   couponId?: number;
   couponName?: string;
 }
@@ -264,7 +265,7 @@ const checkoutInfo = ref<CheckoutInfo>({
   contactPhone: "",
   roomPrice: 0,
   serviceFee: 10,
-  totalPrice: 0,
+
 });
 
 const computedTotal = computed(() => {
@@ -272,10 +273,12 @@ const computedTotal = computed(() => {
   return roomTotal + checkoutInfo.value.serviceFee;
 });
 
+const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
+
 const canSubmit = computed(() =>
   !!selectedTimeSlot.value
   && !!checkoutInfo.value.contactName.trim()
-  && !!checkoutInfo.value.contactPhone.trim()
+  && isValidPhone(checkoutInfo.value.contactPhone.trim())
 );
 
 const isSlotAvailable = (slot: string) => {
@@ -336,17 +339,34 @@ const onSubmit = () => {
     Taro.showToast({ title: "请输入联系人手机号", icon: "none" });
     return;
   }
+  if (!isValidPhone(checkoutInfo.value.contactPhone)) {
+    Taro.showToast({ title: "手机号格式不正确", icon: "none" });
+    return;
+  }
   Taro.showToast({ title: "订单提交成功", icon: "success" });
 };
 
 onMounted(() => {
   const params = router.params;
-  if (params.roomId) checkoutInfo.value.roomId = params.roomId;
-  if (params.spaceId) checkoutInfo.value.spaceId = params.spaceId;
-  if (params.roomName) checkoutInfo.value.roomName = params.roomName;
-  if (params.spaceName) checkoutInfo.value.spaceName = params.spaceName;
-  if (params.roomPrice) {
-    checkoutInfo.value.roomPrice = Number(params.roomPrice);
+  if (!params.roomId || !params.spaceId) {
+    Taro.showToast({ title: "订单信息缺失", icon: "none" });
+    setTimeout(() => Taro.navigateBack(), 1500);
+    return;
   }
+  checkoutInfo.value.roomId = params.roomId;
+  checkoutInfo.value.spaceId = params.spaceId;
+
+  const space = getSpaceDetail(params.spaceId);
+  const room = allRooms.find((r) => r.id === params.roomId);
+  if (!space || !room) {
+    Taro.showToast({ title: "门店或房间不存在", icon: "none" });
+    setTimeout(() => Taro.navigateBack(), 1500);
+    return;
+  }
+  checkoutInfo.value.spaceName = space.name;
+  checkoutInfo.value.spaceImage = space.image;
+  checkoutInfo.value.roomName = room.name;
+  checkoutInfo.value.roomPrice = room.price;
+  Taro.setNavigationBarTitle({ title: space.name });
 });
 </script>

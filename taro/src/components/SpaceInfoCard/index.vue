@@ -76,7 +76,7 @@ const onClick = () => {
 
 .room-price-info {
   font-size: 26rpx;
-  color: var(--color-secondary);
+  color: var(--color-gold);
   font-weight: 600;
 }
 

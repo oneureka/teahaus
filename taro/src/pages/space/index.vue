@@ -254,9 +254,6 @@ const onBook = () => {
     url: buildRoute(ROUTES.checkout, {
       roomId: selectedRoom.value.id,
       spaceId: space.value.id,
-      roomName: selectedRoom.value.name,
-      spaceName: space.value.name,
-      roomPrice: String(selectedRoom.value.price),
     }),
   });
 };

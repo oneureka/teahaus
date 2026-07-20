@@ -32,7 +32,7 @@ const onClick = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .chip {
   padding: 14rpx 24rpx;
   border-radius: 12rpx;

@@ -20,20 +20,20 @@
         <!-- 日期选择 -->
         <view class="form-item">
           <text class="label">日期</text>
-          <text class="picker-text">{{ formatDate(checkoutInfo.date) }}</text>
+          <text class="date-text">{{ formatDate(checkoutInfo.date) }}</text>
         </view>
 
         <!-- 日期快捷选择 -->
         <view class="date-quick-list">
-          <view
-            v-for="d in quickDates"
-            :key="d.value"
+            <view
+            v-for="date in quickDates"
+            :key="date.value"
             class="date-chip"
-            :class="{ active: checkoutInfo.date === d.value }"
-            @tap="selectQuickDate(d.value)"
+            :class="{ active: checkoutInfo.date === date.value }"
+            @tap="selectQuickDate(date.value)"
           >
-            <text class="date-chip-week">{{ d.weekday }}</text>
-            <text class="date-chip-day">{{ d.day }}</text>
+            <text class="date-chip-week">{{ date.weekday }}</text>
+            <text class="date-chip-day">{{ date.day }}</text>
           </view>
         </view>
 
@@ -42,44 +42,44 @@
           <text class="label">时间段</text>
         </view>
         <view class="time-slot-group">
-          <view class="slot-period">
+          <view class="time-period">
             <text class="period-label">上午</text>
-            <view class="slot-row">
-            <view class="slot-chip" v-for="slot in morningSlots" :key="slot">
+            <view class="time-row">
+            <view class="time-chip" v-for="time in morningSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === slot"
-                :disabled="!isSlotAvailable(slot)"
-                @tap="selectTimeSlot(slot)"
+                :active="selectedTimeSlot === time"
+                :disabled="!isSlotAvailable(time)"
+                @tap="selectTimeSlot(time)"
               >
-                {{ slot }}
+                {{ time }}
               </Chip>
             </view>
             </view>
           </view>
-          <view class="slot-period">
+          <view class="time-period">
             <text class="period-label">下午</text>
-            <view class="slot-row">
-            <view class="slot-chip" v-for="slot in afternoonSlots" :key="slot">
+            <view class="time-row">
+            <view class="time-chip" v-for="time in afternoonSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === slot"
-                :disabled="!isSlotAvailable(slot)"
-                @tap="selectTimeSlot(slot)"
+                :active="selectedTimeSlot === time"
+                :disabled="!isSlotAvailable(time)"
+                @tap="selectTimeSlot(time)"
               >
-                {{ slot }}
+                {{ time }}
               </Chip>
             </view>
             </view>
           </view>
-          <view class="slot-period">
+          <view class="time-period">
             <text class="period-label">晚间</text>
-            <view class="slot-row">
-            <view class="slot-chip" v-for="slot in eveningSlots" :key="slot">
+            <view class="time-row">
+            <view class="time-chip" v-for="time in eveningSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === slot"
-                :disabled="!isSlotAvailable(slot)"
-                @tap="selectTimeSlot(slot)"
+                :active="selectedTimeSlot === time"
+                :disabled="!isSlotAvailable(time)"
+                @tap="selectTimeSlot(time)"
               >
-                {{ slot }}
+                {{ time }}
               </Chip>
             </view>
             </view>
@@ -90,12 +90,12 @@
         <view class="form-item no-border">
           <text class="label">时长</text>
           <view class="duration-list">
-            <view class="duration-chip" v-for="d in durationOptions" :key="d">
+            <view class="duration-chip" v-for="hour in durationOptions" :key="hour">
               <Chip
-                :active="selectedDuration === d"
-                @tap="selectedDuration = d"
+                :active="selectedDuration === hour"
+                @tap="selectedDuration = hour"
               >
-                {{ d }}小时
+                {{ hour }}小时
               </Chip>
             </view>
           </view>
@@ -107,7 +107,7 @@
           <view class="stepper">
             <view class="stepper-btn" :class="{ disabled: checkoutInfo.partySize <= 1 }" @tap="decreasePartySize">−</view>
             <text class="stepper-value">{{ checkoutInfo.partySize }}</text>
-            <view class="stepper-btn" :class="{ disabled: atMaxParty }" @tap="increasePartySize">+</view>
+            <view class="stepper-btn" :class="{ disabled: isMaxParty }" @tap="increasePartySize">+</view>
           </view>
         </view>
       </view>
@@ -151,7 +151,7 @@
         </view>
         <view class="price-total">
           <text class="price-label total-label">合计</text>
-          <text class="total-value">¥{{ computedTotal }}</text>
+          <text class="total-value">¥{{ total }}</text>
         </view>
       </view>
 
@@ -176,7 +176,7 @@
     <BottomBar>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
-        <text class="bottom-total">¥{{ computedTotal }}</text>
+        <text class="bottom-total">¥{{ total }}</text>
       </view>
       <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit" @tap="onSubmit" />
     </BottomBar>
@@ -233,12 +233,6 @@ const quickDates = computed(() => {
   return dates;
 });
 
-const allTimeSlots = [
-  "09:00", "10:00", "11:00",
-  "12:00", "13:00", "14:00", "15:00", "16:00",
-  "17:00", "18:00", "19:00", "20:00", "21:00",
-];
-
 const morningSlots = ["09:00", "10:00", "11:00"];
 const afternoonSlots = ["12:00", "13:00", "14:00", "15:00", "16:00"];
 const eveningSlots = ["17:00", "18:00", "19:00", "20:00", "21:00"];
@@ -260,17 +254,16 @@ const checkoutInfo = ref<CheckoutInfo>({
   contactPhone: "",
   roomPrice: 0,
   serviceFee: 10,
-
 });
 
-const computedTotal = computed(() => {
+const total = computed(() => {
   const roomTotal = checkoutInfo.value.roomPrice * selectedDuration.value;
   return roomTotal + checkoutInfo.value.serviceFee;
 });
 
 const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
 
-const atMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
+const isMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
 
 const canSubmit = computed(() =>
   !!selectedTimeSlot.value

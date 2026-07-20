@@ -2,9 +2,11 @@
   <view class="space-info-card" :class="{ clickable }" @tap="onClick">
     <image class="space-image" :src="image" mode="aspectFill" />
     <view class="space-detail">
-      <text class="space-name">{{ spaceName }}</text>
+      <view class="space-top-row">
+        <text class="space-name">{{ spaceName }}</text>
+        <text v-if="price" class="room-price-info">{{ price }}</text>
+      </view>
       <text class="room-name">{{ roomName }}</text>
-      <text v-if="price" class="room-price-info">{{ price }}</text>
     </view>
     <image v-if="showArrow" class="arrow" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
   </view>
@@ -61,6 +63,12 @@ const onClick = () => {
   flex-direction: column;
   gap: 24rpx;
   min-width: 0;
+}
+
+.space-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .space-name {

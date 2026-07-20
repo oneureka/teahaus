@@ -56,11 +56,7 @@
   text-align: right;
 }
 
-.picker {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.picker-text {
   font-size: 28rpx;
   color: var(--color-base-content);
 }
@@ -135,8 +131,12 @@
 
 .slot-row {
   display: flex;
-  gap: 12rpx;
   flex-wrap: wrap;
+}
+
+.slot-chip {
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
 }
 
 /* ===== 时长选择 ===== */

@@ -20,12 +20,7 @@
         <!-- 日期选择 -->
         <view class="form-item">
           <text class="label">日期</text>
-          <picker mode="date" :value="checkoutInfo.date" @change="onDateChange">
-            <view class="picker">
-              <text>{{ formatDate(checkoutInfo.date) }}</text>
-              <text class="arrow">›</text>
-            </view>
-          </picker>
+          <text class="picker-text">{{ formatDate(checkoutInfo.date) }}</text>
         </view>
 
         <!-- 日期快捷选择 -->
@@ -50,23 +45,22 @@
           <view class="slot-period">
             <text class="period-label">上午</text>
             <view class="slot-row">
+            <view class="slot-chip" v-for="slot in morningSlots" :key="slot">
               <Chip
-                v-for="slot in morningSlots"
-                :key="slot"
                 :active="selectedTimeSlot === slot"
                 :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
               >
                 {{ slot }}
               </Chip>
+            </view>
             </view>
           </view>
           <view class="slot-period">
             <text class="period-label">下午</text>
             <view class="slot-row">
+            <view class="slot-chip" v-for="slot in afternoonSlots" :key="slot">
               <Chip
-                v-for="slot in afternoonSlots"
-                :key="slot"
                 :active="selectedTimeSlot === slot"
                 :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
@@ -74,19 +68,20 @@
                 {{ slot }}
               </Chip>
             </view>
+            </view>
           </view>
           <view class="slot-period">
             <text class="period-label">晚间</text>
             <view class="slot-row">
+            <view class="slot-chip" v-for="slot in eveningSlots" :key="slot">
               <Chip
-                v-for="slot in eveningSlots"
-                :key="slot"
                 :active="selectedTimeSlot === slot"
                 :disabled="!isSlotAvailable(slot)"
                 @tap="selectTimeSlot(slot)"
               >
                 {{ slot }}
               </Chip>
+            </view>
             </view>
           </view>
         </view>
@@ -222,7 +217,7 @@ const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
 const quickDates = computed(() => {
   const today = new Date();
   const dates: { value: string; weekday: string; day: string }[] = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 5; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
     const y = d.getFullYear();
@@ -248,7 +243,7 @@ const morningSlots = ["09:00", "10:00", "11:00"];
 const afternoonSlots = ["12:00", "13:00", "14:00", "15:00", "16:00"];
 const eveningSlots = ["17:00", "18:00", "19:00", "20:00", "21:00"];
 
-const durationOptions = [1, 2, 3, 4];
+const durationOptions = [1, 2, 3];
 
 const selectedTimeSlot = ref("");
 const selectedDuration = ref(2);
@@ -313,11 +308,9 @@ const decreasePartySize = () => {
 };
 
 const increasePartySize = () => {
-  checkoutInfo.value.partySize++;
-};
-
-const onDateChange = (e: { detail: { value: string } }) => {
-  checkoutInfo.value.date = e.detail.value;
+  if (checkoutInfo.value.partySize < 6) {
+    checkoutInfo.value.partySize++;
+  }
 };
 
 const onSelectCoupon = () => {

@@ -1,18 +1,17 @@
 .checkout {
   background-color: var(--color-base-200);
-  min-height: 100vh;
-  padding-bottom: 140rpx;
-}
-
-.scroll-content {
   height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  padding-bottom: 140rpx;
 }
 
 /* ===== 通用卡片 ===== */
 .card {
   background-color: var(--color-base-100);
-  padding: 28rpx;
-  margin: 0 24rpx 20rpx;
+  padding: 24rpx;
+  margin: 24rpx 24rpx 20rpx;
   border-radius: 16rpx;
   border: 2rpx solid var(--color-taupe-300);
 }

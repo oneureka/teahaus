@@ -173,7 +173,7 @@
     </scroll-view>
 
     <!-- 底部结算栏 -->
-    <BottomBar>
+    <BottomBar shadow>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
         <text class="bottom-total">¥{{ total }}</text>

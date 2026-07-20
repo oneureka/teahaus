@@ -100,41 +100,8 @@
             :key="facility"
             class="facility-item"
           >
-            <text class="facility-icon">{{ getFacilityIcon(facility) }}</text>
+            <image class="facility-icon" :src="getFacilityIcon(facility)" mode="aspectFill" />
             <text class="facility-name">{{ facility }}</text>
-          </view>
-        </view>
-      </view>
-
-      <!-- 用户评价 -->
-      <view class="card">
-        <view class="section-header">
-          <text class="section-title">用户评价</text>
-          <text class="view-all" @tap="onViewAllReviews">查看全部 ›</text>
-        </view>
-        <view class="reviews-list">
-          <view v-for="review in reviews" :key="review.id" class="review-item">
-            <view class="review-header">
-              <image
-                class="review-avatar"
-                :src="review.avatar"
-                mode="aspectFill"
-              />
-              <view class="review-user">
-                <text class="review-name">{{ review.username }}</text>
-                <text class="review-time">{{ review.time }}</text>
-              </view>
-            </view>
-            <text class="review-content">{{ review.content }}</text>
-            <view v-if="review.images?.length" class="review-images">
-              <image
-                v-for="img in review.images"
-                :key="img"
-                class="review-image"
-                :src="img"
-                mode="aspectFill"
-              />
-            </view>
           </view>
         </view>
       </view>
@@ -143,15 +110,11 @@
     </scroll-view>
 
     <!-- 底部操作栏 -->
-    <BottomBar justify="between">
+    <BottomBar justify="between" shadow>
       <view class="bar-actions">
         <view class="bar-action" @tap="onFavorite">
           <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
           <text class="bar-action-text">收藏</text>
-        </view>
-        <view class="bar-action" @tap="onContact">
-          <text class="bar-action-icon">📞</text>
-          <text class="bar-action-text">联系</text>
         </view>
       </view>
       <view class="book-btn" @tap="onBook">
@@ -166,12 +129,14 @@ import { ref, onMounted } from "vue";
 import Taro, { useRouter, usePullDownRefresh } from "@tarojs/taro";
 import { getSpaceDetail, type SpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms, type Room } from "@/datasets/rooms";
-import { spaceReviews, type Review } from "@/datasets/reviews";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
 import BottomBar from "@/components/BottomBar/index.vue";
 import iconFavorite from "@/assets/icons/icon-favorite@2x.png";
 import iconFavorited from "@/assets/icons/icon-favorited@2x.png";
+import iconWifi from "@/assets/icons/icon-wifi@2x.png";
+import iconTea from "@/assets/icons/icon-tea@2x.png";
+import iconParking from "@/assets/icons/icon-parking@2x.png";
 import "./index.css";
 
 const router = useRouter();
@@ -183,19 +148,15 @@ const roomList = ref<Room[]>([]);
 
 const selectedRoom = ref<Room | null>(null);
 
-const reviews = ref<Review[]>([...spaceReviews]);
-
 usePullDownRefresh(usePullRefresh());
 
 const getFacilityIcon = (facility: string) => {
-  const iconMap: Record<string, string> = {
-    WiFi: "📶",
-    停车场: "🅿️",
-    充电宝: "🔋",
-    茶水: "🍵",
-    点心: "🍪",
+  const imageMap: Record<string, string> = {
+    "高速WiFi": iconWifi,
+    茶水: iconTea,
+    停车位: iconParking,
   };
-  return iconMap[facility] || "✓";
+  return imageMap[facility] || "";
 };
 
 const onLocationClick = () => {
@@ -244,10 +205,6 @@ const onBook = () => {
       roomPrice: selectedRoom.value.price,
     }),
   });
-};
-
-const onViewAllReviews = () => {
-  Taro.showToast({ title: "查看全部评价", icon: "none" });
 };
 
 onMounted(() => {

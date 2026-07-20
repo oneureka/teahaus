@@ -16,7 +16,7 @@ export interface Space {
 }
 
 export interface SpaceDetail {
-  id: number;
+  id: string;
   name: string;
   image: string;
   businessHours: string;
@@ -294,7 +294,7 @@ export const spaceList: Space[] = [
 const DEFAULT_SPACE_IMAGE =
   "https://images.unsplash.com/photo-1610375233775-6e0166927193";
 
-const DEFAULT_FACILITIES = ["高速WiFi", "茶水", "停车位"];
+const DEFAULT_FACILITIES = ["WiFi", "茶水", "停车位"];
 
 export function getSpaceById(id: string | number): Space | undefined {
   const key = String(id);
@@ -306,7 +306,7 @@ export function getSpaceDetail(id: string | number): SpaceDetail | null {
   if (!space) return null;
 
   return {
-    id: Number(space.id),
+    id: space.id,
     name: space.name,
     image: space.images[0] || DEFAULT_SPACE_IMAGE,
     businessHours: space.businessHours,

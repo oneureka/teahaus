@@ -11,7 +11,7 @@
     <scroll-view class="scroll-content" scroll-y>
       <!-- 顶部图片 -->
       <view class="header-image-wrapper">
-        <swiper class="header-swiper" :current="currentImageIndex" indicator-dots="false" autoplay circular @change="onSwiperChange">
+        <swiper class="header-swiper" :current="currentImageIndex" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#ffffff" autoplay circular @change="onSwiperChange">
           <swiper-item v-for="(img, i) in spaceImages" :key="i">
             <view class="swiper-slide">
               <view v-if="!imagesLoaded[i]" class="image-skeleton"></view>
@@ -26,14 +26,6 @@
           </swiper-item>
         </swiper>
         <text class="header-district">{{ space.district }}</text>
-        <view v-if="spaceImages.length > 1" class="swiper-dots">
-          <view
-            v-for="(img, i) in spaceImages"
-            :key="i"
-            class="swiper-dot"
-            :class="{ active: currentImageIndex === i }"
-          ></view>
-        </view>
       </view>
 
       <!-- 基本信息 -->

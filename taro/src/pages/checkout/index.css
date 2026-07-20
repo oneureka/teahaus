@@ -145,13 +145,16 @@
   margin-bottom: 12rpx;
 }
 
-/* ===== 时长选择 ===== */
-.duration-list {
-  display: flex;
+/* ===== 时长 ===== */
+.duration-value {
+  font-size: 28rpx;
+  color: var(--color-primary);
+  font-weight: 500;
 }
 
-.duration-chip {
-  margin-right: 12rpx;
+.duration-value.hint {
+  color: var(--color-taupe-400);
+  font-weight: 400;
 }
 
 /* ===== 人数选择器 ===== */

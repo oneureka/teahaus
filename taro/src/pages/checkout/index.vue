@@ -46,7 +46,7 @@
             <view class="time-row">
             <view class="time-chip" v-for="time in morningSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === time"
+                :active="isInRange(time)"
                 :disabled="!isSlotAvailable(time)"
                 @tap="selectTimeSlot(time)"
               >
@@ -60,7 +60,7 @@
             <view class="time-row">
             <view class="time-chip" v-for="time in afternoonSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === time"
+                :active="isInRange(time)"
                 :disabled="!isSlotAvailable(time)"
                 @tap="selectTimeSlot(time)"
               >
@@ -74,7 +74,7 @@
             <view class="time-row">
             <view class="time-chip" v-for="time in eveningSlots" :key="time">
               <Chip
-                :active="selectedTimeSlot === time"
+                :active="isInRange(time)"
                 :disabled="!isSlotAvailable(time)"
                 @tap="selectTimeSlot(time)"
               >
@@ -85,19 +85,18 @@
           </view>
         </view>
 
-        <!-- 时长选择 -->
+        <!-- 时长 -->
         <view class="form-item no-border">
           <text class="label">时长</text>
-          <view class="duration-list">
-            <view class="duration-chip" v-for="hour in durationOptions" :key="hour">
-              <Chip
-                :active="selectedDuration === hour"
-                @tap="selectedDuration = hour"
-              >
-                {{ hour }}小时
-              </Chip>
-            </view>
-          </view>
+          <text class="duration-value" v-if="timeRange.start && timeRange.end">
+            {{ timeRange.start }} - {{ timeRange.end }}（共{{ selectedDuration }}小时）
+          </text>
+          <text class="duration-value hint" v-else-if="timeRange.start">
+            请选择结束时间
+          </text>
+          <text class="duration-value hint" v-else>
+            选择时间段后自动计算
+          </text>
         </view>
 
         <!-- 人数 -->
@@ -234,12 +233,23 @@ const morningSlots = ["09:00", "10:00", "11:00"];
 const afternoonSlots = ["12:00", "13:00", "14:00", "15:00", "16:00"];
 const eveningSlots = ["17:00", "18:00", "19:00", "20:00", "21:00"];
 
-const durationOptions = [1, 2, 3];
-
 const SERVICE_FEE = 10;
 
-const selectedTimeSlot = ref("");
-const selectedDuration = ref(2);
+const allTimeSlots = computed(() => [
+  ...morningSlots,
+  ...afternoonSlots,
+  ...eveningSlots,
+]);
+
+const timeRange = ref<{ start: string; end: string }>({ start: "", end: "" });
+
+const selectedDuration = computed(() => {
+  if (!timeRange.value.start || !timeRange.value.end) return 0;
+  const slots = allTimeSlots.value;
+  const s = slots.indexOf(timeRange.value.start);
+  const e = slots.indexOf(timeRange.value.end);
+  return e - s;
+});
 
 const checkoutInfo = ref<CheckoutInfo>({
   spaceId: "",
@@ -256,8 +266,8 @@ const checkoutInfo = ref<CheckoutInfo>({
 });
 
 const total = computed(() => {
-  const roomTotal = checkoutInfo.value.roomPrice * selectedDuration.value;
-  return roomTotal + SERVICE_FEE;
+  if (!timeRange.value.start || !timeRange.value.end) return 0;
+  return checkoutInfo.value.roomPrice * selectedDuration.value + SERVICE_FEE;
 });
 
 const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
@@ -265,7 +275,8 @@ const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
 const isMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
 
 const canSubmit = computed(() =>
-  !!selectedTimeSlot.value
+  !!timeRange.value.start
+  && !!timeRange.value.end
   && !!checkoutInfo.value.contactName.trim()
   && isValidPhone(checkoutInfo.value.contactPhone.trim())
 );
@@ -278,13 +289,59 @@ const isSlotAvailable = (slot: string) => {
   return h > now.getHours();
 };
 
+const isInRange = (slot: string) => {
+  const { start, end } = timeRange.value;
+  if (!start) return false;
+  if (!end) return slot === start;
+  const slots = allTimeSlots.value;
+  const s = slots.indexOf(start);
+  const e = slots.indexOf(end);
+  const cur = slots.indexOf(slot);
+  return cur >= s && cur <= e;
+};
+
 const selectTimeSlot = (slot: string) => {
   if (!isSlotAvailable(slot)) return;
-  selectedTimeSlot.value = slot;
+
+  const { start, end } = timeRange.value;
+
+  if (!start) {
+    timeRange.value = { start: slot, end: "" };
+    return;
+  }
+
+  if (!end) {
+    if (slot === start) return;
+    const slots = allTimeSlots.value;
+    const sIdx = slots.indexOf(start);
+    const curIdx = slots.indexOf(slot);
+    if (curIdx > sIdx) {
+      timeRange.value = { start, end: slot };
+    } else {
+      timeRange.value = { start: slot, end: start };
+    }
+    return;
+  }
+
+  const slots = allTimeSlots.value;
+  const sIdx = slots.indexOf(start);
+  const eIdx = slots.indexOf(end);
+  const curIdx = slots.indexOf(slot);
+
+  if (curIdx < sIdx) {
+    timeRange.value = { start: slot, end: "" };
+  } else if (curIdx > eIdx) {
+    timeRange.value = { start, end: slot };
+  } else if (curIdx === sIdx) {
+    timeRange.value = { start: "", end: "" };
+  } else {
+    timeRange.value = { start, end: slot };
+  }
 };
 
 const selectQuickDate = (date: string) => {
   checkoutInfo.value.date = date;
+  timeRange.value = { start: "", end: "" };
 };
 
 const formatDate = (dateStr: string) => {
@@ -314,8 +371,8 @@ const onSelectCoupon = () => {
 };
 
 const onSubmit = () => {
-  if (!selectedTimeSlot.value) {
-    Taro.showToast({ title: "请选择时间段", icon: "none" });
+  if (!timeRange.value.start || !timeRange.value.end) {
+    Taro.showToast({ title: "请选择完整的时间段", icon: "none" });
     return;
   }
   if (!checkoutInfo.value.contactName) {

@@ -112,7 +112,7 @@
         <view class="info-row arrow-row">
           <view class="info-left">
             <view class="info-value-row">
-              <text>📞</text>
+              <image class="info-icon" :src="iconPhone" mode="aspectFill" />
               <text class="info-value">{{ space.phone }}</text>
             </view>
           </view>
@@ -122,6 +122,12 @@
     </view>
     <BottomBar v-if="space" justify="between" shadow>
       <view class="bar-actions">
+        <view class="bar-action">
+          <button open-type="share" class="share-btn">
+            <image class="bar-action-icon-img" :src="iconShare" mode="aspectFill" />
+            <text class="bar-action-text">分享</text>
+          </button>
+        </view>
         <view class="bar-action" @tap="onFavorite">
           <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
           <text class="bar-action-text">收藏</text>
@@ -143,9 +149,11 @@ import { usePullRefresh } from "@/composables/useMockSubmit";
 import BottomBar from "@/components/BottomBar/index.vue";
 import iconFavorite from "@/assets/icons/icon-favorite@2x.png";
 import iconFavorited from "@/assets/icons/icon-favorited@2x.png";
+import iconShare from "@/assets/icons/icon-share@2x.png";
 import iconWifi from "@/assets/icons/icon-wifi@2x.png";
 import iconTea from "@/assets/icons/icon-tea@2x.png";
 import iconParking from "@/assets/icons/icon-parking@2x.png";
+import iconPhone from "@/assets/icons/icon-phone@2x.png";
 import "./index.css";
 
 const router = useRouter();

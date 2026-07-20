@@ -11,7 +11,7 @@
     <scroll-view class="scroll-content" scroll-y>
       <!-- 顶部图片 -->
       <view class="header-image-wrapper">
-        <swiper class="header-swiper" :current="currentImageIndex" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#ffffff" autoplay circular @change="onSwiperChange">
+        <swiper class="header-swiper" :current="currentImageIndex" :indicator-dots="true" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#ffffff" autoplay circular @change="onSwiperChange">
           <swiper-item v-for="(img, i) in spaceImages" :key="i">
             <view class="swiper-slide">
               <view v-if="!imagesLoaded[i]" class="image-skeleton"></view>
@@ -53,10 +53,8 @@
       </view>
 
       <!-- 设施服务 -->
-      <view class="card card-section">
-        <view class="section-header">
-          <text class="section-title">设施服务</text>
-        </view>
+      <view class="card">
+        <view class="section-title">设施服务</view>
         <view class="facilities-grid">
           <view
             v-for="facility in space.facilities"
@@ -70,10 +68,8 @@
       </view>
 
       <!-- 选择房间 -->
-      <view class="card card-section">
-        <view class="section-header">
-          <text class="section-title">选择房间</text>
-        </view>
+      <view class="card">
+        <view class="section-title">选择房间</view>
         <view v-if="roomList.length > 0" class="room-list">
           <view
             v-for="room in roomList"
@@ -101,10 +97,8 @@
       </view>
 
       <!-- 门店地址 -->
-      <view class="card card-section" @tap="onLocationClick">
-        <view class="section-header">
-          <text class="section-title">门店地址</text>
-        </view>
+      <view class="card" @tap="onLocationClick">
+        <view class="section-title">门店地址</view>
         <view class="info-row arrow-row">
           <view class="info-left">
             <view class="info-value-row">
@@ -117,10 +111,8 @@
       </view>
 
       <!-- 联系我们 -->
-      <view class="card card-section card-last" @tap="onContact">
-        <view class="section-header">
-          <text class="section-title">联系我们</text>
-        </view>
+      <view class="card card-last" @tap="onContact">
+        <view class="section-title">联系我们</view>
         <view class="info-row arrow-row">
           <view class="info-left">
             <view class="info-value-row">
@@ -132,7 +124,6 @@
         </view>
       </view>
 
-      <view style="height: 140rpx"></view>
     </scroll-view>
 
     <!-- 底部操作栏 -->

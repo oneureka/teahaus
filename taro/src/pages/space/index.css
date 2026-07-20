@@ -1,12 +1,12 @@
 .detail {
   background-color: var(--color-base-200);
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding-bottom: 140rpx;
+  height: 100vh;
 }
 
 .scroll-content {
   height: 100vh;
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
 }
 
 /* ===== 骨架屏 ===== */
@@ -36,6 +36,7 @@
   width: 100%;
   height: 500rpx;
   overflow: hidden;
+  margin-bottom: 0;
 }
 
 .header-swiper {
@@ -66,7 +67,7 @@
   top: 24rpx;
   left: 24rpx;
   z-index: 1;
-  font-size: 22rpx;
+  font-size: 28rpx;
   color: var(--color-primary-content);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8rpx);
@@ -77,15 +78,10 @@
 /* ===== 通用卡片 ===== */
 .card {
   background-color: var(--color-base-100);
-  padding: 28rpx;
-  margin: 0 24rpx 20rpx;
-  border-radius: 16rpx;
-  border: 2rpx solid var(--color-taupe-300);
-}
-
-.card-section {
   padding: 24rpx;
   margin: 24rpx 24rpx 0;
+  border-radius: 16rpx;
+  border: 2rpx solid var(--color-taupe-300);
 }
 
 .card-last {
@@ -209,20 +205,14 @@
   margin-top: 4rpx;
 }
 
-/* ===== Section 标题 ===== */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20rpx;
-}
-
+/* ===== 区块标题 ===== */
 .section-title {
   font-size: 28rpx;
   font-weight: 600;
   color: var(--color-base-content);
   border-left: 6rpx solid var(--color-primary);
   padding-left: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 /* ===== 房间列表 ===== */
@@ -236,13 +226,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24rpx;
   padding: 24rpx;
   border-radius: 12rpx;
   background-color: var(--color-base-200);
   border: 2rpx solid var(--color-taupe-200);
 }
-
-
 
 .room-item.active {
   border-color: var(--color-primary);
@@ -275,7 +264,7 @@
 .room-left {
   display: flex;
   flex-direction: column;
-  gap: 6rpx;
+  gap: 12rpx;
 }
 
 .room-name {
@@ -322,6 +311,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24rpx;
+  padding: 12rpx 0 8rpx;
 }
 
 .facility-item {

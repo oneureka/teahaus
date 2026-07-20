@@ -26,7 +26,7 @@ withDefaults(defineProps<Props>(), {
   right: 0;
   display: flex;
   align-items: center;
-  padding: 20rpx 24rpx;
+  padding: 20rpx 28rpx;
   padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
   background-color: var(--color-base-100);
   border-top: 2rpx solid var(--color-taupe-300);

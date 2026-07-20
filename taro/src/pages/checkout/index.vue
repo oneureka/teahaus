@@ -1,6 +1,5 @@
 <template>
   <view class="checkout">
-    <scroll-view class="scroll-content" scroll-y>
       <!-- 茶室信息 -->
       <view class="card">
         <SpaceInfoCard
@@ -169,10 +168,7 @@
         </view>
       </view>
 
-      <view style="height: 140rpx"></view>
-    </scroll-view>
-
-    <!-- 底部结算栏 -->
+      <!-- 底部结算栏 -->
     <BottomBar shadow>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
@@ -185,10 +181,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import Taro, { useRouter } from "@tarojs/taro";
+import Taro, { useRouter, usePullDownRefresh } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { getSpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms } from "@/datasets/rooms";
+import { usePullRefresh } from "@/composables/useMockSubmit";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -239,6 +236,8 @@ const eveningSlots = ["17:00", "18:00", "19:00", "20:00", "21:00"];
 
 const durationOptions = [1, 2, 3];
 
+const SERVICE_FEE = 10;
+
 const selectedTimeSlot = ref("");
 const selectedDuration = ref(2);
 
@@ -253,12 +252,12 @@ const checkoutInfo = ref<CheckoutInfo>({
   contactName: "",
   contactPhone: "",
   roomPrice: 0,
-  serviceFee: 10,
+  serviceFee: SERVICE_FEE,
 });
 
 const total = computed(() => {
   const roomTotal = checkoutInfo.value.roomPrice * selectedDuration.value;
-  return roomTotal + checkoutInfo.value.serviceFee;
+  return roomTotal + SERVICE_FEE;
 });
 
 const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
@@ -333,6 +332,8 @@ const onSubmit = () => {
   }
   Taro.showToast({ title: "订单提交成功", icon: "success" });
 };
+
+usePullDownRefresh(usePullRefresh());
 
 onMounted(() => {
   const params = router.params;

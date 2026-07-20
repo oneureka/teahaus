@@ -90,14 +90,14 @@
         <view class="form-item no-border">
           <text class="label">时长</text>
           <view class="duration-list">
-            <Chip
-              v-for="d in durationOptions"
-              :key="d"
-              :active="selectedDuration === d"
-              @tap="selectedDuration = d"
-            >
-              {{ d }}小时
-            </Chip>
+            <view class="duration-chip" v-for="d in durationOptions" :key="d">
+              <Chip
+                :active="selectedDuration === d"
+                @tap="selectedDuration = d"
+              >
+                {{ d }}小时
+              </Chip>
+            </view>
           </view>
         </view>
 
@@ -105,9 +105,9 @@
         <view class="form-item no-border">
           <text class="label">人数</text>
           <view class="stepper">
-            <view class="stepper-btn" @tap="decreasePartySize">−</view>
+            <view class="stepper-btn" :class="{ disabled: checkoutInfo.partySize <= 1 }" @tap="decreasePartySize">−</view>
             <text class="stepper-value">{{ checkoutInfo.partySize }}</text>
-            <view class="stepper-btn" @tap="increasePartySize">+</view>
+            <view class="stepper-btn" :class="{ disabled: atMaxParty }" @tap="increasePartySize">+</view>
           </view>
         </view>
       </view>
@@ -269,6 +269,8 @@ const computedTotal = computed(() => {
 });
 
 const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
+
+const atMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
 
 const canSubmit = computed(() =>
   !!selectedTimeSlot.value

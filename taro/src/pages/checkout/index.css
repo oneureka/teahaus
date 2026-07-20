@@ -70,9 +70,12 @@
 /* ===== 日期快捷选择 ===== */
 .date-quick-list {
   display: flex;
-  gap: 12rpx;
   padding: 16rpx 0 24rpx;
   overflow-x: auto;
+}
+
+.date-quick-list > .date-chip {
+  margin-right: 12rpx;
 }
 
 .date-chip {
@@ -142,7 +145,10 @@
 /* ===== 时长选择 ===== */
 .duration-list {
   display: flex;
-  gap: 12rpx;
+}
+
+.duration-chip {
+  margin-right: 12rpx;
 }
 
 /* ===== 人数选择器 ===== */
@@ -171,6 +177,10 @@
   color: var(--color-base-content);
   min-width: 48rpx;
   text-align: center;
+}
+
+.stepper-btn.disabled {
+  opacity: 0.35;
 }
 
 /* ===== 费用明细 ===== */

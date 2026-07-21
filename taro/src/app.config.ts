@@ -23,7 +23,7 @@ export default defineAppConfig({
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '茶室预订',
+    navigationBarTitleText: 'TeaHaus',
     navigationBarTextStyle: 'black'
   },
   tabBar: {

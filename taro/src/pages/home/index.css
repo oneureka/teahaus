@@ -133,6 +133,10 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+.space-card-last {
+  margin-bottom: 0;
+}
+
 .space-card:active {
   transform: scale(0.97);
 }
@@ -246,26 +250,10 @@
 }
 
 .card-address {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-  font-size: 24rpx;
-  color: var(--color-taupe-500);
-  margin-bottom: 16rpx;
-}
-
-.address-icon {
-  width: 28rpx;
-  height: 28rpx;
-  flex-shrink: 0;
-  display: block;
-}
-
-.address-text {
-  flex: 1;
   font-size: 24rpx;
   color: var(--color-taupe-500);
   line-height: 1.5;
+  margin-bottom: 16rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

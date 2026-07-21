@@ -189,6 +189,7 @@ import { ROUTES, buildRoute } from "@/constants/routes";
 import { getSpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms } from "@/datasets/rooms";
 import { useMockSubmit } from "@/composables/useMockSubmit";
+import { getImageUrl } from "@/utils/image";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -407,7 +408,7 @@ onMounted(() => {
     return;
   }
   checkoutInfo.value.spaceName = space.name;
-  checkoutInfo.value.spaceImage = space.image;
+  checkoutInfo.value.spaceImage = getImageUrl(space.image, { width: 460 });
   checkoutInfo.value.roomName = room.name;
   checkoutInfo.value.roomPrice = room.price;
   Taro.setNavigationBarTitle({ title: space.name });

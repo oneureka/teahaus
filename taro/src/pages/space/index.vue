@@ -146,6 +146,8 @@ import { getSpaceDetail, type SpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms, type Room } from "@/datasets/rooms";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
+import { getImageUrl } from "@/utils/image";
+import { PLACEHOLDER_IMAGE } from "@/constants/app";
 import BottomBar from "@/components/BottomBar/index.vue";
 import iconFavorite from "@/assets/icons/icon-favorite@2x.png";
 import iconFavorited from "@/assets/icons/icon-favorited@2x.png";
@@ -173,12 +175,10 @@ const onImageLoad = (index: number) => {
   imagesLoaded.value[index] = true;
 };
 
-const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1610375233775-6e0166927193",
-  "https://images.unsplash.com/photo-1531970227416-f0cddeb1f748",
-];
-
-const spaceImages = computed(() => [space.value?.image || FALLBACK_IMAGES[0], ...FALLBACK_IMAGES.slice(1)]);
+const spaceImages = computed(() => {
+  const images = [space.value?.image || PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE]
+  return images.map((img) => getImageUrl(img, { width: 1600 }))
+})
 
 const UNAVAIL_ROOM_IDS = new Set(["cmrnjdy9x00015me9lbsj4txr", "cmrnje5d800065me9pzckx2jx"]);
 

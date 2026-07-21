@@ -93,10 +93,11 @@
 .tag-scroll {
   padding: 20rpx 24rpx;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .tag-list {
-  display: flex;
+  display: inline-flex;
   gap: 16rpx;
 }
 
@@ -205,9 +206,9 @@
 }
 
 .card-featured {
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: var(--color-primary);
-  background-color: var(--color-taupe-200);
+  background: var(--gradient-badge);
   padding: 4rpx 12rpx;
   border-radius: 6rpx;
   margin-left: 12rpx;

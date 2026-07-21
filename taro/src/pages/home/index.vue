@@ -196,7 +196,5 @@ const onImageError = (id: string) => {
 usePullDownRefresh(usePullRefresh(() => {
   activeCategory.value = "all";
   activeSort.value = "distance";
-  imagesLoaded.value = {};
-  spaceList.value = [...spaceList.value].sort(() => Math.random() - 0.5);
 }));
 </script>

@@ -87,6 +87,8 @@ import { ROUTES, buildRoute } from "@/constants/routes";
 import { orderList, type Order, type OrderStatus } from "@/datasets/orders";
 import { spaceList } from "@/datasets/spaces";
 import { roomList } from "@/datasets/rooms";
+import { getImageUrl } from "@/utils/image";
+import { PLACEHOLDER_IMAGE } from "@/constants/app";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
 import "./index.css";
@@ -129,8 +131,7 @@ const getRoomName = (roomId: string): string => {
 
 const getSpaceImage = (spaceId: string): string => {
   const space = spaceList.find((s) => s.id === spaceId);
-  const DEFAULT = "https://images.unsplash.com/photo-1610375233775-6e0166927193";
-  return (space?.images?.[0] ?? DEFAULT) + "?q=80&w=460";
+  return getImageUrl(space?.images?.[0] ?? PLACEHOLDER_IMAGE, { width: 460 });
 };
 
 const onSpaceClick = () => {

@@ -205,7 +205,7 @@
   font-size: 24rpx;
   color: var(--color-primary);
   background-color: var(--color-taupe-100);
-  border: 2rpx solid var(--color-taupe-300);
+  border: 1rpx solid var(--color-taupe-300);
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
   margin-left: 12rpx;
@@ -246,10 +246,26 @@
 }
 
 .card-address {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: var(--color-taupe-500);
+  margin-bottom: 16rpx;
+}
+
+.address-icon {
+  width: 28rpx;
+  height: 28rpx;
+  flex-shrink: 0;
+  display: block;
+}
+
+.address-text {
+  flex: 1;
   font-size: 24rpx;
   color: var(--color-taupe-500);
   line-height: 1.5;
-  margin-bottom: 16rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

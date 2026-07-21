@@ -4,6 +4,7 @@ export default defineAppConfig({
       desc: "定位将用于推荐附近的商家和服务",
     },
   },
+  requiredPrivateInfos: ["getLocation"],
   pages: [
     "pages/home/index",
     "pages/orders/index",

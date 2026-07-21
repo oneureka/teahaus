@@ -51,7 +51,7 @@ export const useSystemStore = defineStore("system", () => {
 
   async function initLocation() {
     try {
-      const res = await Taro.getLocation({ type: "gcj02" });
+      const res = await Taro.getLocation({ type: "wgs84" });
       userLatitude.value = res.latitude;
       userLongitude.value = res.longitude;
       locationLoaded.value = true;

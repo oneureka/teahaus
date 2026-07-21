@@ -107,6 +107,8 @@ import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
 import { getImageUrl } from "@/utils/image";
 import { PLACEHOLDER_IMAGE } from "@/constants/app";
+import { useSystemStore } from "@/stores/system";
+import { getDistance, formatDistance } from "@/utils/geo";
 import "./index.css";
 
 interface SpaceDisplay extends Space {
@@ -140,14 +142,26 @@ const sortOptions: SortOption[] = [
 const activeCategory = ref("all");
 const activeSort = ref("distance");
 const imagesLoaded = ref<Record<string, boolean>>({});
-const spaceList = ref<SpaceDisplay[]>(
-  mockSpaceList.map((s, i) => ({
-    ...s,
-    rating: +(4.5 + (i % 5) * 0.1).toFixed(1),
-    reviewCount: 200 + i * 80,
-    distance: `${(1 + i * 0.5).toFixed(1)}km`,
-    distanceValue: 1 + i * 0.5,
-  })),
+const systemStore = useSystemStore();
+
+const spaceList = computed<SpaceDisplay[]>(() =>
+  mockSpaceList.map((s, i) => {
+    const distanceMeters = getDistance(
+      {
+        latitude: systemStore.userLatitude || 24.48,
+        longitude: systemStore.userLongitude || 118.09,
+      },
+      { latitude: Number(s.lat), longitude: Number(s.lng) },
+    );
+    const distanceKm = distanceMeters / 1000;
+    return {
+      ...s,
+      rating: +(4.5 + (i % 5) * 0.1).toFixed(1),
+      reviewCount: 200 + i * 80,
+      distance: formatDistance(distanceMeters),
+      distanceValue: distanceKm,
+    };
+  }),
 );
 
 const filteredList = computed(() => {

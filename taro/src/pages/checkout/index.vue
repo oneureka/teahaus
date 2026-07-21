@@ -442,7 +442,10 @@ onMounted(() => {
     return
   }
   checkoutInfo.value.spaceName = space.name
-  checkoutInfo.value.spaceImage = getImageUrl(space.image || PLACEHOLDER_IMAGE, { width: 460 })
+  checkoutInfo.value.spaceImage = getImageUrl(
+    space.image || PLACEHOLDER_IMAGE,
+    { width: 460 }
+  )
   checkoutInfo.value.roomName = room.name
   checkoutInfo.value.roomPrice = room.price
   Taro.setNavigationBarTitle({ title: space.name })

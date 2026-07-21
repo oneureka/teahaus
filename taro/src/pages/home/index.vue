@@ -55,7 +55,7 @@
           <view v-if="!imagesLoaded[item.id]" class="image-skeleton"></view>
           <image
             class="card-image"
-            :src="item.images[0] || 'https://images.unsplash.com/photo-1531970227416-f0cddeb1f748'"
+            :src="getImageUrl(item.images[0] || PLACEHOLDER_IMAGE, { width: 1600 })"
             mode="aspectFill"
             lazy-load
             @load="onImageLoad(item.id)"
@@ -105,6 +105,8 @@ import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { spaceList as mockSpaceList, type Space } from "@/datasets/spaces";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
+import { getImageUrl } from "@/utils/image";
+import { PLACEHOLDER_IMAGE } from "@/constants/app";
 import "./index.css";
 
 interface SpaceDisplay extends Space {

@@ -1,5 +1,5 @@
-export {};
+export {}
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents extends JSX.IntrinsicElements {}
 }

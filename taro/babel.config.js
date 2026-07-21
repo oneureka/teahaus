@@ -2,13 +2,13 @@
 module.exports = {
   presets: [
     [
-      "taro",
+      'taro',
       {
-        framework: "vue3",
+        framework: 'vue3',
         ts: true,
-        compiler: "vite",
-        useBuiltIns: process.env.TARO_ENV === "h5" ? "usage" : false,
-      },
-    ],
-  ],
-};
+        compiler: 'vite',
+        useBuiltIns: process.env.TARO_ENV === 'h5' ? 'usage' : false
+      }
+    ]
+  ]
+}

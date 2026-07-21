@@ -121,15 +121,17 @@
             class="input"
             v-model="checkoutInfo.contactName"
             placeholder="请输入姓名"
+            cursor-spacing="40"
           />
         </view>
         <view class="form-item no-border">
           <text class="label">手机号</text>
           <input
             class="input"
-            type="number"
+            type="digit"
             v-model="checkoutInfo.contactPhone"
             placeholder="请输入手机号"
+            cursor-spacing="40"
           />
         </view>
       </view>
@@ -141,7 +143,9 @@
         </view>
         <view class="price-row">
           <text class="price-label">房间费用</text>
-          <text class="price-value">¥{{ checkoutInfo.roomPrice }} × {{ selectedDuration }}小时</text>
+          <text class="price-value">
+            ¥{{ checkoutInfo.roomPrice }}<template v-if="checkoutInfo.roomPrice > 0 && selectedDuration > 0"> × {{ selectedDuration }}小时</template>
+          </text>
         </view>
         <view class="price-row">
           <text class="price-label">服务费</text>
@@ -171,7 +175,7 @@
     <BottomBar shadow>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
-        <text class="bottom-total">¥{{ total }}</text>
+        <text class="bottom-total">{{ timeRange.value.start && timeRange.value.end ? `¥${total}` : '—' }}</text>
       </view>
       <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit" @tap="onSubmit" />
     </BottomBar>
@@ -180,11 +184,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import Taro, { useRouter, usePullDownRefresh } from "@tarojs/taro";
+import Taro, { useRouter } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { getSpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms } from "@/datasets/rooms";
-import { usePullRefresh } from "@/composables/useMockSubmit";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -275,15 +278,12 @@ const isValidPhone = (v: string) => /^1\d{10}$/.test(v);
 const isMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
 
 const canSubmit = computed(() =>
-  !!timeRange.value.start
-  && !!timeRange.value.end
-  && !!checkoutInfo.value.contactName.trim()
-  && isValidPhone(checkoutInfo.value.contactPhone.trim())
+  !!timeRange.value.start && !!timeRange.value.end
 );
 
 const isSlotAvailable = (slot: string) => {
   const now = new Date();
-  const today = new Date().toISOString().split("T")[0];
+  const today = now.toISOString().split("T")[0];
   if (checkoutInfo.value.date !== today) return true;
   const [h] = slot.split(":").map(Number);
   return h > now.getHours();
@@ -375,22 +375,12 @@ const onSubmit = () => {
     Taro.showToast({ title: "请选择完整的时间段", icon: "none" });
     return;
   }
-  if (!checkoutInfo.value.contactName) {
-    Taro.showToast({ title: "请输入联系人姓名", icon: "none" });
-    return;
-  }
-  if (!checkoutInfo.value.contactPhone) {
-    Taro.showToast({ title: "请输入联系人手机号", icon: "none" });
-    return;
-  }
-  if (!isValidPhone(checkoutInfo.value.contactPhone)) {
+  if (checkoutInfo.value.contactPhone.trim() && !isValidPhone(checkoutInfo.value.contactPhone.trim())) {
     Taro.showToast({ title: "手机号格式不正确", icon: "none" });
     return;
   }
   Taro.showToast({ title: "订单提交成功", icon: "success" });
 };
-
-usePullDownRefresh(usePullRefresh());
 
 onMounted(() => {
   const params = router.params;

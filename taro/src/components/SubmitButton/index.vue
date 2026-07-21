@@ -1,34 +1,30 @@
 <template>
-  <view
-    class="submit-btn"
-    :class="[variant, { disabled }]"
-    @tap="onClick"
-  >
+  <view class="submit-btn" :class="[variant, { disabled }]" @tap="onClick">
     <text class="submit-btn-text">{{ text }}</text>
   </view>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  text: string;
-  variant?: "pill" | "square";
-  disabled?: boolean;
+  text: string
+  variant?: 'pill' | 'square'
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: "square",
-  disabled: false,
-});
+  variant: 'square',
+  disabled: false
+})
 
 const emit = defineEmits<{
-  tap: [];
-}>();
+  tap: []
+}>()
 
 const onClick = () => {
   if (!props.disabled) {
-    emit("tap");
+    emit('tap')
   }
-};
+}
 </script>
 
 <style>

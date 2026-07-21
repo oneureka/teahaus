@@ -1,11 +1,6 @@
 <template>
   <view class="empty-state">
-    <image
-      v-if="image"
-      class="empty-image"
-      :src="image"
-      mode="aspectFit"
-    />
+    <image v-if="image" class="empty-image" :src="image" mode="aspectFit" />
     <text class="empty-text">{{ text }}</text>
     <view v-if="actionText" class="empty-action" @tap="onActionTap">
       <text>{{ actionText }}</text>
@@ -21,17 +16,17 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  image: "",
-  actionText: "",
-});
+  image: '',
+  actionText: ''
+})
 
 const emit = defineEmits<{
   action: []
-}>();
+}>()
 
 const onActionTap = () => {
-  emit("action");
-};
+  emit('action')
+}
 </script>
 
 <style>

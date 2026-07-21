@@ -56,7 +56,11 @@
 }
 
 .btn-recharge {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-warning));
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-warning)
+  );
   color: var(--color-secondary-content);
 }
 
@@ -81,5 +85,3 @@
   padding-left: 16rpx;
   border-left: 6rpx solid var(--color-primary);
 }
-
-

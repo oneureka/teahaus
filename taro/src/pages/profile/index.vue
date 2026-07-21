@@ -10,11 +10,24 @@
       :style="{ paddingTop: statusBarHeight + navBarHeight + 'px' }"
     >
       <view class="user-info">
-        <button open-type="chooseAvatar" class="avatar-btn" @chooseavatar="onChooseAvatar">
-          <image class="avatar" :src="userStore.userInfo.avatar" mode="aspectFill" />
+        <button
+          open-type="chooseAvatar"
+          class="avatar-btn"
+          @chooseavatar="onChooseAvatar"
+        >
+          <image
+            class="avatar"
+            :src="userStore.userInfo.avatar"
+            mode="aspectFill"
+          />
         </button>
         <view class="user-text">
-          <text v-if="!editingNick" class="username" @tap="onStartEditNickname">{{ userStore.userInfo.nickname }}</text>
+          <text
+            v-if="!editingNick"
+            class="username"
+            @tap="onStartEditNickname"
+            >{{ userStore.userInfo.nickname }}</text
+          >
           <input
             v-else
             type="nickname"
@@ -56,7 +69,6 @@
           v-for="(item, index) in menuList"
           :key="index"
           class="menu-list-item"
-
           @tap="onMenuClick(item)"
         >
           <view class="menu-list-left">
@@ -83,139 +95,139 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Taro from "@tarojs/taro";
-import iconOrder from "@/assets/icons/icon-order@2x.png";
-import iconCoupon from "@/assets/icons/icon-coupon@2x.png";
-import iconFaq from "@/assets/icons/icon-faq@2x.png";
-import iconContact from "@/assets/icons/icon-contact@2x.png";
-import iconFeedback from "@/assets/icons/icon-feedback@2x.png";
-import { useUserStore } from "@/stores/user";
-import { useSystemStore } from "@/stores/system";
-import { couponList, CouponStatus } from "@/datasets/coupons";
-import { ROUTES } from "@/constants/routes";
-import "./index.css";
+import { ref, onMounted } from 'vue'
+import Taro from '@tarojs/taro'
+import iconOrder from '@/assets/icons/icon-order@2x.png'
+import iconCoupon from '@/assets/icons/icon-coupon@2x.png'
+import iconFaq from '@/assets/icons/icon-faq@2x.png'
+import iconContact from '@/assets/icons/icon-contact@2x.png'
+import iconFeedback from '@/assets/icons/icon-feedback@2x.png'
+import { useUserStore } from '@/stores/user'
+import { useSystemStore } from '@/stores/system'
+import { couponList, CouponStatus } from '@/datasets/coupons'
+import { ROUTES } from '@/constants/routes'
+import './index.css'
 
-const userStore = useUserStore();
-const systemStore = useSystemStore();
+const userStore = useUserStore()
+const systemStore = useSystemStore()
 
-const statusBarHeight = ref(0);
-const navBarHeight = ref(44);
-const editingNick = ref(false);
+const statusBarHeight = ref(0)
+const navBarHeight = ref(44)
+const editingNick = ref(false)
 
 onMounted(() => {
-  statusBarHeight.value = systemStore.systemViewHeight.statusBarHeight || 20;
-  navBarHeight.value = systemStore.systemViewHeight.navBarHeight;
+  statusBarHeight.value = systemStore.systemViewHeight.statusBarHeight || 20
+  navBarHeight.value = systemStore.systemViewHeight.navBarHeight
   try {
-    const saved = Taro.getStorageSync("profile_user");
-    if (saved && typeof saved === "object") {
-      if (saved.nickname) userStore.setUserInfo({ nickname: saved.nickname });
-      if (saved.avatar) userStore.setUserInfo({ avatar: saved.avatar });
+    const saved = Taro.getStorageSync('profile_user')
+    if (saved && typeof saved === 'object') {
+      if (saved.nickname) userStore.setUserInfo({ nickname: saved.nickname })
+      if (saved.avatar) userStore.setUserInfo({ avatar: saved.avatar })
     }
   } catch {} // first visit, no saved data
-});
+})
 
 // 菜单列表
 interface MenuItem {
-  title: string;
-  icon: string;
-  path: string;
-  badge?: string;
-  type: "navigate" | "switchTab" | "customerService" | "modal";
+  title: string
+  icon: string
+  path: string
+  badge?: string
+  type: 'navigate' | 'switchTab' | 'customerService' | 'modal'
 }
 
 const menuList = ref<MenuItem[]>([
   {
-    title: "我的订单",
+    title: '我的订单',
     icon: iconOrder,
     path: ROUTES.orders,
-    type: "switchTab",
+    type: 'switchTab'
   },
   {
-    title: "团购验券",
+    title: '团购验券',
     icon: iconCoupon,
     path: ROUTES.verify,
-    type: "navigate",
+    type: 'navigate'
   },
   {
-    title: "常见问题",
+    title: '常见问题',
     icon: iconFaq,
     path: ROUTES.faq,
-    type: "navigate",
+    type: 'navigate'
   },
   {
-    title: "联系客服",
+    title: '联系客服',
     icon: iconContact,
-    path: "",
-    type: "customerService",
+    path: '',
+    type: 'customerService'
   },
   {
-    title: "留言反馈",
+    title: '留言反馈',
     icon: iconFeedback,
     path: ROUTES.feedback,
-    type: "navigate",
-  },
-]);
+    type: 'navigate'
+  }
+])
 
 const couponCount = couponList.filter(
-  (c) => c.status === CouponStatus.NEW,
-).length;
+  (c) => c.status === CouponStatus.NEW
+).length
 
 const loadProfile = (): Record<string, unknown> => {
   try {
-    const saved = Taro.getStorageSync("profile_user") as Record<string, unknown>;
-    return saved && typeof saved === "object" ? saved : {};
+    const saved = Taro.getStorageSync('profile_user') as Record<string, unknown>
+    return saved && typeof saved === 'object' ? saved : {}
   } catch {
-    return {};
+    return {}
   }
-};
+}
 
 const saveProfile = (patch: Record<string, unknown>) => {
-  Taro.setStorageSync("profile_user", { ...loadProfile(), ...patch });
-};
+  Taro.setStorageSync('profile_user', { ...loadProfile(), ...patch })
+}
 
 const onChooseAvatar = (e: { detail: { avatarUrl: string } }) => {
-  const { avatarUrl } = e.detail;
-  userStore.setUserInfo({ avatar: avatarUrl });
-  saveProfile({ avatar: avatarUrl });
-};
+  const { avatarUrl } = e.detail
+  userStore.setUserInfo({ avatar: avatarUrl })
+  saveProfile({ avatar: avatarUrl })
+}
 
 const onStartEditNickname = () => {
-  editingNick.value = true;
-};
+  editingNick.value = true
+}
 
 const onNicknameDone = (e: { detail: { value: string } }) => {
-  const val = e.detail.value?.trim();
+  const val = e.detail.value?.trim()
   if (val) {
-    userStore.setUserInfo({ nickname: val });
-    saveProfile({ nickname: val });
+    userStore.setUserInfo({ nickname: val })
+    saveProfile({ nickname: val })
   }
-  editingNick.value = false;
-};
+  editingNick.value = false
+}
 
 // 导航到指定页面
 const navigateTo = (path: string) => {
   if (path) {
-    Taro.navigateTo({ url: path });
+    Taro.navigateTo({ url: path })
   }
-};
+}
 
 // 点击菜单项
 const onMenuClick = (item: MenuItem) => {
-  if (item.type === "switchTab") {
-    Taro.switchTab({ url: item.path });
-  } else if (item.type === "navigate") {
-    navigateTo(item.path);
-  } else if (item.type === "customerService") {
+  if (item.type === 'switchTab') {
+    Taro.switchTab({ url: item.path })
+  } else if (item.type === 'navigate') {
+    navigateTo(item.path)
+  } else if (item.type === 'customerService') {
     Taro.openCustomerServiceChat({
-      extInfo: { url: "" },
-      corpId: "",
+      extInfo: { url: '' },
+      corpId: '',
       fail: () =>
         Taro.showToast({
-          title: "当前未接入微信客服系统，如有问题请通过「留言反馈」联系我们",
-          icon: "none",
-        }),
-    });
+          title: '当前未接入微信客服系统，如有问题请通过「留言反馈」联系我们',
+          icon: 'none'
+        })
+    })
   }
-};
+}
 </script>

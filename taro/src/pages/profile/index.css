@@ -35,7 +35,7 @@
 }
 
 .user-section::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -60rpx;
   right: -130rpx;
@@ -201,7 +201,7 @@
 }
 
 .menu-list-item:not(:last-child)::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;

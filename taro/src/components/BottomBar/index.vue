@@ -6,16 +6,16 @@
 
 <script setup lang="ts">
 interface Props {
-  justify?: "between" | "end" | "center";
-  tall?: boolean;
-  shadow?: boolean;
+  justify?: 'between' | 'end' | 'center'
+  tall?: boolean
+  shadow?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
-  justify: "between",
+  justify: 'between',
   tall: false,
-  shadow: false,
-});
+  shadow: false
+})
 </script>
 
 <style>

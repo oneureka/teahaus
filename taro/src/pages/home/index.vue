@@ -6,7 +6,9 @@
         <view class="featured-content">
           <text class="featured-label">Seasonal Selection</text>
           <text class="featured-title">夏日龙井 · 当季新茶上市</text>
-          <text class="featured-desc">精选明前龙井，配以雅致茶席。预订即赠茶点一份。</text>
+          <text class="featured-desc"
+            >精选明前龙井，配以雅致茶席。预订即赠茶点一份。</text
+          >
           <view class="featured-link">
             <text>立即查看</text>
             <text class="featured-arrow">→</text>
@@ -55,7 +57,9 @@
           <view v-if="!imagesLoaded[item.id]" class="image-skeleton"></view>
           <image
             class="card-image"
-            :src="getImageUrl(item.images[0] || PLACEHOLDER_IMAGE, { width: 1600 })"
+            :src="
+              getImageUrl(item.images[0] || PLACEHOLDER_IMAGE, { width: 1600 })
+            "
             mode="aspectFill"
             lazy-load
             @load="onImageLoad(item.id)"
@@ -83,7 +87,11 @@
           <view class="card-address">{{ item.address }}</view>
           <view class="card-footer">
             <view class="card-hours">
-              <image class="hours-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
+              <image
+                class="hours-icon"
+                src="@/assets/icons/icon-clock@2x.png"
+                mode="aspectFill"
+              />
               <text>营业时间 {{ item.businessHours }}</text>
             </view>
             <text class="card-price">¥{{ item.minPrice }}/时起</text>
@@ -100,117 +108,119 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import Taro, { usePullDownRefresh } from "@tarojs/taro";
-import { spaceList as mockSpaceList, type Space } from "@/datasets/spaces";
-import { ROUTES, buildRoute } from "@/constants/routes";
-import { usePullRefresh } from "@/composables/useMockSubmit";
-import { getImageUrl } from "@/utils/image";
-import { PLACEHOLDER_IMAGE } from "@/constants/app";
-import { useSystemStore } from "@/stores/system";
-import { getDistance, formatDistance } from "@/utils/geo";
-import "./index.css";
+import { ref, computed } from 'vue'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
+import { spaceList as mockSpaceList, type Space } from '@/datasets/spaces'
+import { ROUTES, buildRoute } from '@/constants/routes'
+import { usePullRefresh } from '@/composables/useMockSubmit'
+import { getImageUrl } from '@/utils/image'
+import { PLACEHOLDER_IMAGE } from '@/constants/app'
+import { useSystemStore } from '@/stores/system'
+import { getDistance, formatDistance } from '@/utils/geo'
+import './index.css'
 
 interface SpaceDisplay extends Space {
-  rating: number;
-  reviewCount: number;
-  distance: string;
-  distanceValue: number;
+  rating: number
+  reviewCount: number
+  distance: string
+  distanceValue: number
 }
 
 interface SortOption {
-  key: string;
-  label: string;
+  key: string
+  label: string
 }
 
 const categoryList = [
-  { key: "all", label: "全部" },
-  { key: "海景茶舍", label: "海景" },
-  { key: "禅意茶苑", label: "禅意" },
-  { key: "文艺茶舍", label: "文艺" },
-  { key: "山景茶居", label: "山景" },
-  { key: "工夫茶馆", label: "工夫茶" },
-  { key: "古城茶馆", label: "古城" },
-];
+  { key: 'all', label: '全部' },
+  { key: '海景茶舍', label: '海景' },
+  { key: '禅意茶苑', label: '禅意' },
+  { key: '文艺茶舍', label: '文艺' },
+  { key: '山景茶居', label: '山景' },
+  { key: '工夫茶馆', label: '工夫茶' },
+  { key: '古城茶馆', label: '古城' }
+]
 
 const sortOptions: SortOption[] = [
-  { key: "distance", label: "距离最近" },
-  { key: "price", label: "价格最低" },
-  { key: "rating", label: "评分最高" },
-];
+  { key: 'distance', label: '距离最近' },
+  { key: 'price', label: '价格最低' },
+  { key: 'rating', label: '评分最高' }
+]
 
-const activeCategory = ref("all");
-const activeSort = ref("distance");
-const imagesLoaded = ref<Record<string, boolean>>({});
-const systemStore = useSystemStore();
+const activeCategory = ref('all')
+const activeSort = ref('distance')
+const imagesLoaded = ref<Record<string, boolean>>({})
+const systemStore = useSystemStore()
 
 const spaceList = computed<SpaceDisplay[]>(() =>
   mockSpaceList.map((s, i) => {
     const distanceMeters = getDistance(
       {
         latitude: systemStore.userLatitude || 24.48,
-        longitude: systemStore.userLongitude || 118.09,
+        longitude: systemStore.userLongitude || 118.09
       },
-      { latitude: Number(s.lat), longitude: Number(s.lng) },
-    );
-    const distanceKm = distanceMeters / 1000;
+      { latitude: Number(s.lat), longitude: Number(s.lng) }
+    )
+    const distanceKm = distanceMeters / 1000
     return {
       ...s,
       rating: +(4.5 + (i % 5) * 0.1).toFixed(1),
       reviewCount: 200 + i * 80,
       distance: formatDistance(distanceMeters),
-      distanceValue: distanceKm,
-    };
-  }),
-);
+      distanceValue: distanceKm
+    }
+  })
+)
 
 const filteredList = computed(() => {
-  let list = spaceList.value;
+  let list = spaceList.value
 
-  if (activeCategory.value !== "all") {
-    list = list.filter((item) => item.category === activeCategory.value);
+  if (activeCategory.value !== 'all') {
+    list = list.filter((item) => item.category === activeCategory.value)
   }
 
-  const sorted = [...list];
-  if (activeSort.value === "distance") {
-    sorted.sort((a, b) => a.distanceValue - b.distanceValue);
-  } else if (activeSort.value === "price") {
-    sorted.sort((a, b) => a.minPrice - b.minPrice);
-  } else if (activeSort.value === "rating") {
-    sorted.sort((a, b) => b.rating - a.rating);
+  const sorted = [...list]
+  if (activeSort.value === 'distance') {
+    sorted.sort((a, b) => a.distanceValue - b.distanceValue)
+  } else if (activeSort.value === 'price') {
+    sorted.sort((a, b) => a.minPrice - b.minPrice)
+  } else if (activeSort.value === 'rating') {
+    sorted.sort((a, b) => b.rating - a.rating)
   }
 
-  return sorted;
-});
+  return sorted
+})
 
 const onCategoryChange = (key: string) => {
-  activeCategory.value = key;
-};
+  activeCategory.value = key
+}
 
 const onSortChange = (key: string) => {
-  activeSort.value = key;
-};
+  activeSort.value = key
+}
 
 const onCardClick = (item: SpaceDisplay) => {
   Taro.navigateTo({
-    url: buildRoute(ROUTES.space, { id: item.id }),
-  });
-};
+    url: buildRoute(ROUTES.space, { id: item.id })
+  })
+}
 
 const onFeaturedClick = () => {
-  Taro.showToast({ title: "夏日龙井活动", icon: "none" });
-};
+  Taro.showToast({ title: '夏日龙井活动', icon: 'none' })
+}
 
 const onImageLoad = (id: string) => {
-  imagesLoaded.value[id] = true;
-};
+  imagesLoaded.value[id] = true
+}
 
 const onImageError = (id: string) => {
-  imagesLoaded.value[id] = true;
-};
+  imagesLoaded.value[id] = true
+}
 
-usePullDownRefresh(usePullRefresh(() => {
-  activeCategory.value = "all";
-  activeSort.value = "distance";
-}));
+usePullDownRefresh(
+  usePullRefresh(() => {
+    activeCategory.value = 'all'
+    activeSort.value = 'distance'
+  })
+)
 </script>

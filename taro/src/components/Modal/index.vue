@@ -14,29 +14,29 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: boolean;
-  title?: string;
-  closeOnMask?: boolean;
+  modelValue: boolean
+  title?: string
+  closeOnMask?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: "",
-  closeOnMask: true,
-});
+  title: '',
+  closeOnMask: true
+})
 
 const emit = defineEmits<{
-  "update:modelValue": [value: boolean];
-}>();
+  'update:modelValue': [value: boolean]
+}>()
 
 const onClose = () => {
-  emit("update:modelValue", false);
-};
+  emit('update:modelValue', false)
+}
 
 const onMaskTap = () => {
   if (props.closeOnMask) {
-    onClose();
+    onClose()
   }
-};
+}
 </script>
 
 <style>

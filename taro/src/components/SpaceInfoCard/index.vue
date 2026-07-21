@@ -10,35 +10,40 @@
       </view>
       <text class="room-name">{{ roomName }}</text>
     </view>
-    <image v-if="showArrow" class="arrow" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
+    <image
+      v-if="showArrow"
+      class="arrow"
+      src="@/assets/icons/icon-arrow@2x.png"
+      mode="aspectFill"
+    />
   </view>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  image: string;
-  spaceName: string;
-  roomName: string;
-  price?: string;
-  showArrow?: boolean;
-  clickable?: boolean;
+  image: string
+  spaceName: string
+  roomName: string
+  price?: string
+  showArrow?: boolean
+  clickable?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  price: "",
+  price: '',
   showArrow: false,
-  clickable: false,
-});
+  clickable: false
+})
 
 const emit = defineEmits<{
-  tap: [];
-}>();
+  tap: []
+}>()
 
 const onClick = () => {
   if (props.clickable) {
-    emit("tap");
+    emit('tap')
   }
-};
+}
 </script>
 
 <style>

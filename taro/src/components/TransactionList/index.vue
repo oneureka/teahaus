@@ -3,12 +3,7 @@
     <view v-if="items.length === 0" class="empty-records">
       <text class="empty-text">{{ emptyText }}</text>
     </view>
-    <view
-      v-else
-      v-for="item in items"
-      :key="item.id"
-      class="transaction-item"
-    >
+    <view v-else v-for="item in items" :key="item.id" class="transaction-item">
       <view class="transaction-info">
         <text class="transaction-type">{{ getTypeLabel(item) }}</text>
         <text class="transaction-time">{{ formatDate(item) }}</text>
@@ -17,52 +12,50 @@
         class="transaction-amount"
         :class="{
           'amount-in': getAmount(item) > 0,
-          'amount-out': getAmount(item) < 0,
+          'amount-out': getAmount(item) < 0
         }"
       >
         <text v-if="getAmount(item) > 0">+{{ unit }}{{ getAmount(item) }}</text>
         <text v-else>-{{ unit }}{{ Math.abs(getAmount(item)) }}</text>
       </view>
     </view>
-    </view>
+  </view>
 </template>
 
 <script setup lang="ts">
-
-
 export interface TransactionItem {
-  id: string;
-  type: string;
-  createdAt: string;
-  [key: string]: unknown;
+  id: string
+  type: string
+  createdAt: string
+  [key: string]: unknown
 }
 
 export interface Props {
-  items: TransactionItem[];
-  typeLabels?: Record<string, string>;
-  amountKey?: string;
-  unit?: string;
-  emptyText?: string;
+  items: TransactionItem[]
+  typeLabels?: Record<string, string>
+  amountKey?: string
+  unit?: string
+  emptyText?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   typeLabels: () => ({}),
-  amountKey: "amount",
-  unit: "¥",
-  emptyText: "暂无明细",
-});
+  amountKey: 'amount',
+  unit: '¥',
+  emptyText: '暂无明细'
+})
 
 const getTypeLabel = (item: TransactionItem): string => {
-  return props.typeLabels[item.type] || item.type;
-};
+  return props.typeLabels[item.type] || item.type
+}
 
 const getAmount = (item: TransactionItem): number => {
-  return Number(item[props.amountKey]) || 0;
-};
+  return Number(item[props.amountKey]) || 0
+}
 
 const formatDate = (item: TransactionItem): string => {
-  return String(item.createdAt).split("T")[0];
-};
+  return String(item.createdAt).split('T')[0]
+}
 </script>
 
 <style>

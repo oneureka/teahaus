@@ -25,15 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { faqList as mockFaqList, type FaqItem } from "@/datasets/faq";
-import "./index.css";
+import { ref } from 'vue'
+import { faqList as mockFaqList, type FaqItem } from '@/datasets/faq'
+import './index.css'
 
-const faqList = ref<FaqItem[]>(
-  mockFaqList.map((item) => ({ ...item }))
-);
+const faqList = ref<FaqItem[]>(mockFaqList.map((item) => ({ ...item })))
 
 const onFaqClick = (index: number) => {
-  faqList.value[index].expanded = !faqList.value[index].expanded;
-};
+  faqList.value[index].expanded = !faqList.value[index].expanded
+}
 </script>

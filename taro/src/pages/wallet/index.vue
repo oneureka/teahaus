@@ -26,36 +26,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import Taro, { usePullDownRefresh } from "@tarojs/taro";
-import { useUserStore } from "@/stores/user";
-import { transactionList, type Transaction } from "@/datasets/wallet";
-import { ROUTES, buildRoute } from "@/constants/routes";
-import { usePullRefresh } from "@/composables/useMockSubmit";
-import TransactionList from "@/components/TransactionList/index.vue";
-import "./index.css";
+import { ref } from 'vue'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
+import { useUserStore } from '@/stores/user'
+import { transactionList, type Transaction } from '@/datasets/wallet'
+import { ROUTES, buildRoute } from '@/constants/routes'
+import { usePullRefresh } from '@/composables/useMockSubmit'
+import TransactionList from '@/components/TransactionList/index.vue'
+import './index.css'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
-const transactions = ref<Transaction[]>([...transactionList]);
+const transactions = ref<Transaction[]>([...transactionList])
 
 const walletTypeLabels: Record<string, string> = {
-  RECHARGE: "充值",
-  PAYMENT: "消费",
-  REWARD: "奖励",
-};
+  RECHARGE: '充值',
+  PAYMENT: '消费',
+  REWARD: '奖励'
+}
 
 const goToRecharge = () => {
   Taro.navigateTo({
-    url: buildRoute(ROUTES.transfer, { tab: "recharge" }),
-  });
-};
+    url: buildRoute(ROUTES.transfer, { tab: 'recharge' })
+  })
+}
 
 const goToWithdraw = () => {
   Taro.navigateTo({
-    url: buildRoute(ROUTES.transfer, { tab: "withdraw" }),
-  });
-};
+    url: buildRoute(ROUTES.transfer, { tab: 'withdraw' })
+  })
+}
 
-usePullDownRefresh(usePullRefresh());
+usePullDownRefresh(usePullRefresh())
 </script>

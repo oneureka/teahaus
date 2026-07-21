@@ -1,6 +1,6 @@
 export default definePageConfig({
-  navigationBarTitleText: "我的积分",
+  navigationBarTitleText: '我的积分',
   enablePullDownRefresh: true,
-  backgroundColor: "#F5F5F4",
-  backgroundTextStyle: "dark",
-});
+  backgroundColor: '#F5F5F4',
+  backgroundTextStyle: 'dark'
+})

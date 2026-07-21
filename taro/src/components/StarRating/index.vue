@@ -14,25 +14,25 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: number;
-  count?: number;
-  readonly?: boolean;
+  modelValue: number
+  count?: number
+  readonly?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   count: 5,
-  readonly: false,
-});
+  readonly: false
+})
 
 const emit = defineEmits<{
-  "update:modelValue": [value: number];
-}>();
+  'update:modelValue': [value: number]
+}>()
 
 const onClick = (star: number) => {
   if (!props.readonly) {
-    emit("update:modelValue", star);
+    emit('update:modelValue', star)
   }
-};
+}
 </script>
 
 <style scoped>

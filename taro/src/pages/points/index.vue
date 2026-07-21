@@ -20,7 +20,9 @@
       </view>
       <view class="usage-item">
         <text class="usage-text">有效期</text>
-        <text class="usage-detail">积分自获取之日起 12 个月内有效，逾期自动清零</text>
+        <text class="usage-detail"
+          >积分自获取之日起 12 个月内有效，逾期自动清零</text
+        >
       </view>
     </Modal>
 
@@ -39,28 +41,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { usePullDownRefresh } from "@tarojs/taro";
-import { useUserStore } from "@/stores/user";
-import { pointTransactions as pointTransactionList, type PointTransaction } from "@/datasets/points";
-import { usePullRefresh } from "@/composables/useMockSubmit";
-import TransactionList from "@/components/TransactionList/index.vue";
-import Modal from "@/components/Modal/index.vue";
-import "./index.css";
+import { ref } from 'vue'
+import { usePullDownRefresh } from '@tarojs/taro'
+import { useUserStore } from '@/stores/user'
+import {
+  pointTransactions as pointTransactionList,
+  type PointTransaction
+} from '@/datasets/points'
+import { usePullRefresh } from '@/composables/useMockSubmit'
+import TransactionList from '@/components/TransactionList/index.vue'
+import Modal from '@/components/Modal/index.vue'
+import './index.css'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
-const showModal = ref(false);
-const pointTransactions = ref<PointTransaction[]>([...pointTransactionList]);
+const showModal = ref(false)
+const pointTransactions = ref<PointTransaction[]>([...pointTransactionList])
 
 const pointsTypeLabels: Record<string, string> = {
-  EARN: "获得",
-  BURN: "消耗",
-};
+  EARN: '获得',
+  BURN: '消耗'
+}
 
 const showUsageModal = () => {
-  showModal.value = true;
-};
+  showModal.value = true
+}
 
-usePullDownRefresh(usePullRefresh());
+usePullDownRefresh(usePullRefresh())
 </script>

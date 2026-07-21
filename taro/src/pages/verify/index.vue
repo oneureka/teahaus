@@ -30,54 +30,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import Taro from "@tarojs/taro";
-import { useMockSubmit } from "@/composables/useMockSubmit";
-import SubmitButton from "@/components/SubmitButton/index.vue";
-import "./index.css";
+import { ref } from 'vue'
+import Taro from '@tarojs/taro'
+import { useMockSubmit } from '@/composables/useMockSubmit'
+import SubmitButton from '@/components/SubmitButton/index.vue'
+import './index.css'
 
-const verificationCode = ref("");
-const isFocus = ref(false);
-const inputKey = ref(0);
+const verificationCode = ref('')
+const isFocus = ref(false)
+const inputKey = ref(0)
 
 const { submitting, submit } = useMockSubmit({
-  loadingText: "核销中...",
-  successText: "核销成功",
-  delay: 1500,
-});
+  loadingText: '核销中...',
+  successText: '核销成功',
+  delay: 1500
+})
 
 const handleScan = () => {
   Taro.scanCode({
     success: (res) => {
       if (res.result) {
-        verificationCode.value = res.result;
-        handleSubmit();
+        verificationCode.value = res.result
+        handleSubmit()
       }
     },
     fail: (err) => {
-      if (err.errMsg === "scanCode:fail cancel") {
-        return;
+      if (err.errMsg === 'scanCode:fail cancel') {
+        return
       }
       Taro.showToast({
-        title: "扫码失败",
-        icon: "none",
-      });
-    },
-  });
-};
+        title: '扫码失败',
+        icon: 'none'
+      })
+    }
+  })
+}
 
 const handleSubmit = () => {
   if (!verificationCode.value.trim()) {
     Taro.showToast({
-      title: "请输入核销码",
-      icon: "none",
-    });
-    return;
+      title: '请输入核销码',
+      icon: 'none'
+    })
+    return
   }
 
   submit(() => {
-    verificationCode.value = "";
-    inputKey.value++;
-  });
-};
+    verificationCode.value = ''
+    inputKey.value++
+  })
+}
 </script>

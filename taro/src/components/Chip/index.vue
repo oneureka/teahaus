@@ -1,35 +1,31 @@
 <template>
-  <view
-    class="chip"
-    :class="{ active, disabled, pill }"
-    @tap="onClick"
-  >
+  <view class="chip" :class="{ active, disabled, pill }" @tap="onClick">
     <slot />
   </view>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  active?: boolean;
-  disabled?: boolean;
-  pill?: boolean;
+  active?: boolean
+  disabled?: boolean
+  pill?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   active: false,
   disabled: false,
-  pill: false,
-});
+  pill: false
+})
 
 const emit = defineEmits<{
-  tap: [];
-}>();
+  tap: []
+}>()
 
 const onClick = () => {
   if (!props.disabled) {
-    emit("tap");
+    emit('tap')
   }
-};
+}
 </script>
 
 <style>

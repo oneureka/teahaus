@@ -3,7 +3,7 @@
     <view class="status-filter">
       <view
         v-for="(filter, index) in statusFilters"
-        :key="filter.key || index"
+        :key="filter.key"
         class="status-tag"
         :class="{ 'status-tag-active': activeTab === filter.type }"
         @tap="onTabChange(index, filter)"
@@ -12,7 +12,7 @@
       </view>
     </view>
     <scroll-view
-      :style="{ height: scrollHeight + 'px' }"
+      class="scroll-view"
       refresher-background="var(--color-base-200)"
       :refresher-enabled="true"
       :refresher-triggered="refreshing"
@@ -41,10 +41,10 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Taro from "@tarojs/taro";
-import { useSystemStore } from "@/stores/system";
 import { useMockSubmit } from "@/composables/useMockSubmit";
 import emptyCouponsImage from "@/assets/images/no-coupons.png";
 import { couponList, CouponStatus, type Coupon } from "@/datasets/coupons";
+import { isExpiringSoon, isExpired } from "@/utils/coupon";
 import EmptyState from "@/components/EmptyState/index.vue";
 import CouponCard from "@/components/CouponCard/index.vue";
 import "./index.css";
@@ -65,14 +65,7 @@ const statusFilters: StatusFilter[] = [
 const activeTab = ref<CouponStatus>(CouponStatus.ALL);
 const refreshing = ref(false);
 
-const systemStore = useSystemStore();
-systemStore.init();
-
 const { submit: runRefresh } = useMockSubmit({ delay: 2000 });
-
-const scrollHeight = computed(() => {
-  return systemStore.systemViewHeight.windowHeight - 100;
-});
 
 const onRefresh = () => {
   refreshing.value = true;
@@ -82,19 +75,6 @@ const onRefresh = () => {
 };
 
 const coupons = ref<Coupon[]>([...couponList]);
-
-const isExpiringSoon = (coupon: Coupon): boolean => {
-  const expireDate = new Date(coupon.expireDate);
-  const now = new Date();
-  const daysUntilExpire = Math.floor(
-    (expireDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
-  );
-  return daysUntilExpire <= 30 && daysUntilExpire >= 0;
-};
-
-const isExpired = (coupon: Coupon): boolean => {
-  return new Date(coupon.expireDate) < new Date();
-};
 
 const onTabChange = (_index: number, filter: StatusFilter) => {
   activeTab.value = filter.type;
@@ -107,12 +87,12 @@ const filteredCoupons = computed(() => {
   }
   if (currentStatus === CouponStatus.EXPIRING) {
     return coupons.value.filter(
-      (c) => c.status === CouponStatus.NEW && isExpiringSoon(c),
+      (c) => c.status === CouponStatus.NEW && isExpiringSoon(c.expireDate),
     );
   }
   if (currentStatus === CouponStatus.NEW) {
     return coupons.value.filter(
-      (c) => c.status === CouponStatus.NEW && !isExpired(c),
+      (c) => c.status === CouponStatus.NEW && !isExpired(c.expireDate),
     );
   }
   return coupons.value.filter((coupon) => coupon.status === currentStatus);

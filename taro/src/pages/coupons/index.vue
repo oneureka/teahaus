@@ -60,6 +60,7 @@ const statusFilters: StatusFilter[] = [
   { title: "可用", key: "new", type: CouponStatus.NEW },
   { title: "即将过期", key: "expiring", type: CouponStatus.EXPIRING },
   { title: "已使用", key: "used", type: CouponStatus.USED },
+  { title: "已过期", key: "expired", type: CouponStatus.EXPIRED },
 ];
 
 const activeTab = ref<CouponStatus>(CouponStatus.ALL);
@@ -95,6 +96,9 @@ const filteredCoupons = computed(() => {
       (c) => c.status === CouponStatus.NEW && !isExpired(c.expireDate),
     );
   }
+  if (currentStatus === CouponStatus.EXPIRED) {
+    return coupons.value.filter((c) => c.status === CouponStatus.EXPIRED);
+  }
   return coupons.value.filter((coupon) => coupon.status === currentStatus);
 });
 
@@ -102,6 +106,13 @@ const handleCouponTap = (coupon: Coupon) => {
   if (coupon.status === CouponStatus.USED) {
     Taro.showToast({
       title: "该卡券已使用",
+      icon: "none",
+    });
+    return;
+  }
+  if (isExpired(coupon.expireDate)) {
+    Taro.showToast({
+      title: "该卡券已过期",
       icon: "none",
     });
     return;

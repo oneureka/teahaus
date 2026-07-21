@@ -25,6 +25,7 @@
 import { computed } from "vue";
 import { CouponStatus, type Coupon } from "@/datasets/coupons";
 import { getDaysUntilExpire } from "@/utils/coupon";
+import "./index.css";
 
 const props = defineProps<{
   coupon: Coupon;
@@ -42,6 +43,9 @@ interface CouponStatusMeta {
 function getStatusMeta(coupon: Coupon): CouponStatusMeta {
   if (coupon.status === CouponStatus.USED) {
     return { label: "已使用", className: "coupon-status-used" };
+  }
+  if (coupon.status === CouponStatus.EXPIRED) {
+    return { label: "已过期", className: "coupon-status-expired" };
   }
   const daysUntilExpire = getDaysUntilExpire(coupon.expireDate);
   if (daysUntilExpire < 0) return { label: "已过期", className: "coupon-status-expired" };

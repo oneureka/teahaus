@@ -3,6 +3,7 @@ export enum CouponStatus {
   NEW = 1,
   EXPIRING = 2,
   USED = 3,
+  EXPIRED = 4,
 }
 
 export interface Coupon {
@@ -32,7 +33,7 @@ export const couponList: Coupon[] = [
     description: "周末专用茶饮券",
     conditions: "周六日全天可用，不限金额",
     expireDate: "2026-05-01",
-    status: CouponStatus.NEW,
+    status: CouponStatus.EXPIRED,
   },
   {
     id: 3,

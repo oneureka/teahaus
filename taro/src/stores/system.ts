@@ -106,20 +106,8 @@ export const useSystemStore = defineStore("system", () => {
         safeAreaTop = sysInfo.statusBarHeight || 0;
       }
 
-      const ios = sysInfo.system?.toLowerCase().includes("ios");
-      if (ios) {
-        const iPhoneModels = ["iPhone14", "iPhone15", "iPhone16", "iPhone17"];
-        const isNotch = iPhoneModels.some((model) =>
-          sysInfo.model?.includes(model),
-        );
-        if (isNotch || sysInfo.safeArea?.bottom) {
-          safeAreaBottom =
-            sysInfo.screenHeight -
-            (sysInfo.safeArea?.bottom || sysInfo.screenHeight);
-          if (safeAreaBottom === 0) {
-            safeAreaBottom = 34;
-          }
-        }
+      if (sysInfo.safeArea?.bottom) {
+        safeAreaBottom = Math.max(sysInfo.screenHeight - sysInfo.safeArea.bottom, 0);
       }
 
       systemViewHeight.value = {

@@ -84,7 +84,10 @@
             <text class="address-text">{{ item.address }}</text>
           </view>
           <view class="card-footer">
-            <text class="card-hours">{{ item.businessHours }}</text>
+            <view class="card-hours">
+              <image class="hours-icon" src="@/assets/icons/icon-clock@2x.png" mode="aspectFill" />
+              <text>营业时间 {{ item.businessHours }}</text>
+            </view>
             <text class="card-price">¥{{ item.minPrice }}/时起</text>
           </view>
         </view>

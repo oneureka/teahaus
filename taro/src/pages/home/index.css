@@ -277,12 +277,22 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 16rpx;
-  border-top: 1rpx solid var(--color-taupe-200);
+  border-top: 1rpx dashed var(--color-taupe-200);
 }
 
 .card-hours {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
   font-size: 24rpx;
   color: var(--color-taupe-400);
+}
+
+.hours-icon {
+  width: 24rpx;
+  height: 24rpx;
+  flex-shrink: 0;
+  display: block;
 }
 
 .card-price {

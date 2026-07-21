@@ -22,11 +22,11 @@
         />
       </view>
 
-      <!-- 预定信息 -->
+      <!-- 预订信息 -->
       <view class="section">
         <view class="section-title">预订信息</view>
         <view class="info-row">
-          <text class="label">预定时间</text>
+          <text class="label">预订时间</text>
           <text class="value">{{ order.startTime }}<text class="time-separator"> - </text>{{ order.endTime }}</text>
         </view>
         <view class="info-row">

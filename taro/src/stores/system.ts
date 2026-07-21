@@ -103,7 +103,6 @@ export const useSystemStore = defineStore("system", () => {
         const menuButtonInfo = Taro.getMenuButtonBoundingClientRect();
         const gap = 8;
         navBarHeight = menuButtonInfo.height + gap * 2;
-        safeAreaTop = sysInfo.statusBarHeight || 0;
       }
 
       if (sysInfo.safeArea?.bottom) {

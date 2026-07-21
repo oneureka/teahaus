@@ -50,12 +50,10 @@ import Taro, { usePullDownRefresh } from "@tarojs/taro";
 import { ref, computed } from "vue";
 import emptyOrdersImage from "@/assets/images/no-orders.png";
 import { orderList, type Order, type OrderStatus } from "@/datasets/orders";
-import { roomList } from "@/datasets/rooms";
-import { spaceList } from "@/datasets/spaces";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
 import { formatRelativeTime } from "@/utils/time";
-import { statusLabel } from "@/utils/order";
+import { statusLabel, getSpaceName, getRoomName } from "@/utils/order";
 import EmptyState from "@/components/EmptyState/index.vue";
 import "./index.css";
 
@@ -80,16 +78,6 @@ const orders = ref<Order[]>([...orderList]);
 
 const statusClass = (status: OrderStatus): string => {
   return status === "CANCELLED" ? "card-status-cancelled" : "";
-};
-
-const getSpaceName = (spaceId: string): string => {
-  const space = spaceList.find((s) => s.id === spaceId);
-  return space?.name ?? "未知空间";
-};
-
-const getRoomName = (roomId: string): string => {
-  const room = roomList.find((r) => r.id === roomId);
-  return room?.name ?? "未知房间";
 };
 
 usePullDownRefresh(usePullRefresh(undefined, { delay: 2000 }));

@@ -86,10 +86,9 @@ import Taro, { useRouter } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { orderList, type Order } from "@/datasets/orders";
 import { spaceList } from "@/datasets/spaces";
-import { roomList } from "@/datasets/rooms";
 import { getImageUrl } from "@/utils/image";
 import { formatRelativeTime } from "@/utils/time";
-import { statusLabel } from "@/utils/order";
+import { statusLabel, getSpaceName, getRoomName } from "@/utils/order";
 import { PLACEHOLDER_IMAGE } from "@/constants/app";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -98,16 +97,6 @@ import "./index.css";
 const router = useRouter();
 
 const order = ref<Order | null>(null);
-
-const getSpaceName = (spaceId: string): string => {
-  const space = spaceList.find((s) => s.id === spaceId);
-  return space?.name ?? "未知空间";
-};
-
-const getRoomName = (roomId: string): string => {
-  const room = roomList.find((r) => r.id === roomId);
-  return room?.name ?? "未知房间";
-};
 
 const getSpaceImage = (spaceId: string): string => {
   const space = spaceList.find((s) => s.id === spaceId);

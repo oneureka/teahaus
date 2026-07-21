@@ -54,6 +54,8 @@ import { roomList } from "@/datasets/rooms";
 import { spaceList } from "@/datasets/spaces";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { usePullRefresh } from "@/composables/useMockSubmit";
+import { formatRelativeTime } from "@/utils/time";
+import { statusLabel } from "@/utils/order";
 import EmptyState from "@/components/EmptyState/index.vue";
 import "./index.css";
 
@@ -75,17 +77,6 @@ const tabs: TabItem[] = [
 const activeTab = ref<FilterStatus>("ALL");
 
 const orders = ref<Order[]>([...orderList]);
-
-const statusLabel = (status: OrderStatus): string => {
-  const map: Record<OrderStatus, string> = {
-    UNPAID: "未支付",
-    PAID: "已支付",
-    IN_PROGRESS: "进行中",
-    COMPLETED: "已完成",
-    CANCELLED: "已取消",
-  };
-  return map[status];
-};
 
 const statusClass = (status: OrderStatus): string => {
   return status === "CANCELLED" ? "card-status-cancelled" : "";
@@ -127,17 +118,6 @@ const calcDuration = (startTime: string, endTime: string): string => {
   const end = eh * 60 + em;
   const hours = (end - start) / 60;
   return `共${hours}小时`;
-};
-
-const formatRelativeTime = (dateStr: string): string => {
-  const now = new Date();
-  const date = new Date(dateStr);
-  const diff = now.getTime() - date.getTime();
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  if (days === 0) return "今天";
-  if (days === 1) return "昨天";
-  if (days < 30) return `${days}天前`;
-  return dateStr.split("T")[0];
 };
 
 const onOrderClick = (order: Order) => {

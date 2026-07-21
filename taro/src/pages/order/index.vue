@@ -84,10 +84,12 @@
 import { ref, onMounted } from "vue";
 import Taro, { useRouter } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
-import { orderList, type Order, type OrderStatus } from "@/datasets/orders";
+import { orderList, type Order } from "@/datasets/orders";
 import { spaceList } from "@/datasets/spaces";
 import { roomList } from "@/datasets/rooms";
 import { getImageUrl } from "@/utils/image";
+import { formatRelativeTime } from "@/utils/time";
+import { statusLabel } from "@/utils/order";
 import { PLACEHOLDER_IMAGE } from "@/constants/app";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -96,28 +98,6 @@ import "./index.css";
 const router = useRouter();
 
 const order = ref<Order | null>(null);
-
-const statusLabel = (status: OrderStatus): string => {
-  const map: Record<OrderStatus, string> = {
-    UNPAID: "未支付",
-    PAID: "已支付",
-    IN_PROGRESS: "进行中",
-    COMPLETED: "已完成",
-    CANCELLED: "已取消",
-  };
-  return map[status];
-};
-
-const formatRelativeTime = (dateStr: string): string => {
-  const now = new Date();
-  const date = new Date(dateStr);
-  const diff = now.getTime() - date.getTime();
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  if (days === 0) return "今天";
-  if (days === 1) return "昨天";
-  if (days < 30) return `${days}天前`;
-  return dateStr.split("T")[0];
-};
 
 const getSpaceName = (spaceId: string): string => {
   const space = spaceList.find((s) => s.id === spaceId);

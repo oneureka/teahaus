@@ -93,31 +93,31 @@
       </view>
 
       <!-- 门店地址 -->
-      <view class="card" @tap="onLocationClick">
+      <view class="card card-arrow-wrap" @tap="onLocationClick">
         <view class="section-title">所在位置</view>
-        <view class="info-row arrow-row">
+        <view class="info-row">
           <view class="info-left">
             <view class="info-value-row">
               <image class="info-icon" src="@/assets/icons/icon-location@2x.png" mode="aspectFill" />
               <text class="info-value address">{{ space.address }}</text>
             </view>
           </view>
-            <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
+        <image class="card-arrow" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
       </view>
 
       <!-- 联系我们 -->
-      <view class="card card-last" @tap="onContact">
+      <view class="card card-last card-arrow-wrap" @tap="onContact">
         <view class="section-title">联系茶室</view>
-        <view class="info-row arrow-row">
+        <view class="info-row">
           <view class="info-left">
             <view class="info-value-row">
               <image class="info-icon" :src="iconPhone" mode="aspectFill" />
               <text class="info-value">{{ space.phone }}</text>
             </view>
           </view>
-            <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
+        <image class="card-arrow" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
       </view>
     </view>
     <BottomBar v-if="space" justify="between" shadow>

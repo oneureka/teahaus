@@ -62,9 +62,10 @@
   color: var(--color-base-content);
 }
 
-.arrow {
-  font-size: 32rpx;
-  color: var(--color-taupe-400);
+.arrow-img {
+  width: 32rpx;
+  height: 32rpx;
+  display: block;
   margin-left: 12rpx;
 }
 

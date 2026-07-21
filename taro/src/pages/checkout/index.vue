@@ -167,7 +167,7 @@
             </text>
             <text v-else class="coupon-placeholder">选择优惠券</text>
           </view>
-          <text class="arrow">›</text>
+          <image class="arrow-img" src="@/assets/icons/icon-arrow@2x.png" mode="aspectFill" />
         </view>
       </view>
 
@@ -232,9 +232,9 @@ const quickDates = computed(() => {
   return dates;
 });
 
-const morningSlots = ["09:00", "10:00", "11:00"];
-const afternoonSlots = ["12:00", "13:00", "14:00", "15:00", "16:00"];
-const eveningSlots = ["17:00", "18:00", "19:00", "20:00", "21:00"];
+const morningSlots = ["08:00", "09:00", "10:00", "11:00", "12:00"];
+const afternoonSlots = ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+const eveningSlots = ["19:00", "20:00", "21:00", "22:00", "23:00"];
 
 const SERVICE_FEE = 10;
 

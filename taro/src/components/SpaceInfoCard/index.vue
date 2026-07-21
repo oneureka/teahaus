@@ -55,6 +55,9 @@ const onClick = () => {
   border-radius: 12rpx;
   margin-right: 20rpx;
   display: block;
+  border: 2rpx solid var(--color-base-100);
+  outline: 2rpx solid var(--color-taupe-200);
+  outline-offset: -4rpx;
 }
 
 .space-detail {

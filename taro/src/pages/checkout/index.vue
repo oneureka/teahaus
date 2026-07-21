@@ -144,12 +144,12 @@
         <view class="price-row">
           <text class="price-label">房间费用</text>
           <text class="price-value">
-            ¥{{ checkoutInfo.roomPrice }}<template v-if="checkoutInfo.roomPrice > 0 && selectedDuration > 0"> × {{ selectedDuration }}小时</template>
+            <template v-if="timeRange.start && timeRange.end">¥{{ checkoutInfo.roomPrice }}<template v-if="checkoutInfo.roomPrice > 0"> × {{ selectedDuration }}小时</template></template><template v-else>¥0</template>
           </text>
         </view>
         <view class="price-row">
           <text class="price-label">服务费</text>
-          <text class="price-value">¥{{ checkoutInfo.serviceFee }}</text>
+          <text class="price-value"><template v-if="timeRange.start && timeRange.end">¥{{ checkoutInfo.serviceFee }}</template><template v-else>¥0</template></text>
         </view>
         <view class="price-total">
           <text class="price-label total-label">合计</text>
@@ -175,7 +175,7 @@
     <BottomBar shadow>
       <view class="bottom-price">
         <text class="bottom-label">实付款</text>
-        <text class="bottom-total">{{ timeRange.value.start && timeRange.value.end ? `¥${total}` : '—' }}</text>
+        <text class="bottom-total">{{ timeRange.start && timeRange.end ? `¥${total}` : '—' }}</text>
       </view>
       <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit" @tap="onSubmit" />
     </BottomBar>

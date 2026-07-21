@@ -14,7 +14,7 @@
           <image class="avatar" :src="userStore.userInfo.avatar" mode="aspectFill" />
         </button>
         <view class="user-text">
-          <text v-if="!editingNick" class="username" @tap="onSyncNickname">{{ userStore.userInfo.nickname }}</text>
+          <text v-if="!editingNick" class="username" @tap="onStartEditNickname">{{ userStore.userInfo.nickname }}</text>
           <input
             v-else
             type="nickname"
@@ -180,7 +180,7 @@ const onChooseAvatar = (e: { detail: { avatarUrl: string } }) => {
   saveProfile({ avatar: avatarUrl });
 };
 
-const onSyncNickname = () => {
+const onStartEditNickname = () => {
   editingNick.value = true;
 };
 

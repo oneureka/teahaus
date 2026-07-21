@@ -177,7 +177,7 @@
         <text class="bottom-label">实付款</text>
         <text class="bottom-total">{{ timeRange.start && timeRange.end ? `¥${total}` : '—' }}</text>
       </view>
-      <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit" @tap="onSubmit" />
+      <SubmitButton text="提交订单" variant="pill" :disabled="!canSubmit || submitting" @tap="onSubmit" />
     </BottomBar>
   </view>
 </template>
@@ -188,6 +188,7 @@ import Taro, { useRouter } from "@tarojs/taro";
 import { ROUTES, buildRoute } from "@/constants/routes";
 import { getSpaceDetail } from "@/datasets/spaces";
 import { roomList as allRooms } from "@/datasets/rooms";
+import { useMockSubmit } from "@/composables/useMockSubmit";
 import SpaceInfoCard from "@/components/SpaceInfoCard/index.vue";
 import SubmitButton from "@/components/SubmitButton/index.vue";
 import BottomBar from "@/components/BottomBar/index.vue";
@@ -280,6 +281,12 @@ const isMaxParty = computed(() => checkoutInfo.value.partySize >= 6);
 const canSubmit = computed(() =>
   !!timeRange.value.start && !!timeRange.value.end
 );
+
+const { submitting, submit } = useMockSubmit({
+  loadingText: "提交中...",
+  successText: "订单提交成功",
+  delay: 1500,
+});
 
 const isSlotAvailable = (slot: string) => {
   const now = new Date();
@@ -379,7 +386,7 @@ const onSubmit = () => {
     Taro.showToast({ title: "手机号格式不正确", icon: "none" });
     return;
   }
-  Taro.showToast({ title: "订单提交成功", icon: "success" });
+  submit();
 };
 
 onMounted(() => {

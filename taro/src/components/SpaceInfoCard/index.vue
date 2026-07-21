@@ -1,6 +1,8 @@
 <template>
   <view class="space-info-card" :class="{ clickable }" @tap="onClick">
-    <image class="space-image" :src="image" mode="aspectFill" />
+    <view class="space-image-wrapper">
+      <image class="space-image" :src="image" mode="aspectFill" />
+    </view>
     <view class="space-detail">
       <view class="space-top-row">
         <text class="space-name">{{ spaceName }}</text>
@@ -49,15 +51,21 @@ const onClick = () => {
   cursor: pointer;
 }
 
-.space-image {
+.space-image-wrapper {
   width: 140rpx;
   height: 140rpx;
   border-radius: 12rpx;
+  border: 2rpx solid var(--color-taupe-200);
+  padding: 6rpx;
   margin-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.space-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 6rpx;
   display: block;
-  border: 2rpx solid var(--color-base-100);
-  outline: 2rpx solid var(--color-taupe-200);
-  outline-offset: -4rpx;
 }
 
 .space-detail {

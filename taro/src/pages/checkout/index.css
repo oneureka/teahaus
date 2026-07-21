@@ -1,6 +1,7 @@
 .checkout {
   background-color: var(--color-base-200);
   box-sizing: border-box;
+  padding-top: 24rpx;
   padding-bottom: 140rpx;
   min-height: 100vh;
 }
@@ -9,13 +10,9 @@
 .card {
   background-color: var(--color-base-100);
   padding: 24rpx;
-  margin: 24rpx 24rpx 0;
+  margin: 0 24rpx 24rpx;
   border-radius: 16rpx;
   border: 2rpx solid var(--color-taupe-300);
-}
-
-.card:last-of-type {
-  margin-bottom: 24rpx;
 }
 
 /* ===== Section 标题 ===== */

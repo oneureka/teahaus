@@ -77,7 +77,7 @@
             <view class="room-left">
               <text class="room-name">{{ room.name }}</text>
               <text class="room-desc">{{ room.description }}</text>
-              <text v-if="!getRoomAvailable(room)" class="room-item-tag">已预约</text>
+              <text v-if="!getRoomAvailable(room)" class="room-item-tag">已约满</text>
             </view>
             <view class="room-right">
               <text class="room-price">¥{{ room.price }}/时</text>
@@ -122,15 +122,15 @@
     </view>
     <BottomBar v-if="space" justify="between" shadow>
       <view class="bar-actions">
-        <view class="bar-action" @tap="onFavorite">
-          <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
-          <text class="bar-action-text">收藏</text>
-        </view>
         <view class="bar-action">
           <button open-type="share" class="share-btn">
             <image class="bar-action-icon-img" :src="iconShare" mode="aspectFill" />
             <text class="bar-action-text">分享</text>
           </button>
+        </view>
+        <view class="bar-action" @tap="onFavorite">
+          <image class="bar-action-icon-img" :src="favorited ? iconFavorited : iconFavorite" mode="aspectFill" />
+          <text class="bar-action-text">收藏</text>
         </view>
       </view>
       <view class="book-btn" :class="{ disabled: !selectedRoom }" @tap="onBook">

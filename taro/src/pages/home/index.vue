@@ -29,19 +29,17 @@
     </view>
 
     <!-- 分类标签 -->
-    <scroll-view class="tag-scroll" scroll-x show-scrollbar="false">
-      <view class="tag-list">
-        <view
-          v-for="cat in categoryList"
-          :key="cat.key"
-          class="tag-item"
-          :class="{ active: activeCategory === cat.key }"
-          @tap="onCategoryChange(cat.key)"
-        >
-          <text>{{ cat.label }}</text>
-        </view>
+    <view class="tag-scroll">
+      <view
+        v-for="cat in categoryList"
+        :key="cat.key"
+        class="tag-item"
+        :class="{ active: activeCategory === cat.key }"
+        @tap="onCategoryChange(cat.key)"
+      >
+        <text>{{ cat.label }}</text>
       </view>
-    </scroll-view>
+    </view>
 
     <!-- 空间列表 -->
     <view class="space-list">

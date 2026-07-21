@@ -1,6 +1,7 @@
 .home {
   background-color: var(--color-base-200);
   min-height: 100vh;
+  overflow: hidden;
   padding-bottom: 40rpx;
 }
 
@@ -91,18 +92,14 @@
 
 /* ===== 分类标签 ===== */
 .tag-scroll {
+  display: flex;
   padding: 20rpx 24rpx;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.tag-list {
-  display: inline-flex;
+  overflow-x: auto;
   gap: 16rpx;
 }
 
 .tag-item {
-  display: inline-flex;
+  flex-shrink: 0;
   padding: 12rpx 28rpx;
   border-radius: 32rpx;
   font-size: 26rpx;

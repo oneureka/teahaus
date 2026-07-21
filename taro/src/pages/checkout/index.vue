@@ -216,6 +216,7 @@
 import { ref, computed, onMounted } from 'vue'
 import Taro, { useRouter } from '@tarojs/taro'
 import { ROUTES, buildRoute } from '@/constants/routes'
+import { PLACEHOLDER_IMAGE } from '@/constants/app'
 import { getSpaceDetail } from '@/datasets/spaces'
 import { roomList as allRooms } from '@/datasets/rooms'
 import { useMockSubmit } from '@/composables/useMockSubmit'
@@ -441,7 +442,7 @@ onMounted(() => {
     return
   }
   checkoutInfo.value.spaceName = space.name
-  checkoutInfo.value.spaceImage = getImageUrl(space.image, { width: 460 })
+  checkoutInfo.value.spaceImage = getImageUrl(space.image || PLACEHOLDER_IMAGE, { width: 460 })
   checkoutInfo.value.roomName = room.name
   checkoutInfo.value.roomPrice = room.price
   Taro.setNavigationBarTitle({ title: space.name })

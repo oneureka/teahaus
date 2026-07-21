@@ -33,8 +33,7 @@ export interface User {
 export const user: User = {
   id: 'cmrnigkqr0000hfe9yellxbde',
   nickname: '清欢客',
-  avatar:
-    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
+  avatar: 'https://unavatar.io/github/cmrnigkqr0000hfe9yellxbde',
   phone: '13888888888',
   wechatOpenId: null,
   wechatUnionId: null,

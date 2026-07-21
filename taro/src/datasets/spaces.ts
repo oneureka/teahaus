@@ -307,9 +307,6 @@ export const spaceList: Space[] = [
   }
 ]
 
-const DEFAULT_SPACE_IMAGE =
-  'https://images.unsplash.com/photo-1610375233775-6e0166927193'
-
 const DEFAULT_FACILITIES = ['WiFi', '茶水', '停车位']
 
 export function getSpaceById(id: string | number): Space | undefined {
@@ -324,7 +321,7 @@ export function getSpaceDetail(id: string | number): SpaceDetail | null {
   return {
     id: space.id,
     name: space.name,
-    image: space.images[0] || DEFAULT_SPACE_IMAGE,
+    image: space.images[0] || '',
     businessHours: space.businessHours,
     address: space.address,
     district: space.district,

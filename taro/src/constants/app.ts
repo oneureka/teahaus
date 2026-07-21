@@ -1,5 +1,3 @@
-export const CURRENT_USER_ID = 'cmrnigkqr0000hfe9yellxbde'
-
 export const DEFAULT_BALANCE = 128.5
 
 export const DEFAULT_POINTS = 2560

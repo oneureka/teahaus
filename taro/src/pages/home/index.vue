@@ -135,7 +135,6 @@ const sortOptions: SortOption[] = [
   { key: "rating", label: "评分最高" },
 ];
 
-const searchKeyword = ref("");
 const activeCategory = ref("all");
 const activeSort = ref("distance");
 const imagesLoaded = ref<Record<string, boolean>>({});
@@ -154,13 +153,6 @@ const filteredList = computed(() => {
 
   if (activeCategory.value !== "all") {
     list = list.filter((item) => item.category === activeCategory.value);
-  }
-
-  if (searchKeyword.value.trim()) {
-    const kw = searchKeyword.value.trim().toLowerCase();
-    list = list.filter((item) =>
-      item.name.toLowerCase().includes(kw) || item.address.toLowerCase().includes(kw)
-    );
   }
 
   const sorted = [...list];
@@ -201,5 +193,10 @@ const onImageError = (id: string) => {
   imagesLoaded.value[id] = true;
 };
 
-usePullDownRefresh(usePullRefresh());
+usePullDownRefresh(usePullRefresh(() => {
+  activeCategory.value = "all";
+  activeSort.value = "distance";
+  imagesLoaded.value = {};
+  spaceList.value = [...spaceList.value].sort(() => Math.random() - 0.5);
+}));
 </script>

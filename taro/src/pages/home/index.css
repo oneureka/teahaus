@@ -174,7 +174,8 @@
   position: absolute;
   top: 24rpx;
   left: 24rpx;
-  font-size: 22rpx;
+  z-index: 1;
+  font-size: 28rpx;
   color: var(--color-primary-content);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8rpx);
@@ -277,7 +278,7 @@
 .card-price {
   font-size: 30rpx;
   font-weight: 700;
-  color: var(--color-secondary);
+  color: var(--color-gold);
 }
 
 /* ===== 空状态 ===== */

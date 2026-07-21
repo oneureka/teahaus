@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 import Taro from "@tarojs/taro";
 
 interface MockSubmitOptions {
@@ -39,7 +39,14 @@ interface PullRefreshOptions {
 }
 
 export function usePullRefresh(task?: () => void | Promise<void>, options: PullRefreshOptions = {}) {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  onUnmounted(() => {
+    if (timer) clearTimeout(timer);
+  });
+
   return () => {
+    if (timer) clearTimeout(timer);
     const run = async () => {
       try {
         await task?.();
@@ -47,6 +54,6 @@ export function usePullRefresh(task?: () => void | Promise<void>, options: PullR
         Taro.stopPullDownRefresh();
       }
     };
-    setTimeout(run, options.delay ?? 1500);
+    timer = setTimeout(run, options.delay ?? 1500);
   };
 }

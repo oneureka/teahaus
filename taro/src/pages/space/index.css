@@ -103,12 +103,13 @@
 }
 
 .card-featured {
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: var(--color-primary);
-  background-color: var(--color-taupe-200);
+  background-color: var(--color-taupe-100);
+  border: 2rpx solid var(--color-taupe-300);
   padding: 4rpx 12rpx;
-  border-radius: 6rpx;
-  margin-left: 8rpx;
+  border-radius: 8rpx;
+  margin-left: 12rpx;
   flex-shrink: 0;
 }
 

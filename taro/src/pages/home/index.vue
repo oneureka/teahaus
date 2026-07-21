@@ -79,9 +79,7 @@
             <text class="meta-divider">|</text>
             <text class="meta-distance">{{ item.distance }}</text>
           </view>
-
           <view class="card-address">{{ item.address }}</view>
-
           <view class="card-footer">
             <text class="card-hours">{{ item.businessHours }}</text>
             <text class="card-price">¥{{ item.minPrice }}/时起</text>

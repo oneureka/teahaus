@@ -1,7 +1,6 @@
 .home {
   background-color: var(--color-base-200);
   min-height: 100vh;
-  overflow: hidden;
   padding-bottom: 40rpx;
 }
 
@@ -205,9 +204,10 @@
 .card-featured {
   font-size: 24rpx;
   color: var(--color-primary);
-  background: var(--gradient-badge);
+  background-color: var(--color-taupe-100);
+  border: 2rpx solid var(--color-taupe-300);
   padding: 4rpx 12rpx;
-  border-radius: 6rpx;
+  border-radius: 8rpx;
   margin-left: 12rpx;
   flex-shrink: 0;
 }
@@ -217,10 +217,6 @@
   color: var(--color-taupe-400);
   margin-bottom: 16rpx;
   line-height: 1.5;
-}
-
-.tag-divider {
-  color: var(--color-taupe-300);
 }
 
 /* ===== 卡片元信息行 ===== */

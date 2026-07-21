@@ -8,7 +8,9 @@ const App = createApp({
     console.log("App onShow.");
   },
   onLaunch() {
-    useSystemStore().init();
+    const store = useSystemStore();
+    store.init();
+    store.initLocation();
   },
 });
 

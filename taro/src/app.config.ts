@@ -1,4 +1,9 @@
 export default defineAppConfig({
+  permission: {
+    "scope.userLocation": {
+      desc: "定位将用于推荐附近的商家和服务",
+    },
+  },
   pages: [
     "pages/home/index",
     "pages/orders/index",

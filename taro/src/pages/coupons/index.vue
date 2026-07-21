@@ -41,7 +41,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Taro from "@tarojs/taro";
-import { useMockSubmit } from "@/composables/useMockSubmit";
 import emptyCouponsImage from "@/assets/images/no-coupons.png";
 import { couponList, CouponStatus, type Coupon } from "@/datasets/coupons";
 import { isExpiringSoon, isExpired } from "@/utils/coupon";
@@ -66,13 +65,11 @@ const statusFilters: StatusFilter[] = [
 const activeTab = ref<CouponStatus>(CouponStatus.ALL);
 const refreshing = ref(false);
 
-const { submit: runRefresh } = useMockSubmit({ delay: 2000 });
-
 const onRefresh = () => {
   refreshing.value = true;
-  runRefresh(() => {
+  setTimeout(() => {
     refreshing.value = false;
-  });
+  }, 2000);
 };
 
 const coupons = ref<Coupon[]>([...couponList]);

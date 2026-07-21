@@ -45,6 +45,21 @@ export const useSystemStore = defineStore("system", () => {
   });
   const isInitialized = ref(false);
 
+  const userLatitude = ref(0);
+  const userLongitude = ref(0);
+  const locationLoaded = ref(false);
+
+  async function initLocation() {
+    try {
+      const res = await Taro.getLocation({ type: "gcj02" });
+      userLatitude.value = res.latitude;
+      userLongitude.value = res.longitude;
+      locationLoaded.value = true;
+    } catch {
+      locationLoaded.value = false;
+    }
+  }
+
   const safeAreaHeight = computed(() => {
     return (
       systemViewHeight.value.safeAreaTop + systemViewHeight.value.safeAreaBottom
@@ -134,7 +149,11 @@ export const useSystemStore = defineStore("system", () => {
     safeAreaHeight,
     fullNavBarHeight,
     contentHeight,
+    userLatitude,
+    userLongitude,
+    locationLoaded,
     init,
+    initLocation,
     updateNavBarHeight,
   };
 });

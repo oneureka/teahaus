@@ -226,7 +226,7 @@ const onImageLoad = (index: number) => {
 }
 
 const spaceImages = computed(() => {
-  const images = [space.value?.image || PLACEHOLDER_IMAGE, PLACEHOLDER_IMAGE]
+  const images = [space.value?.image || PLACEHOLDER_IMAGE]
   return images.map((img) => getImageUrl(img, { width: 1600 }))
 })
 

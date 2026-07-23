@@ -31,7 +31,7 @@
 - Lint/typecheck: `tsc` (via `tsconfig.json`)
 - Do NOT commit `.env`, `.env.local`, or secrets
 - Never run `rm -rf` or other destructive shell commands
-- Never execute `npm run` or `npm install` — always ask the user first
+- Never execute `npm install` — always ask the user first
 
 ## API Routes
 

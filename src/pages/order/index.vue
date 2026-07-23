@@ -42,12 +42,16 @@
           >
         </view>
         <view class="info-row">
-          <text class="label">使用人数</text>
+          <text class="label">人数</text>
           <text class="value">2 人</text>
         </view>
         <view class="info-row">
-          <text class="label">订单编号</text>
+          <text class="label">订单号</text>
           <text class="value">{{ order.orderNo }}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">下单时间</text>
+          <text class="value">{{ formatDateTime(order.createdAt) }}</text>
         </view>
       </view>
 
@@ -99,7 +103,7 @@ import { ROUTES, buildRoute } from '@/constants/routes'
 import { orderList, type Order } from '@/datasets/orders'
 import { spaceList } from '@/datasets/spaces'
 import { getImageUrl } from '@/utils/image'
-import { formatRelativeTime } from '@/utils/time'
+import { formatRelativeTime, formatDateTime } from '@/utils/time'
 import { statusLabel, getSpaceName, getRoomName } from '@/utils/order'
 import { PLACEHOLDER_IMAGE } from '@/constants/app'
 import { usePullRefresh } from '@/composables/useMockSubmit'

@@ -1,9 +1,8 @@
 {
   "name": "@teahaus/db",
-  "version": "0.1.1",
-  "license": "MIT",
+  "version": "1.0.0",
   "scripts": {
-    "start": "prisma studio"
+    "dev": "prisma studio"
   },
   "devDependencies": {
     "@types/node": "26.1.1",

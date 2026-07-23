@@ -1,9 +1,8 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
-import devConfig from './dev'
-import prodConfig from './prod'
+import { devConfig, prodConfig } from './base'
 import { resolve } from 'path'
 
-export default defineConfig<'vite'>(async (merge, { command, mode }) => {
+export default defineConfig<'vite'>(async (merge, {}) => {
   const baseConfig: UserConfigExport<'vite'> = {
     projectName: 'teahaus',
     date: '2026-3-30',
@@ -122,14 +121,6 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
             namingPattern: 'module',
             generateScopedName: '[name]__[local]___[hash:base64:5]'
           }
-        }
-      }
-    },
-    rn: {
-      appName: 'taroDemo',
-      postcss: {
-        cssModules: {
-          enable: false
         }
       }
     }

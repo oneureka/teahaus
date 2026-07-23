@@ -4,12 +4,8 @@
   background-color: var(--color-base-200);
 }
 
-.scroll-content {
-  height: 100vh;
-}
-
-.scroll-content.has-bottom-bar {
-  padding-bottom: 96rpx;
+.order-detail.has-bottom-bar {
+  padding-bottom: 140rpx;
 }
 
 /* 订单状态 */

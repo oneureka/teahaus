@@ -1,11 +1,6 @@
 <template>
-  <view class="order-detail">
-    <scroll-view
-      v-if="order"
-      class="scroll-content"
-      :class="{ 'has-bottom-bar': order.status === 'UNPAID' }"
-      scroll-y
-    >
+  <view class="order-detail" :class="{ 'has-bottom-bar': order?.status === 'UNPAID' }">
+    <view v-if="order" class="order-content">
       <!-- 订单状态 -->
       <view class="order-status">
         <text class="status-text">{{ statusLabel(order.status) }}</text>
@@ -84,7 +79,7 @@
           }}</text>
         </view>
       </view>
-    </scroll-view>
+    </view>
 
     <!-- 底部操作栏 -->
     <BottomBar v-if="order?.status === 'UNPAID'" justify="end" shadow>
@@ -96,7 +91,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Taro, { useRouter } from '@tarojs/taro'
+import Taro, { useRouter, usePullDownRefresh } from '@tarojs/taro'
 import { ROUTES, buildRoute } from '@/constants/routes'
 import { orderList, type Order } from '@/datasets/orders'
 import { spaceList } from '@/datasets/spaces'
@@ -104,6 +99,7 @@ import { getImageUrl } from '@/utils/image'
 import { formatRelativeTime } from '@/utils/time'
 import { statusLabel, getSpaceName, getRoomName } from '@/utils/order'
 import { PLACEHOLDER_IMAGE } from '@/constants/app'
+import { usePullRefresh } from '@/composables/useMockSubmit'
 import SpaceInfoCard from '@/components/SpaceInfoCard/index.vue'
 import BottomBar from '@/components/BottomBar/index.vue'
 import './index.css'
@@ -130,6 +126,8 @@ const onContactClick = () => {
     phoneNumber: order.value.contactPhone
   })
 }
+
+usePullDownRefresh(usePullRefresh())
 
 const onCancel = () => {
   Taro.showModal({

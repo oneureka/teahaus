@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "lib",
     "target": "es2017",
     "module": "commonjs",
-    "removeComments": false,
-    "preserveConstEnums": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "preserveConstEnums": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "lib",
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
+    "removeComments": false,
     "sourceMap": true,
-    "rootDir": ".",
-    "jsx": "preserve",
     "allowJs": true,
-    "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types"],
+    "jsx": "preserve",
     "paths": {
       "@/*": ["./src/*"]
     }

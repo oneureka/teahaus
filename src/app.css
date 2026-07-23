@@ -1,47 +1,52 @@
 page {
   /* DaisyUI standard */
-  --color-primary: #57534E;
-  --color-primary-content: #FAFAF9;
-  --color-secondary: #ABAB9C;
-  --color-secondary-content: #FAFAF9;
-  --color-accent: #FFB900;
+  --color-primary: #57534e;
+  --color-primary-content: #fafaf9;
+  --color-secondary: #abab9c;
+  --color-secondary-content: #fafaf9;
+  --color-accent: #ffb900;
   --color-accent-content: #292524;
   --color-neutral: #262626;
-  --color-neutral-content: #FAFAF9;
-  --color-base-100: #FAFAF9;
-  --color-base-200: #F5F5F4;
-  --color-base-300: #E7E5E4;
+  --color-neutral-content: #fafaf9;
+  --color-base-100: #fafaf9;
+  --color-base-200: #f5f5f4;
+  --color-base-300: #e7e5e4;
   --color-base-content: #292524;
-  --color-info: #0084D1;
-  --color-info-content: #F0F9FF;
+  --color-info: #0084d1;
+  --color-info-content: #f0f9ff;
   --color-success: #009966;
-  --color-success-content: #ECFDF5;
-  --color-warning: #E17100;
+  --color-success-content: #ecfdf5;
+  --color-warning: #e17100;
   --color-warning-content: #292524;
-  --color-error: #C10007;
-  --color-error-content: #FEF2F2;
+  --color-error: #c10007;
+  --color-error-content: #fef2f2;
   /* Tailwind taupe scale (Tailwind v4 naming & values) */
-  --color-taupe-50: #FAFAF9;
-  --color-taupe-100: #F5F5F4;
-  --color-taupe-200: #E7E5E4;
-  --color-taupe-300: #D6D3D1;
-  --color-taupe-400: #A8A29E;
-  --color-taupe-500: #78716C;
-  --color-taupe-600: #57534E;
-  --color-taupe-700: #44403C;
+  --color-taupe-50: #fafaf9;
+  --color-taupe-100: #f5f5f4;
+  --color-taupe-200: #e7e5e4;
+  --color-taupe-300: #d6d3d1;
+  --color-taupe-400: #a8a29e;
+  --color-taupe-500: #78716c;
+  --color-taupe-600: #57534e;
+  --color-taupe-700: #44403c;
   --color-taupe-800: #292524;
-  --color-taupe-900: #1C1917;
-  --color-taupe-950: #0C0A09;
+  --color-taupe-900: #1c1917;
+  --color-taupe-950: #0c0a09;
   /* Auxiliary morphological colors (Tailwind v4 naming & values) */
-  --color-orange: #FF8904;
-  --color-green: #00A63E;
+  --color-orange: #ff8904;
+  --color-green: #00a63e;
   --color-gold: #d4a76a;
-  --color-gray: #D1D5DC;
+  --color-gray: #d1d5dc;
   /* Custom extensions (deprecated — gradually replaced by taupe / DaisyUI tokens) */
-  --gradient-hero: linear-gradient(135deg, #404040 0%, #262626 30%, #171717 100%);
-  --gradient-button: linear-gradient(135deg, #57534E 0%, #404040 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    #404040 0%,
+    #262626 30%,
+    #171717 100%
+  );
+  --gradient-button: linear-gradient(135deg, #57534e 0%, #404040 100%);
   --color-shadow-button: rgba(87, 83, 78, 0.3);
   --color-shadow-card: rgba(0, 0, 0, 0.05);
-  --color-skeleton: #E5E5E5;
-  --gradient-badge: linear-gradient(135deg, #FFFBEB 0%, #FEF3C6 100%);
+  --color-skeleton: #e5e5e5;
+  --gradient-badge: linear-gradient(135deg, #fffbeb 0%, #fef3c6 100%);
 }

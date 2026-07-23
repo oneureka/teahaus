@@ -1,5 +1,8 @@
 <template>
-  <view class="order-detail" :class="{ 'has-bottom-bar': order?.status === 'UNPAID' }">
+  <view
+    class="order-detail"
+    :class="{ 'has-bottom-bar': order?.status === 'UNPAID' }"
+  >
     <view v-if="order" class="order-content">
       <!-- 订单状态 -->
       <view class="order-status">

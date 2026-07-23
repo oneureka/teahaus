@@ -267,11 +267,23 @@ const previewImage = () => {
 
 const onLocationClick = () => {
   if (!space.value) return
-  Taro.openLocation({
-    latitude: space.value.lat,
-    longitude: space.value.lng,
-    name: space.value.name,
-    address: space.value.address
+  Taro.showActionSheet({
+    itemList: ['腾讯地图', '复制地址']
+  }).then(({ tapIndex }) => {
+    if (tapIndex === 0) {
+      Taro.openLocation({
+        latitude: space.value!.lat,
+        longitude: space.value!.lng,
+        name: space.value!.name,
+        address: space.value!.address
+      })
+    } else {
+      Taro.setClipboardData({
+        data: `${space.value!.name}\n${space.value!.address}`
+      }).then(() => {
+        Taro.showToast({ title: '地址已复制', icon: 'none' })
+      })
+    }
   })
 }
 

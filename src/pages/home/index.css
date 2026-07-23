@@ -1,12 +1,12 @@
 .home {
   background-color: var(--color-base-200);
   min-height: 100vh;
-  padding-bottom: 40rpx;
+  padding: 24rpx 0 40rpx;
 }
 
 /* ===== 精选推荐 ===== */
 .featured-card {
-  margin: 24rpx 24rpx 0;
+  margin: 0 24rpx;
   border-radius: 16rpx;
   overflow: hidden;
 }

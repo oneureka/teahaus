@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "license": "MS-PL",
   "scripts": {
-    "dev:weapp": "taro build --type weapp --watch",
-    "dev:h5": "taro build --type h5 --watch",
-    "build:weapp": "taro build --type weapp",
-    "build:h5": "taro build --type h5"
+    "dev": "taro build --type weapp --watch",
+    "build": "taro build --type weapp"
   },
   "browserslist": {
     "development": [
